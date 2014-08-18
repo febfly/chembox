@@ -1,13 +1,15 @@
       module module_reaction
+      use module_model_parameter, only :: DP, MAX_NRXN, MAX_NRXNTYPE, 
+     +                                    MAX_NREAC, MAX_NPROD
       implicit none
 !       integer, parameter             :: funcname_max = 20
        integer, parameter              :: type_max = 30
-       integer, parameter              :: string_max = 200
+!       integer, parameter              :: string_max = 200
+       integer, parameter              :: str2     = 50
 
-       integer, parameter              :: rxn_max  = 500
-!       integer, parameter              :: photo_max = 200
-       integer, parameter              :: reac_max = 4
-       integer, parameter              :: prod_max = 20
+       integer, parameter              :: rxn_max  = MAX_NRXN
+       integer, parameter              :: reac_max = MAX_NREAC
+       integer, parameter              :: prod_max = MAX_NPROD
        integer, parameter              :: para_max = 16
 
        type reaction
@@ -17,23 +19,23 @@
          integer :: sn
          integer,dimension(reac_max) :: reacs
          integer,dimension(prod_max) :: prods
-         real*8 ,dimension(prod_max) :: prod_coefs
+         real(kind=DP) ,dimension(prod_max) :: prod_coefs
          integer :: r_type
-         real*8, dimension(para_max)   :: paras
+         real(kind=DP), dimension(para_max)   :: paras !paras for rate calc
          integer :: rindex          !for photolysis reactions
        endtype reaction
 
        type(reaction),dimension(rxn_max) :: rxn
        integer                           :: nr
        integer                           :: nphoto
-       real*8,dimension(rxn_max)         :: rate_cst
+       real(kind=DP),dimension(rxn_max)         :: rate_cst
 
        type reaction_type
          integer :: np
-         character(len=50):: type_name
-         character(len=1) :: sym1
-         character(len=1) :: sym2
-         character(len=50):: expres
+         character(len=str2):: type_name
+         character(len=1)   :: sym1
+         character(len=1)   :: sym2
+         character(len=str2):: expres
        endtype reaction_type
 
        type(reaction_type), dimension (type_max)  :: rxn_type
@@ -220,8 +222,8 @@
 !=========================================================================
        subroutine rxn_update_rates(Temp,Pres,M,O2,H2O,aer_area,aer_radius)
        integer :: i,tp,np
-       real*8  :: paraF1,paraF2
-       real*8  :: Temp,Pres,M,O2,H2O,aer_area,aer_radius
+       real(kind=DP)  :: paraF1,paraF2
+       real(kind=DP)  :: Temp,Pres,M,O2,H2O,aer_area,aer_radius
 
        paraF1=0d0
        paraF2=0d0
@@ -253,19 +255,19 @@
      +                            nparaF5,paraF5)
      + result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
+       real(kind=DP), dimension(np), intent(in) :: p
        integer, intent(in)             :: tp
 C       character(len=string_max),intent(out) :: expres
 
-       real*8                          :: rate_const
+       real(kind=DP)                          :: rate_const
  
-       real*8                          :: Temp
-       real*8,optional                 :: Pres, O2, N2, M,H2O
+       real(kind=DP)                          :: Temp
+       real(kind=DP),optional                 :: Pres, O2, N2, M,H2O
        integer, optional               :: paraI1, paraI2
        logical, optional               :: paraL1, paraL2
-       real*8,optional                 :: paraF1, paraF2, paraF3,paraF4
+       real(kind=DP),optional                 :: paraF1, paraF2, paraF3,paraF4
        integer,optional                :: nparaF5
-       real*8,dimension(nparaF5),optional:: paraF5
+       real(kind=DP),dimension(nparaF5),optional:: paraF5
        
        select case (tp)
          case (1) 
@@ -314,9 +316,9 @@ C       character(len=string_max),intent(out) :: expres
 !      Arrhenius formulation
        function r1 (np, p,Temp) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp
-       real*8                            :: rate_const
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp
+       real(kind=DP)                            :: rate_const
        rate_const = p(1)
        if (p(2).ne.0e0) rate_const = rate_const*(3e2/Temp)**p(2)
        if (p(3).ne.0e0) rate_const = rate_const*exp(p(3)/Temp)   
@@ -325,10 +327,10 @@ C       character(len=string_max),intent(out) :: expres
 !      2.P: Pressure dependent
        function r2 (np, p, Temp,M) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,M
-       real*8                            :: rate_const
-       real*8                            :: kh,kl,xyrat,blog,fexp
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,M
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: kh,kl,xyrat,blog,fexp
        kh=r1(3,p(1:3),Temp)*M
        kl=r1(3,p(4:6),Temp)
        xyrat=kh/kl
@@ -340,10 +342,10 @@ C       character(len=string_max),intent(out) :: expres
 !      3.B:
        function r3(np,p,Temp,denair) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,denair
-       real*8                            :: rate_const
-       real*8                            :: k1
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,denair
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1
        k1=r1(3,p(1:3),Temp)
        rate_const=k1*(1e0-fyrno3(p(4),denair,Temp))
        endfunction
@@ -351,10 +353,10 @@ C       character(len=string_max),intent(out) :: expres
 !      4.A
        function r4(np,p,Temp,denair) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,denair
-       real*8                            :: rate_const
-       real*8                            :: k1
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,denair
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1
        k1=r1(3,p(1:3),Temp)
        rate_const=k1*fyrno3(p(4),denair,Temp)
        endfunction
@@ -362,10 +364,10 @@ C       character(len=string_max),intent(out) :: expres
 !      5.E
        function r5(np,p,Temp,M,kf) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,M,kf
-       real*8                            :: rate_const
-       real*8                            :: k1
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,M,kf
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1
        k1=r1(3,p(1:3),Temp)
        rate_const=kf*M/k1
        endfunction
@@ -373,10 +375,10 @@ C       character(len=string_max),intent(out) :: expres
 !      6.X,??
        function r6(np,p,Temp,M) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,M
-       real*8                            :: rate_const
-       real*8                            :: k1, k2, k3
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,M
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1, k2, k3
        k1=r1(3,p(1:3),Temp)
        k2=r1(3,p(4:6),Temp)
        k3=r1(3,p(7:9),Temp)*M
@@ -386,12 +388,12 @@ C       character(len=string_max),intent(out) :: expres
 !      7.Y,??
        function r7(np,p,Temp,M) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,M!K,molec/cc
-       real*8                            :: rate_const
-       real*8                            :: klo1,khi1,xyrat1,fexp1,kco1
-       real*8                            :: klo2,khi2,xyrat2,fexp2,kco2
-       real*8                            :: blog1,blog2
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,M!K,molec/cc
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: klo1,khi1,xyrat1,fexp1,kco1
+       real(kind=DP)                            :: klo2,khi2,xyrat2,fexp2,kco2
+       real(kind=DP)                            :: blog1,blog2
 !       real*8,parameter                  :: cst=0.6d0*9.871d-7
 !       k1=r1(3,p(1:3),Temp)
        !rate_const=k1*(1d0+cst*Pres) Old formulation
@@ -414,10 +416,10 @@ C       character(len=string_max),intent(out) :: expres
 !      8.Z
        function r8(np,p,Temp,M,H2O) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,H2O,M!K,molec/cc
-       real*8                            :: rate_const
-       real*8                            :: k1,k2
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,H2O,M!K,molec/cc
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1,k2
        k1=r1(3,p(1:3),Temp)
        k2=r1(3,p(4:6),Temp)
        rate_const=(k1+k2*M)*(1d0+1.4d-21*H2O*exp(2200d0/Temp))
@@ -426,10 +428,10 @@ C       character(len=string_max),intent(out) :: expres
 !      9.C
        function r9(np,p,Temp,O2) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,O2
-       real*8                            :: rate_const
-       real*8                            :: k1
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,O2
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1
        k1=r1(3,p(1:3),Temp)
        rate_const=k1*(O2+3.5d18)/(2d0*O2+3.5d18)
        endfunction
@@ -437,10 +439,10 @@ C       character(len=string_max),intent(out) :: expres
 !      10.D
        function r10(np,p,Temp,O2) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,O2
-       real*8                            :: rate_const
-       real*8                            :: k1
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,O2
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1
        k1=r1(3,p(1:3),Temp)
        rate_const=k1*O2/(2d0*O2+3.5d18)
        endfunction
@@ -448,10 +450,10 @@ C       character(len=string_max),intent(out) :: expres
 !      11.K
        function r11(np,p,Temp,area,radius,denair)result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,area,radius,denair
-       real*8                            :: rate_const
-       real*8                            :: stk,stkcf,sqm
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,area,radius,denair
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: stk,stkcf,sqm
        sqm=sqrt(p(1))
        stkcf=p(2)
        stk=sqrt(Temp)
@@ -461,10 +463,10 @@ C       character(len=string_max),intent(out) :: expres
 !      12.H 
        function r12(np,p,Temp,denair) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,denair
-       real*8                            :: rate_const
-       real*8                            :: k1
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,denair
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1
        k1=r1(3,p(1:3),Temp)
        rate_const=k1*fyhoro(denair,Temp)
        endfunction
@@ -472,10 +474,10 @@ C       character(len=string_max),intent(out) :: expres
 !      13.F
        function r13(np,p,Temp,denair) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp,denair
-       real*8                            :: rate_const
-       real*8                            :: k1
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp,denair
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1
        k1=r1(3,p(1:3),Temp) 
        rate_const=k1*(1d0-fyhoro(denair,Temp))
        endfunction
@@ -483,10 +485,10 @@ C       character(len=string_max),intent(out) :: expres
 !      14.V
        function r14(np,p,Temp) result(rate_const)
        integer, intent(in)             :: np
-       real*8, dimension(np), intent(in) :: p
-       real*8, intent(in)                :: Temp
-       real*8                            :: rate_const
-       real*8                            :: k1,k2
+       real(kind=DP), dimension(np), intent(in) :: p
+       real(kind=DP), intent(in)                :: Temp
+       real(kind=DP)                            :: rate_const
+       real(kind=DP)                            :: k1,k2
        k1=r1(3,p(1:3),Temp)
        k2=r1(3,p(4:6),Temp)
        rate_const=k1/(1d0+k2)
@@ -501,7 +503,7 @@ c       real*8, intent(in)                :: Temp,pres
 c       integer,intent(in)                :: nbin
 c       real*8,dimension(nbin),intent(in) :: fff
 c       integer,optional                  :: iday
-       real*8                            :: rate_const
+       real(kind=DP)                            :: rate_const
        rate_const=jrate(ind)
        endfunction
 !============================================================================
@@ -517,10 +519,10 @@ C          of the number N of carbon atoms.
 C          Updated following Atkinson 1990.
 C***************************************************************************C
 C
-      real*8 xcarbn
-      real*8 zdnum,tt
-      real*8 yyyn,xxyn,aaa,rarb,zzyn,xf,alpha,y300,beta,xminf,xm0
-      real*8 rfyrno3
+      real(kind=DP) :: xcarbn
+      real(kind=DP) :: zdnum,tt
+      real(kind=DP) :: yyyn,xxyn,aaa,rarb,zzyn,xf,alpha,y300,beta,xminf,xm0
+      real(kind=DP) :: rfyrno3
 
       data y300,alpha,beta,xm0,xminf,xf/.826,1.94e-22,.97,0.,8.1,.411/
 c
@@ -565,10 +567,10 @@ c
 !        Chem. Rev., 103, 4657-4689.
 !******************************************************************************
       ! arguments
-      real*8, intent(in) :: zdnum, tt
-      real*8             :: rfyhoro
+      real(kind=DP), intent(in) :: zdnum, tt
+      real(kind=DP)             :: rfyhoro
       ! local variables
-      real*8             :: k1, k2, o2dnum
+      real(kind=DP)             :: k1, k2, o2dnum
       o2dnum = zdnum * 0.21d0
       k1     = 6.0d-14 * exp(-550.d0/tt) * o2dnum
       k2     = 9.5d+13 * exp(-5988.d0/tt)
@@ -582,10 +584,10 @@ C*         on wet aerosol surface, with formula from Dentener's            *C
 C*         thesis, pp14.               jyl, July 1, 1994                   *C
 C*         arsl1k (/s) = area / [ radius/dfkg + 4./(stkcf * xmms) ]        *C
 C***************************************************************************C
-      real*8 stkcf
-      real*8 area, radius, stk, sqm, denair
-      real*8 dfkg
-      real*8 rarsl1k
+      real(kind=DP) ::  stkcf
+      real(kind=DP) ::  area, radius, stk, sqm, denair
+      real(kind=DP) ::  dfkg
+      real(kind=DP) ::  rarsl1k
 C* area: sfc area of wet aerosols per volume of air (cm2/cc);
 C* radius: radius of wet aerosol (cm), order of 0.01-10 um;
 c          note that radius here is rd, not ro ;

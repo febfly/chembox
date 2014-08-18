@@ -1,4 +1,5 @@
       module module_geos
+      use module_model_parameter, only:DP
       implicit none
  
       contains
@@ -6,24 +7,24 @@
        use module_spec,only:spec_init,spec_add,spec_finish_add,spec
        use module_reaction
        use module_photolysis,only:photolysis_index
-       character(len=*)     :: filename
+       character(len=*)   :: filename
        integer,parameter  :: u=78
-       character*512 :: READIN
-       integer       :: nreac, nprod,tpid,iord
-       character(len=1) :: stat, tp,tp0 
-       integer,parameter :: nread=24
-       real        :: pinp(nread)
-       character*14::xinp(nread)
+       character*512      :: READIN
+       integer            :: nreac, nprod,tpid,iord
+       character(len=1)   :: stat, tp,tp0 
+       integer,parameter  :: nread=24
+       real(kind=DP)      :: pinp(nread)
+       character*14       :: xinp(nread)
 c       character*3 ::yinp
-       integer     :: i,j,id
-       type(reaction) :: rtemp 
-       real, dimension(28):: para
+       integer                         :: i,j,id
+       type(reaction)                  :: rtemp 
+       real(kind=DP), dimension(28)    :: para
 !       real, dimension(3) :: paratemp
-       character(len=14),dimension(4):: reac_name
-       integer, dimension(4)::          reac_id
-       character(len=14),dimension(16):: prod_name
-       integer, dimension(16)::          prod_id
-       real,    dimension(16)::          coef
+       character(len=14),dimension(4)  :: reac_name
+       integer, dimension(4)           :: reac_id
+       character(len=14),dimension(16) :: prod_name
+       integer, dimension(16)          :: prod_id
+       real(kind=DP),  dimension(16)   :: coef
 
        
        call spec_init
@@ -152,19 +153,19 @@ c          print*,trim(readin)
        logical :: ifphoto
        character(len=1) :: stat, statx,tp, tpx
        !character(len=2) :: tptmp
-       real, dimension(28):: para
-       real               :: a, b, e, f, g 
-       integer            :: c, d
-       character(len=14),dimension(4):: reac_name
-       integer, dimension(4)::          reac_id
+       real(kind=DP), dimension(28)   :: para
+       real(kind=DP)                  :: a, b, e, f, g 
+       integer                        :: c, d
+       character(len=14),dimension(4) :: reac_name
+       integer, dimension(4)          :: reac_id
        character(len=14),dimension(16):: prod_name
-       integer, dimension(16)::          prod_id
-       real,    dimension(16)::          coef
-       integer               ::          tpid
-       character(len=20)     :: comment
-       integer               :: i, j, nreac,nprod,id
+       integer, dimension(16)         :: prod_id
+       real(kind=DP),    dimension(16):: coef
+       integer                        :: tpid
+       character(len=20)              :: comment
+       integer                        :: i, j, nreac,nprod,id
        character(len=1),dimension(16) :: dummychar
-       real,            dimension(4) :: dummyreal
+       real(kind=DP),    dimension(4) :: dummyreal
 
        read(u,51) stat,iord,a,b,c,d,tp,e,f,g,comment
        para(1)=a

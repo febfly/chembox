@@ -1,8 +1,10 @@
       module module_spec
+      use module_model_parameter, only : DP, MAX_NSPEC,MAX_STR1
        implicit none
        !variables
-       integer, parameter, private              :: ns_max = 200
-       integer, parameter, private              :: str_len = 15
+       integer, parameter, private              :: ns_max = MAX_NSPEC
+       integer, parameter, private              :: str_len = MAX_STR1
+
        type species
             character(len=str_len)              :: name
             character(len=1)                    :: status
@@ -33,12 +35,12 @@
        function spec_add(s,stat,conc) result (id)
        character(len=*),intent(in)        :: s
        character(len=1), optional         :: stat
-       real   , optional                  :: conc
+       real(kind=DP)   , optional                  :: conc
 
        logical                            :: ifdup
        integer                            :: id
        character(len=1)                   :: stat1
-       real                               :: conc1
+       real(kind=DP)                      :: conc1
        character(len=str_len)             :: s1
 
        if (present(stat)) then 
@@ -50,7 +52,7 @@
        if (present(conc)) then
           conc1 = conc 
        else 
-          conc1 = 1e-20
+          conc1 = 1d-20
        endif
 
        s1 = treat_str(s)

@@ -1,5 +1,13 @@
       module module_ream
+      use module_model_parameter,only: DP
       implicit none
+      public  :: ream_read
+      public  :: ream_write
+      private :: read_line
+      private :: read_photoline
+      private :: write_line
+      private :: write_rxn
+      private :: write_photo 
       contains
 !========================================================================
       subroutine ream_read(filename)
@@ -12,7 +20,7 @@
       character(len=5)            :: head
       character(len=1)            :: spec_stat
       character(len=8)            :: spec_name
-      real                        :: spec_conc
+      real(kind=DP)               :: spec_conc
 
       character(len=8),dimension(4) :: reac_name, reac_name2
       integer,dimension(4)          :: reac_id
@@ -20,10 +28,10 @@
       integer                       :: iord
       character(len=1)              :: dinp, flag, flag0, flagtmp
 
-      real,dimension(20)            :: coefs, coefs2
+      real(kind=DP),dimension(20)   :: coefs, coefs2
       character(len=8),dimension(20):: prod_name, prod_name2
       integer,dimension(20)         :: prod_id
-      real,dimension(3)             :: para
+      real(kind=DP),dimension(3)    :: para
       type(reaction)                :: rtemp
 
       integer                     :: u, i, id, nreac, nprod, typeid
@@ -163,17 +171,17 @@ c         flag0
       character(len=8),dimension(4) :: reac 
       character(len=8),dimension(4),optional :: reac0
       integer,dimension(4)          :: reacid
-      real,dimension(20)            :: coef
-      real,dimension(20),optional   :: coef0
+      real(kind=DP),dimension(20)            :: coef
+      real(kind=DP),dimension(20),optional   :: coef0
       character(len=8),dimension(20):: prod
       character(len=8),dimension(20),optional:: prod0
       integer,dimension(20)         :: prodid
       integer                       :: nreac, nprod
       character(len=1)              :: stat,flag
-      real,dimension(3)             :: para
+      real(kind=DP),dimension(3)             :: para
       integer                       :: flagid
      
-      real                          :: a,b,c
+      real(kind=DP)                 :: a,b,c
       integer                       :: c0  , i, id
       character(len=10)             :: comment
       read(u,12) (reac(i), i=1,4)      
@@ -254,12 +262,12 @@ c         flag0
       integer                       :: u,ord
       character(len=8),dimension(4) :: reac 
       integer,dimension(4)          :: reacid
-      real,dimension(20)            :: coef
+      real(kind=DP),dimension(20)   :: coef
       character(len=8),dimension(20):: prod
       integer,dimension(20)         :: prodid
       integer                       :: nreac, nprod
       character(len=1)              :: stat,flag
-      real,dimension(3)             :: para
+      real(kind=DP),dimension(3)    :: para
       integer                       :: flagid
       
       integer                       :: i,id
@@ -349,9 +357,9 @@ c         flag0
       use module_spec,only:spec_getid
       integer :: u,nprod, ord,nreact
       integer        ,dimension(reac_max) :: react
-      integer        ,dimension(prod_max):: prod
-      real*8          ,dimension(prod_max):: coef
-      real*8          ,dimension(para_max)  :: para
+      integer        ,dimension(prod_max) :: prod
+      real(kind=DP)  ,dimension(prod_max) :: coef
+      real(kind=DP)  ,dimension(para_max):: para
       integer                       :: flag
       character(len=1)              :: stat,sym
 !      character(len=9)              :: comment
@@ -389,12 +397,12 @@ c         flag0
       integer  :: u, nprod, nreact,ord
       integer        ,dimension(reac_max) :: react
       integer        ,dimension(prod_max):: prod
-      real*8          ,dimension(prod_max):: coef
+      real(kind=DP)  ,dimension(prod_max):: coef
       character(len=1)              :: stat,sym
       integer                       :: flag
       character(len=9)              :: comment
       integer                       :: i
-      real*8                        :: a,b,c
+      real(kind=DP)                 :: a,b,c
       comment=" "
       if (flag.eq.0) then
         sym=" "
@@ -432,13 +440,13 @@ c         flag0
       integer  :: u, nprod,ord
       integer  :: react
       integer, dimension(prod_max) :: prod
-      real*8 , dimension(prod_max) :: coef
+      real(kind=DP), dimension(prod_max) :: coef
       character(len=1)             :: stat
       integer                      :: flag
-      real*8                       :: para
+      real(kind=DP)                :: para
       character(len=9)             :: comment
       integer                      :: i
-      real*8                       :: defj
+      real(kind=DP)                :: defj
 
       comment=" "
       write(u,15) spec(react)%name,ord,stat,nprod,para,
