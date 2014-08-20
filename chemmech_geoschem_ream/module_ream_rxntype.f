@@ -15,6 +15,7 @@
       integer,dimension(MAX_NTYPE)               :: preceeding_type
       integer,dimension(MAX_NTYPE)               :: succeeding_type
       integer,dimension(MAX_NTYPE)               :: if_photo_type
+      integer,dimension(MAX_NTYPE)               :: nrxnline
 
       public  :: rxn_rate
       public  :: rxntype_id

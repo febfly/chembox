@@ -11,53 +11,61 @@
       contains
 !========================================================================
       subroutine ream_read(filename)
-      use module_spec, only : spec_init, spec_add, spec_finish_add,ns
-      use module_reaction, only: rxn_init,rxn_add,reaction,nr
+!      use module_spec, only : spec_init, spec_add, spec_finish_add,ns
+!      use module_reaction, only: rxn_init,rxn_add,reaction,nr
+      use module_ream_cheminfo,only : ream_cheminfo_init,spec_add,
+     +                         spec_finish_add, rxn_add
+      use module_ream_rxntype, only : MAX_NPARA, rxntype_init
       use module_photolysis,only:photolysis_index
 
-      character(len=*),intent(in) :: filename
+      character(len=*),intent(in)        :: filename
 
-      character(len=5)            :: head
-      character(len=1)            :: spec_stat
-      character(len=8)            :: spec_name
-      real(kind=DP)               :: spec_conc
+      character(len=5)                   :: head
+      character(len=1)                   :: spec_stat
+      character(len=8)                   :: spec_name
+      real(kind=DP)                      :: spec_conc
 
-      character(len=8),dimension(4) :: reac_name, reac_name2
-      integer,dimension(4)          :: reac_id
+      character(len=8),dimension(4)      :: reac_name, reac_name2
+      integer,dimension(4)               :: reac_id
 
-      integer                       :: iord
-      character(len=1)              :: dinp, flag, flag0, flagtmp
+      integer                            :: iord
+      character(len=1)                   :: dinp, flag, flag0, flagtmp
 
-      real(kind=DP),dimension(20)   :: coefs, coefs2
-      character(len=8),dimension(20):: prod_name, prod_name2
-      integer,dimension(20)         :: prod_id
-      real(kind=DP),dimension(3)    :: para
-      type(reaction)                :: rtemp
+      real(kind=DP),dimension(20)        :: coefs, coefs2
+      character(len=8),dimension(20)     :: prod_name, prod_name2
+      integer,dimension(20)              :: prod_id
+      real(kind=DP),dimension(3)         :: para
+      real(kind=DP),dimension(MAX_NPARA) :: paralist
+      type(reaction)                     :: rtemp
 
       integer                     :: u, i, id, nreac, nprod, typeid
-      u = 90
 
-      call spec_init
-      call rxn_init
+      u = 90 !I/O unit
 
+      !initialize common variables
+      call ream_cheminfo_init
+      call rxntype_init
+
+      !open input file chem.dat
       open(unit=u,file=trim(filename),status='old')
 
-      !read heading
+      !read heading for species list
       head = ''
       do while(head.ne.'BEGIN')
          read(u,'a5') head
       enddo
 
-      !read spec_list
+      !read species list
       spec_name=''
       read(u,11) spec_stat, spec_name,spec_conc
       do while(spec_name.ne.'END')
-         id=spec_add(spec_name, spec_stat, spec_conc)
+         call spec_add(spec_name, spec_stat, spec_conc)
          read(u,11) spec_stat, spec_name,spec_conc
       enddo
       call spec_finish_add
       print*,'done read species'
-      !read heading
+
+      !read heading for reaction list
       head = ''
       do while(head.ne.'BEGIN')
          read(u,'a5') head
@@ -68,18 +76,18 @@
 
          call read_line(u,reac_name,reac_id,nreac,prod_name,prod_id,nprod,coefs,
      &                     dinp,iord,para,flag,typeid)
-         if (reac_name(1).eq.'END') exit
-         if (dinp.eq.'D') cycle
-         rtemp%nreac = nreac
-         rtemp%reacs(1:nreac) = reac_id(1:nreac)
-         rtemp%nprod = nprod
-         rtemp%prods(1:nprod) = prod_id(1:nprod)
-         rtemp%prod_coefs(1:nprod) = coefs(1:nprod)
-         rtemp%status         = dinp
-         rtemp%sn             = iord
-         rtemp%r_type         = typeid
-         rtemp%paras(1:3)     = para(1:3)
-         rtemp%rindex         = 0
+         if (reac_name(1).eq.'END') exit !finish reading
+         if (dinp.eq.'D') cycle          !it is a dead reaction
+!         rtemp%nreac = nreac
+!         rtemp%reacs(1:nreac) = reac_id(1:nreac)
+!         rtemp%nprod = nprod
+!         rtemp%prods(1:nprod) = prod_id(1:nprod)
+!         rtemp%prod_coefs(1:nprod) = coefs(1:nprod)
+!         rtemp%status         = dinp
+!         rtemp%sn             = iord
+!         rtemp%r_type         = typeid
+!         rtemp%paras(1:3)     = para(1:3)
+!         rtemp%rindex         = 0
 c         flag0
          !special types
          reac_name2 = reac_name
@@ -129,8 +137,8 @@ c         flag0
          flag0=flag
          call rxn_add(rtemp,.false.)
       enddo
+      print*,'done read non-photolysis reactions'
 
-      print*,'done read reactions'
       !read photolysis reactions
       head=""
       do while (trim(head).ne.'BEGIN')
@@ -155,6 +163,7 @@ c         flag0
       enddo
       print*,'done read photolysis'
       close(u)
+
       print*,'number of species',ns
       print*,'number of reactions',nr
  11   format(a1, 1x, a8, 1x, e10.3)
@@ -163,8 +172,8 @@ c         flag0
       subroutine read_line(u,reac,reacid,nreac,prod,prodid,nprod,coef,
      &                     stat,ord,para,flag,flagid,reac0,prod0,coef0,
      &                     _ifphoto)
-      use module_spec,only:spec_getid
-      use module_reaction,only:rxn_findtype
+      use module_ream_cheminfo,only:spec_getid
+      use module_ream_rxntype ,only:rxn_findtype
       integer                       :: u,ord
       logical,optional              :: _ifphoto
       logical                       :: ifphoto
@@ -257,8 +266,8 @@ c         flag0
 !==============================================================
       subroutine read_photoline(u,reac,reacid,nreac,prod,prodid,nprod,
      &           coef,stat,ord,para,flag,flagid)
-      use module_spec,only:spec_getid
-      use module_reaction,only:rxn_findtype
+      use module_ream_cheminfo,only:spec_getid
+      use module_ream_rxntype ,only:rxn_findtype
       integer                       :: u,ord
       character(len=8),dimension(4) :: reac 
       integer,dimension(4)          :: reacid

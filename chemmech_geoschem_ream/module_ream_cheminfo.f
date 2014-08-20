@@ -24,6 +24,7 @@
       public :: spec_add
       public :: spec_finish_add
       public :: spec_getid
+      public :: rxn_add
 
       private :: spec_ifduplicate
       private :: treat_str
@@ -135,13 +136,13 @@
        enddo
        endfunction spec_ifduplicate
 !=========================================================================
-       subroutine rxn_add(ifp,n1, n2, id1, id2, cf2, flag, typeid, pr)
+       subroutine rxn_add(ifp,n1, n2, id1, id2, cf2,  typeid, pr)
        logical, intent(in) :: ifp
        integer, intent(in) :: n1, n2
        integer, dimension(MAX_NREAC),intent(in) :: id1
        integer, dimension(MAX_NPROD),intent(in) :: id2
        real(kind=DP), dimension(MAX_NPROD),intent(in) :: cf2
-       character(len=1),intent(in)              :: flag
+!       character(len=1),intent(in)              :: flag
        integer,intent(in)                       :: typeid
        real(kind=DP), dimension(MAX_NPARA),intent(in) :: pr       
 
@@ -153,7 +154,7 @@
        reacs(:,nr) = id1(:)
        prods(:,nr) = id2(:)
        coefs(:,nr) = cf2(:)
-       rxn_symbol(nr) = flag
+!       rxn_symbol(nr) = flag
        r_type (nr) = typeid
        paras(:,nr) = pr(:)
 

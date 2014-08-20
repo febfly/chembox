@@ -1,4 +1,5 @@
       module module_photolysis
+      use module_model_parameter,only :DP
       implicit none
       integer,parameter     :: mxnjrxn=80
       integer,parameter     :: mxnbin=7
@@ -10,30 +11,30 @@
       integer               :: npdep
       integer               :: njrxn
 
-      real*8,dimension(mxnjrxn)                :: jfacta
+      real(kind=DP),dimension(mxnjrxn)         :: jfacta
       integer,dimension(mxnjrxn)               :: branch
       character(len=7),dimension(mxnjrxn)      :: jlabel 
       character(len=7),dimension(mxnjrxn)      :: rnames 
 
-      real*8,dimension(3,mxnjval)              :: tqq
-      real*8,dimension(mxnbin,2,mxnjval-3)     :: qqq
-      real*8,dimension(mxnbin,3)               :: qo2,qo3,q1d
-      integer                                  :: nw1, nw2
-      real*8,dimension(mxnbin+1)               :: wbin
-      real*8,dimension(mxnbin)                 :: wl
-      real*8,dimension(mxnbin)                 :: fl
-      real*8,dimension(mxnbin)                 :: qrayl
-      real*8,dimension(mxnbin)                 :: qbc
-      character(len=7),dimension(mxnjval)      :: titlej
-      integer,dimension(mxnpdep)               :: pdepf
-      real*8,dimension(mxnbin,mxnpdep)         :: zpdep
-      real*8,dimension(mxnbin,3)               :: mglypdep
+      real(kind=DP),dimension(3,mxnjval)              :: tqq
+      real(kind=DP),dimension(mxnbin,2,mxnjval-3)     :: qqq
+      real(kind=DP),dimension(mxnbin,3)               :: qo2,qo3,q1d
+      integer                                         :: nw1, nw2
+      real(kind=DP),dimension(mxnbin+1)               :: wbin
+      real(kind=DP),dimension(mxnbin)                 :: wl
+      real(kind=DP),dimension(mxnbin)                 :: fl
+      real(kind=DP),dimension(mxnbin)                 :: qrayl
+      real(kind=DP),dimension(mxnbin)                 :: qbc
+      character(len=7),dimension(mxnjval)             :: titlej
+      integer,dimension(mxnpdep)                      :: pdepf
+      real(kind=DP),dimension(mxnbin,mxnpdep)         :: zpdep
+      real(kind=DP),dimension(mxnbin,3)               :: mglypdep
 
-      integer,dimension(mxnjrxn)               :: jind
-      integer,dimension(mxnjval)               :: jpdep
+      integer,dimension(mxnjrxn)                      :: jind
+      integer,dimension(mxnjval)                      :: jpdep
 
-      real*8,dimension(mxnjval)                :: valj
-      real*8,dimension(mxnjrxn)                :: jrate
+      real(kind=DP),dimension(mxnjval)                :: valj
+      real(kind=DP),dimension(mxnjrxn)                :: jrate
 
       public :: photolysis_read
       public :: photolysis_jrate
@@ -256,31 +257,31 @@ c-----------------------------------------------------------------------
  
 c-----------------------------------------------------------------------
       subroutine photolysis_jrate(fff,Temp,Pres,iday)
-      real*8,dimension(mxnbin),intent(in):: fff !Actinic flux #/cm2/s
-      real*8,intent(in) :: Temp, Pres !K,hPa
+      real(kind=DP),dimension(mxnbin),intent(in):: fff !Actinic flux #/cm2/s
+      real(kind=DP),intent(in) :: Temp, Pres !K,hPa
       integer,optional  :: iday! julian day
 
 C
-      real*8 qo2tot, qo3tot, qo31d, qo33p, qqqt
-      real*8 solf, tfact
+      real(kind=DP):: qo2tot, qo3tot, qo31d, qo33p, qqqt
+      real(kind=DP):: solf, tfact
 
 C     Parameters for Solar distance compensation
-      real*8,parameter ::  pi=3.14159265358979324d0
+      real(kind=DP),parameter ::  pi=3.14159265358979324d0
 
 C     Physical constants
-      real*8,parameter ::   Na=6.02217d23
-      real*8,parameter ::   r=8.3143d0
+      real(kind=DP),parameter ::   Na=6.02217d23
+      real(kind=DP),parameter ::   r=8.3143d0
 
 C     Add Pressure dependancy function selector PF. (tmf, 1/7/09) 
-      integer i, j, k, l, pf
-      real*8 qptemp
+      integer :: i, j, k, l, pf
+      real(kind=DP) ::qptemp
 
 C     For new pressure-dependency algorithm: (tmf, 1/7/09) 
-      real*8 xp, xa, xb, xc
+      real(kind=DP) :: xp, xa, xb, xc
 
 C     For new pressure dependency algo. for acetone
-      real*8 tfaca,tfac0,tfac1, tfac2
-      real*8 qqqa , qq1a , qq1b, qq2
+      real(kind=DP) :: tfaca,tfac0,tfac1, tfac2
+      real(kind=DP) :: qqqa , qq1a , qq1b, qq2
 
 C     Scale actinic flux (FFF) by Solar distance factor (SOLF)
       if (present(iday))then
@@ -410,8 +411,8 @@ c-----------------------------------------------------------------------
 c  three-point linear interpolation function
 c-----------------------------------------------------------------------
       function flint (tint,t1,t2,t3,f1,f2,f3)
-      real*8 tint,t1,t2,t3,f1,f2,f3
-      real*8 flint
+      real(kind=DP):: tint,t1,t2,t3,f1,f2,f3
+      real(kind=DP):: flint
       if (tint .le. t2)  then
         if (tint .le. t1)  then
           flint  = f1
@@ -431,8 +432,8 @@ C-----------------------------------------------------------------------
 c  Quantum yields for O3 --> O2 + O(1D) interpolated across 3 temps
 C-----------------------------------------------------------------------
       function xsec1d(k,ttt)
-      integer k
-      real*8 ttt, xsec1d
+      integer :: k
+      real(kind=DP):: ttt, xsec1d
       xsec1d =
      f  flint(ttt,tqq(1,3),tqq(2,3),tqq(3,3),q1d(k,1),q1d(k,2),q1d(k,3))
       endfunction xsec1d
@@ -441,8 +442,8 @@ c-----------------------------------------------------------------------
 c  Cross-sections for O2 interpolated across 3 temps; No S_R Bands yet!
 C-----------------------------------------------------------------------
       function xseco2(k,ttt)
-      integer k
-      real*8 ttt, xseco2
+      integer :: k
+      real(kind=DP):: ttt, xseco2
       xseco2 =
      f  flint(ttt,tqq(1,1),tqq(2,1),tqq(3,1),qo2(k,1),qo2(k,2),qo2(k,3))
       endfunction xseco2
@@ -452,8 +453,8 @@ c-----------------------------------------------------------------------
 c  Cross-sections for O3 for all processes interpolated across 3 temps
 C-----------------------------------------------------------------------
       function xseco3(k,ttt)
-      integer k
-      real*8 ttt, xseco3
+      integer :: k
+      real(kind=DP):: ttt, xseco3
       xseco3  =
      f  flint(ttt,tqq(1,2),tqq(2,2),tqq(3,2),qo3(k,1),qo3(k,2),qo3(k,3))
       endfunction xseco3
@@ -465,9 +466,9 @@ c-----------------------------------------------------------------------
       ! Index of the specie in jv_spec.dat (should be between 4 and NJVAL)
       integer :: iv
       ! Temperature in 1 grid box
-      real*8  :: ttt
+      real(kind=DP)  :: ttt
       ! Temperature interpolation factor
-      real*8  :: tfaca_f
+      real(kind=DP)  :: tfaca_f
 
       tfaca_f = (ttt-tqq(1,iv))/(tqq(2,iv)-tqq(1,iv))
       tfaca_f = max(0.d0, min(1.d0, tfaca_f))
@@ -475,8 +476,8 @@ c-----------------------------------------------------------------------
 
       function tfac0_f(ttt, iv)
       integer :: iv
-      real*8  :: ttt
-      real*8  :: tfac0_f
+      real(kind=DP)  :: ttt
+      real(kind=DP)  :: tfac0_f
       tfac0_f = ( (ttt-tqq(1,iv))/(tqq(2,iv)-tqq(1,iv)) )**2
       if (ttt .lt. tqq(1,iv)) then
          tfac0_f = (ttt - 210.d0)/(tqq(1,iv)-210.d0)
@@ -487,9 +488,9 @@ c-----------------------------------------------------------------------
       
       function tfac_f(ttt, iv)
       integer :: iv
-      real*8  :: ttt
-      real*8  :: tfac_f
-      real*8  :: tt200
+      real(kind=DP)  :: ttt
+      real(kind=DP)  :: tfac_f
+      real(kind=DP)  :: tt200
       tt200 = min(300.d0, max(200.d0, ttt))
       tfac_f = (tt200-tqq(1,iv))/(tqq(2,iv)-tqq(1,iv))
       endfunction tfac_f
@@ -498,9 +499,9 @@ c-----------------------------------------------------------------------
       function qq2_f(tfac0, iv, k, ttt)
       integer :: iv
       integer :: k
-      real*8  :: ttt,tfac0
+      real(kind=DP)  :: ttt,tfac0
       ! xsect (total abs) for acetone
-      real*8  :: qq2_f
+      real(kind=DP)  :: qq2_f
       qq2_f  = qqq(k,1,iv-3) + (qqq(k,2,iv-3)-qqq(k,1,iv-3))*tfac0
       if (ttt .lt. tqq(1,iv)) then
          qq2_f = qqq(k,1,iv-3)*tfac0
@@ -510,8 +511,8 @@ c-----------------------------------------------------------------------
       function qq1_f(tfac, iv, k)
       integer :: iv
       integer :: k
-      real*8  :: tfac
-      real*8  :: qq1_f
+      real(kind=DP)  :: tfac
+      real(kind=DP)  :: qq1_f
       qq1_f = qqq(k,1,iv-3) + (qqq(k,2,iv-3)-qqq(k,1,iv-3))*tfac
       end function qq1_f
 
@@ -520,7 +521,7 @@ c
 c----------------------------------------------------------------------
       function photolysis_index(specname,p)result(ind)
       character(len=*) :: specname
-      real*8           :: p
+      real(kind=DP)           :: p
       integer          :: ind
       integer          :: ibrch, n
 
