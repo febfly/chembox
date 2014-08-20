@@ -2,7 +2,7 @@
       use module_model_parameter,only: DP
       implicit none
       integer, parameter :: MAX_NTYPE = 30
-      integer, parameter :: MAX_NPARA = 15
+      integer, parameter :: MAX_NPARA = 16
       integer, parameter :: STRLEN    = 50
 
       integer :: ntype
@@ -18,14 +18,14 @@
 
       public  :: rxn_rate
       public  :: rxntype_id
-      private :: rxntype_define
+      public  :: rxntype_init
       private :: r1
       private :: fyhoro
       private :: fyrno3
       private :: arsl1k
       contains
 
-      subroutine rxntype_define
+      subroutine rxntype_init
       parameter_pos(:,:)     = 0
       ntype                  = 16
 
@@ -172,7 +172,7 @@
       preceeding_type(16)    = 0
       succeeding_type(16)    = 0
       if_photo_type(16)      = 1
-      endsubroutine rxntype_define
+      endsubroutine rxntype_init
 
 !=========================================================================
       function rxntype_id(sym,ifphoto) result(id)
