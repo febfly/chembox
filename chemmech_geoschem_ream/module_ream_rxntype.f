@@ -16,7 +16,13 @@
       integer,dimension(MAX_NTYPE)               :: succeeding_type
       integer,dimension(MAX_NTYPE)               :: if_photo_type
 
+      public  :: rxn_rate
+      public  :: rxntype_id
       private :: rxntype_define
+      private :: r1
+      private :: fyhoro
+      private :: fyrno3
+      private :: arsl1k
       contains
 
       subroutine rxntype_define
@@ -185,14 +191,229 @@
       endfunction rxntype_id
 !=========================================================================
 
-      function rxn_rate(tp, np, p, Temp, Pres, O2, N2, M, H2O,
-     +                  aer_area, aer_radius, paraI1, paraF1)
-     +result(rate_const) 
-      integer, intent(in)                    :: tp, np
-      real(kind=DP),dimension(np),intent(in) :: p
-      real(kind=DP) :: Temp, Pres, O2, N2, M, H2O
-      real(kind=DP) :: aer_area, aer_radius, paraF1
-      real(kind=DP) :: 
-      endfunction rxn_rate
+      subroutine rxn_rate(nr, tp, para, Temp, Pres, O2, N2, M, H2O,
+     +                  aer_area, aer_radius, denair,
+     +                  rate_c) 
+      !in out variables
+      integer, intent(in)                              :: nr
+      integer, dimension(nr), intent(in)               :: tp
+      real(kind=DP),dimension(MAX_NPARA,nr),intent(in) :: para
+      real(kind=DP),intent(in) :: Temp, Pres, O2, N2, M, H2O
+      real(kind=DP),intent(in) :: aer_area, aer_radius, denair
+      integer,      intent(in) :: paraI1
+      real(kind=DP),dimension(nr),intent(out)      :: rate_c
+
+      !local variables
+      integer                            :: ir, itp
+      real(kind=DP),dimension(MAX_NPARA) :: p
+      real(kind=DP)                      :: rate_const
+      real(kind=DP)            :: kh, kl, xyrat, blog, fexp
+      real(kind=DP)            :: k1, k2, k3, kf
+      real(kind=DP)            :: klo1,khi1,xyrat1,fexp1,kco1
+      real(kind=DP)            :: klo2,khi2,xyrat2,fexp2,kco2
+      real(kind=DP)            :: blog1,blog2     
+      real(kind=DP)            :: stk, stkcf, sqm
      
+      !loop through reactions
+      rate_c(:) = 0d0 
+      do ir = 1, nr
+         itp = tp(ir)
+         p(:)= para(:,ir)
+         select case (itp)
+           !Arrhenius formulation
+           case (1) 
+                rate_const = r1(p(1:3),Temp)
+           !P: pressure dependent
+           case (2)
+                kh=r1(p(1:3),Temp)*M
+                kl=r1(p(4:6),Temp)
+                xyrat=kh/kl
+                blog=log10(xyrat)
+                fexp=1d0/(1d0+blog*blog)
+                rate_const=kh*p(7)**fexp/(1d0+xyrat)/M
+           !B
+           case (3)
+                k1=r1(p(1:3),Temp)
+                rate_const=k1*(1e0-fyrno3(p(4),denair,Temp))           
+           !A
+           case (4)
+                k1=r1(p(1:3),Temp)
+                rate_const=k1*fyrno3(p(4),denair,Temp)        
+           !E
+           case (5)
+                k1=r1(p(1:3),Temp)
+                kf=rate_c(ir-1)
+                rate_const=kf*M/k1
+           !X
+           case (6)
+                k1=r1(p(1:3),Temp)
+                k2=r1(p(4:6),Temp)
+                k3=r1(p(7:9),Temp)*M
+                rate_const=k1+k3/(1d0+k3/k2)
+           !V
+           case (7)
+                klo1=5.9d-33*(300/Temp)**(1.4d0)
+                khi1=1.1d-12*(300/Temp)**(-1.3d0)
+                xyrat1=klo1*M/khi1
+                blog1=log10(xyrat1)
+                fexp1=1.d0/(1.d0+blog1*blog1)
+                kco1=klo1*M*0.6**fexp1/(1.d0+xyrat1)
+                klo2=1.5d-13*(300/Temp)**(-0.6d0)
+                khi2=2.1d09 *(300/Temp)**(-6.1d0)
+                xyrat2=klo2*M/khi2
+                blog2=log10(xyrat2)
+                fexp2=1.d0/(1.d0+blog2*blog2)
+                kco2=klo2*0.6**fexp2/(1.d0+xyrat2)
+                rate_const=kco1+kco2                            
+           !Z
+           case (8)
+                k1=r1(p(1:3),Temp)
+                k2=r1(p(4:6),Temp)
+                rate_const=(k1+k2*M)*(1d0+1.4d-21*H2O*exp(2200d0/Temp))
+           !C
+           case (9)
+                k1=r1(p(1:3),Temp)
+                rate_const=k1*(O2+3.5d18)/(2d0*O2+3.5d18)               
+           !D
+           case (10)
+                k1=r1(p(1:3),Temp)
+                rate_const=k1*O2/(2d0*O2+3.5d18)
+           !K
+           case (11)
+                sqm=sqrt(p(1))
+                stkcf=p(2)
+                stk=sqrt(Temp)
+                rate_const=arsl1k(aer_area,aer_radius,denair,stkcf,stk,sqm) 
+           !H
+           case (12)
+                k1=r1(p(1:3),Temp)
+                rate_const=k1*fyhoro(denair,Temp)    
+           !F
+           case (13)
+                k1=r1(p(1:3),Temp)
+                rate_const=k1*(1d0-fyhoro(denair,Temp))
+           !V
+           case (14)
+                k1=r1(p(1:3),Temp)
+                k2=r1(p(1:3),Temp)
+                rate_const=k1/(1d0+k2)
+           !Photolysis
+           case (15:16)
+                rate_const= 0d0
+         endselect
+         rate_c(ir) = rate_const
+      enddo !ir
+
+      endfunction rxn_rate
+
+!==========================================================================
+      function r1(para, Temp) result(k)
+      real(kind=DP),dimension(3),intent(in) :: para
+      real(kind=DP),             intent(in) :: Temp
+      real(kind=DP)                         :: k
+      k = para(1)
+      if (para(2).ne.0e0) k = k*(3d2/Temp)**para(2)
+      if (para(3).ne.0e0) k = k*exp(para(3)/Temp)
+      endfunction r1
+
+!============================================================================
+!Helper functions for special rates
+! $Id: fyrno3.f,v 4.18 2001/08/31 15:17:53 bmy v4.18 $
+      function fyrno3(xcarbn,zdnum,tt)result(rfyrno3)
+!***************************************************************************
+!          Returns organic nitrate yields YN = RKA/(RKA+RKB)
+!          from RO2+NO reactions as a function
+!          of the number N of carbon atoms.
+!          Updated following Atkinson 1990.
+!***************************************************************************
+      real(kind=DP) :: xcarbn
+      real(kind=DP) :: zdnum,tt
+      real(kind=DP) :: yyyn,xxyn,aaa,rarb,zzyn,xf,alpha,y300,beta,xminf,xm0
+      real(kind=DP) :: rfyrno3
+
+      data y300,alpha,beta,xm0,xminf,xf/.826,1.94e-22,.97,0.,8.1,.411/
+c
+      xxyn = alpha*exp(beta*xcarbn)*zdnum*((300./tt)**xm0)
+      yyyn = y300*((300./tt)**xminf)
+      aaa=log10(xxyn/yyyn)
+      zzyn = 1./(1.+ aaa*aaa )
+      rarb = (xxyn/(1.+ (xxyn/yyyn)))*(xf**zzyn)
+      rfyrno3 = rarb/(1. + rarb)
+
+      ! Change ISN2 yield from RIO2+NO to 4.4% after Chen et al, 1998
+      ! This reaction is tagged by a 99 for the number of carbons in chem.dat
+      ! (amf, 4/20/00)
+      if (xcarbn == 9.90e+01) then
+         rfyrno3 = 0.044d0
+      endif
+      endfunction fyrno3
+
+!============================================================================
+! $Id: fyhoro.f,v 1.1.1.1 2005/02/06 17:26:09 tmf Exp $
+      function fyhoro( zdnum, tt )result(rfyhoro)
+!
+!******************************************************************************
+!  Function FYHORO returns returns the branching ratio between 
+!  HOC2H4O oxidation and dissociation:
+!  (1) HOC2H4 --O2--> HO2 + GLYC
+!  (2) HOC2H4 ------> HO2 + 2CH2O
+!
+!  Arguments as Input:
+!  ============================================================================
+!  (1 ) ZDNUM  (REAL*8) : Air density   [molec/cm3 ]
+!  (2 ) TT     (REAL*8) : Temperature   [K         ]
+!    
+!  NOTES: 
+!  (1 ) Branching ratio calculation (tmf, 2/6/05).
+!
+!  REFERENCES:
+!  (1 ) Orlando et al., 1998. Laboratory and theoretical study of the oxy 
+!        radicals in the OH- and Cl-initiated oxidation of ethene, 
+!        J. Phys. Chem. A, 102, 8116-8123.
+!  (2 ) Orlando et al., 2003. The atmospheric chemistry of alkoxy radicals,
+!        Chem. Rev., 103, 4657-4689.
+!******************************************************************************
+      ! arguments
+      real(kind=DP), intent(in) :: zdnum, tt
+      real(kind=DP)             :: rfyhoro
+      ! local variables
+      real(kind=DP)             :: k1, k2, o2dnum
+      o2dnum = zdnum * 0.21d0
+      k1     = 6.0d-14 * exp(-550.d0/tt) * o2dnum
+      k2     = 9.5d+13 * exp(-5988.d0/tt)
+      rfyhoro = k1 / (k1 + k2)
+      endfunction fyhoro
+
+!============================================================================
+      function arsl1k(area, radius, denair, stkcf, stk, sqm)result(rarsl1k)
+C***************************************************************************C
+C*      This function calculates the 1st-order loss rate of species        *C
+C*         on wet aerosol surface, with formula from Dentener's            *C
+C*         thesis, pp14.               jyl, July 1, 1994                   *C
+C*         arsl1k (/s) = area / [ radius/dfkg + 4./(stkcf * xmms) ]        *C
+C***************************************************************************C
+      real(kind=DP) ::  stkcf
+      real(kind=DP) ::  area, radius, stk, sqm, denair
+      real(kind=DP) ::  dfkg
+      real(kind=DP) ::  rarsl1k
+C* area: sfc area of wet aerosols per volume of air (cm2/cc);
+C* radius: radius of wet aerosol (cm), order of 0.01-10 um;
+c          note that radius here is rd, not ro ;
+C* dfkg: gas phase diffusion coefficient (cm2/s), order of 0.1;
+C* denair: density of air in #/cc.
+C* stkcf: sticking coefficient (no unit), order of 0.1;
+C* stk: sqrt of temperature (K);
+C* sqm: sqrt of molecular weight (g/mol);
+C* xmms: mean molecular speed (cm/s), = sqrt(8R*TK/pi/M) for Maxwell 
+C*       distribution.
+
+      if(area .lt. 0. .or. radius .lt. 0.) then
+c default 
+         rarsl1k = 1.d-3
+      else
+         dfkg  = 9.45d17/denair * stk * sqrt(3.472d-2 + 1.d0/(sqm*sqm))
+         rarsl1k=area/(radius/dfkg + 2.749064e-4*sqm/(stkcf*stk))
+      endif
+      endfunction arsl1k
+
       endmodule module_ream_rxntype

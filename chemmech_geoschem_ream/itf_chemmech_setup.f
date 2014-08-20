@@ -2,6 +2,7 @@
       !global modules
       use module_model_parameter, only : DP
       use module_model_cheminfo
+      !use module_model_path
 
       !local modules
       use module_spec
@@ -10,12 +11,18 @@
       use module_photolysis, only:photolysis_read
       implicit none
       integer :: i
+      character(len=255) :: pream,fream,fratj,fjspe
+
+      pream='/data12/yzhang425/REAM/REAMSource/v2010_julyo3/Run/'
+      fream='chem.dat'
+      fratj='ratj.d'
+      fjspe='jv_spec.dat'
 
       !Read input files
-      call photolysis_read(,)
-      call ream_read()
+      call photolysis_read(trim(pream)//trim(fratj),trim(pream)//trim(fjspe))
+      call ream_read(trim(pream)//trim(fream))
 
-      !Initialize global module
+      !Initialize variables in the global module "module_model_cheminfo"
       spec_name(:)         = ''
       spec_flag(:)         = ''
       spec_default_conc(:) = 0.
