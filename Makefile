@@ -7,7 +7,7 @@ SRC := $(wildcard *.f)
 OBJ := $(SRC:.f=.o)
 
 all:$(OBJ)
-	$(FC) $(FCFLAGS) -o $(EXE) $(OBJ)
+#	$(FC) $(FCFLAGS) -o $(EXE) $(OBJ)
 #	@mv $(EXE) $(EXEDIR)
 #	@ln -s $(EXEDIR)$(EXE) .
 
