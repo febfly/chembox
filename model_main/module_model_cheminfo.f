@@ -1,7 +1,7 @@
 !Data module that stores information of chemical mechansim
       module module_model_cheminfo
       use module_model_parameter, only : DP,MAX_NSPEC,MAX_NRXN,MAX_STR1,
-     +                                   MAX_STR2, MAX_NRXNTYPE
+     +                                   MAX_STR2,MAX_NPROD,MAX_NREAC
       implicit none
 
       integer       :: nspec_all, nspec_active, nspec_inactive
@@ -17,11 +17,5 @@
       real(kind=DP), dimension(MAX_NPROD, MAX_NRXN) :: rxn_prod_coef 
       character(len=1),dimension(MAX_NRXN)          :: rxn_flag
 
-      !??????????????????????????????????????? 
-      integer, dimension(MAX_NRXN)  :: rxn_type
-
-      integer       :: nrxntype
-      character(len=MAX_NRXNTYPE)   :: type_name
-      !??????????????????????????????????????? 
       
       endmodule

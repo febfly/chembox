@@ -1,4 +1,7 @@
+!=========================================================================
 ! Module mod_smvgear_interface
+! Written by Yuzhong Zhang, 9/8/2014
+!=========================================================================
       module mod_smvgear_interface
       implicit none
 

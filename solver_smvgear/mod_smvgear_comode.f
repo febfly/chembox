@@ -5,8 +5,11 @@
 ! Organized into a module by Yuzhong Zhang, 9/8/2014
 !=====================================================================
       module mod_smvgear_comode
+      !use module_model_parameter, only : DBL_PRECISION => DP
       implicit none
       integer, parameter :: DP = 8       
+      !integer, parameter :: DP = DBL_PRECISION
+
 ! *********************************************************************
 !                   COMMON VARIABLES: PARAMETERS
 ! *********************************************************************        
