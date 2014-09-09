@@ -16,7 +16,7 @@
       !private functions
       private :: read_line
       private :: read_rxn
-      private :: read_photoline
+      private :: read_photorxn
       !private :: write_line
       !private :: write_rxn
       !private :: write_photo
@@ -81,7 +81,7 @@
             stop
          elseif (ifok.eq.0) then 
             !If an active reaction, add
-            call rxn_add(.false.,nreac,nprod, reac_id, prod_id,coef,
+            call rxn_add(0,nreac,nprod, reac_id, prod_id,coef,
      +           tpid, paralist)
             tpid_pre = tpid
          endif
@@ -96,6 +96,22 @@
          read(u,*) head
       enddo
 
+      call read_photorxn(u,nreac, nprod, reac_id,prod_id,tpid,
+     +           coef,paralist, ifok)
+      do while (ifok.ne.2) !END encountered
+         if (ifok.lt.0) then 
+            !if error occurs
+            stop
+         elseif (ifok.eq.0) then
+             call rxn_add(1,nreac,nprod,reac_id,prod_id,coef,
+     +                   tpid,paralist)
+         endif
+         call read_photorxn(u,nreac, nprod, reac_id,prod_id,tpid,
+     +           coef,paralist, ifok)
+      enddo
+      print*,'done read photolysis reactions'
+
+ 11   format(a1, 1x, a8, 1x, e10.3)
       endsubroutine ream_read
 
 !==============================================================
@@ -298,8 +314,8 @@
 ! subroutine : read_photoline
 !              read a photolysis reaction
 !==============================================================
-      subroutine read_photoline(u,reacid,nreac,prodid,nprod,
-     &           coef,stat,para,flagid,ifok)
+      subroutine read_photorxn(u,nreac, nprod, reacid,prodid,
+     &           flagid,coef,para,ifok)
       use module_ream_cheminfo,only:spec_getid
       use module_ream_rxntype ,only:rxntype_id
       integer                       :: u,ord
@@ -314,7 +330,7 @@
       integer                       :: flagid, ifok
 
       integer                       :: i,id
-      logical                       :: ifphoto
+      integer                       :: ifphoto
 
       !Read the line
       read(u,15)reac(1),ord,stat,nprod,para(1),flag
@@ -334,8 +350,8 @@
       endif
 
       !Check reaction type
-      ifphoto=.true.
-      flagid = rxn_findtype(flag,ifphoto)
+      ifphoto=1
+      flagid = rxntype_id(flag,ifphoto)
       if (flagid.eq.0 ) then
          print*,'cannot find reaction type '//flag
          stop
@@ -345,7 +361,10 @@
       nreac = 1
       reacid = 0
       id = spec_getid(reac(1))
-      if (reac(1).eq.'END') return
+      if (reac(1).eq.'END') then 
+         ifok=2
+         return
+      endif
       if (id.eq.0) then
           print*,'cannot find reactants'//reac(1)// 'in species list'
           stop
@@ -362,10 +381,11 @@
             prodid(i) = id
          endif
       enddo
+      ifok = 0
 
  15   format(1x,a8,1x,i4,1x,a1,1x,i2,1x,f4.1,1x,a1)
  16   format(2x,f5.3,1x,a8)
 
-      endsubroutine read_photoline
+      endsubroutine read_photorxn
 
       endmodule module_ream_io

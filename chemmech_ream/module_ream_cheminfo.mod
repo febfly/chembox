@@ -1,5 +1,5 @@
-GFORTRAN module version '0' created from module_ream_cheminfo.f on Mon Sep  8 18:08:33 2014
-MD5:077ada1a426b2de0d2750f9cfc3feb33 -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from module_ream_cheminfo.f on Tue Sep  9 10:42:26 2014
+MD5:4e9ad3d0429ba751a6418d4e1ce23c45 -- If you edit this, you'll get what you deserve.
 
 (() () () () () () () () () () () ()
 () () () () () () () () () () () () () () ())
@@ -164,7 +164,7 @@ INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 29 'n1' '' 'n1' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 28 'ifp' '' 'ifp' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
-LOGICAL 4 0 0 LOGICAL ()) 0 0 () () 0 () () () 0 0)
+INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 )
 
 ('def_conc' 0 2 'dp' 0 3 'max_npara' 0 4 'max_nprod' 0 5 'max_nreac' 0 6

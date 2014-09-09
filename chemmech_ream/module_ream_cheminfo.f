@@ -145,7 +145,7 @@
        endfunction spec_ifduplicate
 !=========================================================================
        subroutine rxn_add(ifp,n1, n2, id1, id2, cf2,  typeid, pr)
-       logical, intent(in) :: ifp
+       integer, intent(in) :: ifp
        integer, intent(in) :: n1, n2
        integer, dimension(MAX_NREAC),intent(in) :: id1
        integer, dimension(MAX_NPROD),intent(in) :: id2
@@ -156,7 +156,7 @@
 
 !       if (flag.eq.'D') return !dead reactions
        nr = nr + 1
-       if (ifp) nphoto = nphoto + 1
+       if (ifp.eq.1) nphoto = nphoto + 1
        nreac(nr) = n1
        nprod(nr) = n2
        reacs(:,nr) = id1(:)
