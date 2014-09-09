@@ -1,8 +1,6 @@
 FC := gfortran
-FCFLAGS := -ffixed-line-length-none  -fopenmp
+FCFLAGS := -ffixed-line-length-none  -fopenmp -J$(MODDIR)
 #FCFLAGS := -ffixed-line-length-none 
 #FC := ifort
 #FCFLAGS := -extend-source -openmp -CB
 	
-%.o:%.f
-	$(FC) $(FCFLAGS) -c $<
