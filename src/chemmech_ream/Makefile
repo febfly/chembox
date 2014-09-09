@@ -22,7 +22,6 @@ clean:
 	@rm $(MOD)
 	@rm $(OBJ)
 
-$(OBJDIR)module_model_parameter.o : module_model_parameter.f
 $(OBJDIR)module_ream_rxntype.o : module_ream_rxntype.f module_model_parameter.o
 $(OBJDIR)module_ream_cheminfo.o : module_ream_cheminfo.f module_ream_rxntype.o module_model_parameter.o
 $(OBJDIR)module_ream_io.o : module_ream_io.f module_ream_cheminfo.o module_ream_rxntype.o module_model_parameter.o

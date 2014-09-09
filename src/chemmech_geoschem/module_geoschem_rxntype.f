@@ -8,7 +8,7 @@
       use module_model_parameter,only: DP
       implicit none
       integer, parameter :: MAX_NTYPE = 30
-      integer, parameter :: MAX_NPARA = 16
+      integer, parameter :: MAX_NPARA = 21
       integer, parameter :: STRLEN    = 50
 
       integer :: ntype
@@ -40,22 +40,21 @@
 !             Defines reaction type
 !             The definition includes
 !               1. name of the reaction type 
-!               2. number of parameter
-!               3. the positions in the parameter list read from the
 !                  GEOS-Chem chemical mechnism input file 
-!               4. symbol used in the GEOS-Chem chemical mechanism input file
+!               2. symbol used in the GEOS-Chem chemical mechnism input file
 !                  to denote the special reaction type
-!               5. comment of the reaction type
-!               6. the reaction type that appears prior to this reaction
-!                  type in the GEOS-Chem chemical mechanism input file; 0
+!               3. comment of the reaction type
+!               4. the reaction type that appears prior to this reaction
+!                  type in the GEOSChem chemical mechnism input file; 0
 !                  means no requirement for the preceeding reaction
 !                  type
-!               7. the reaction type that appears after this reaction
-!                  type in the GEOS-Chem chemical mechanism input file; 0
+!               5. the reaction type that appears after this reaction
+!                  type in the GEOS-Chem chemical mechnism input file; 0
 !                  means no requirement for the succeeding reaction
 !                  type
-!               8. if this is a photolysis reaction type; 0 means normal
+!               6. if this is a photolysis reaction type; 0 means normal
 !                  reaction type; 1 means photolysis.
+!               7. 
 !              ATTENTION: when modifying, be sure to modify ntype to a
 !                  proper value
 !=========================================================================
@@ -69,6 +68,7 @@
       preceeding_type(1)     = 0
       succeeding_type(1)     = 0
       if_photo_type(1)       = 0
+      nrxnline(1)            = 1
 
       type_name(2)           = 'Pressure dependent 3 body'
       symbol(2)              = "P"
@@ -76,6 +76,7 @@
       preceeding_type(2)     = 0
       succeeding_type(2)     = 0      
       if_photo_type(2)       = 0
+      nrxnline(2)            = 2
 
       type_name(3)           = 'Addition branch of RO2+NO'
       symbol(3)              = "B"
@@ -83,6 +84,7 @@
       preceeding_type(3)     = 0
       succeeding_type(3)     = 4
       if_photo_type(3)       = 0
+      nrxnline(3)            = 2
 
       type_name(4)           = 'Abstaction branch of RO2+NO'
       symbol(4)              = "A"
@@ -90,6 +92,7 @@
       preceeding_type(4)     = 3
       succeeding_type(4)     = 0
       if_photo_type(4)       = 0
+      nrxnline(4)            = 2
 
       type_name(5)           = 'Equilibrim reaction (reverse)'
       symbol(5)              = "E"
@@ -97,6 +100,7 @@
       preceeding_type(5)     = 2
       succeeding_type(5)     = 0
       if_photo_type(5)       = 0
+      nrxnline(5)            = 1
 
       type_name(6)           = 'OH+HNO3'
       symbol(6)              = "X"
@@ -104,6 +108,7 @@
       preceeding_type(6)     = 0
       succeeding_type(6)     = 0
       if_photo_type(6)       = 0
+      nrxnline(6)            = 3
 
       type_name(7)           = 'OH+CO'
       symbol(7)              = "Y"
@@ -111,6 +116,7 @@
       preceeding_type(7)     = 0
       succeeding_type(7)     = 0
       if_photo_type(7)       = 0
+      nrxnline(7)            = 1
 
       type_name(8)           = 'HO2/NO3+HO2'
       symbol(8)              = "Z"
@@ -118,6 +124,7 @@
       preceeding_type(8)     = 0
       succeeding_type(8)     = 0
       if_photo_type(8)       = 0
+      nrxnline(8)            = 2
 
       type_name(9)           = 'GLYX+OH/NO3->HO2+CO'
       symbol(9)              = "C"
@@ -125,6 +132,7 @@
       preceeding_type(9)     = 0
       succeeding_type(9)     = 0
       if_photo_type(9)       = 0
+      nrxnline(9)            = 1
 
       type_name(10)          = 'GLYX+OH/NO3->GLCO3'
       symbol(10)             = "D"
@@ -132,6 +140,7 @@
       preceeding_type(10)    = 0
       succeeding_type(10)    = 0
       if_photo_type(10)      = 0
+      nrxnline(10)           = 1
 
       type_name(11)          = 'Aerosol surface loss'
       symbol(11)             = "K"
@@ -139,6 +148,7 @@
       preceeding_type(11)    = 0
       succeeding_type(11)    = 0
       if_photo_type(11)      = 0
+      nrxnline(11)           = 1
 
       type_name(12)          = 'EO2->HO2+GLYC'
       symbol(12)             = "H"
@@ -146,6 +156,7 @@
       preceeding_type(12)    = 0
       succeeding_type(12)    = 0
       if_photo_type(12)      = 0
+      nrxnline(12)           = 1
 
       type_name(13)          = 'EO2->HO2+2CH2O'
       symbol(13)             = "F"
@@ -153,6 +164,7 @@
       preceeding_type(13)    = 0
       succeeding_type(13)    = 0
       if_photo_type(13)      = 0
+      nrxnline(13)           = 1
 
       type_name(14)          = 'Temperature dependent branching'
       symbol(14)             = "V"
@@ -160,6 +172,7 @@
       preceeding_type(14)    = 0
       succeeding_type(14)    = 0
       if_photo_type(14)      = 0
+      nrxnline(14)           = 2
 
       type_name(15)          = 'Photolysis'
       symbol(15)             = " "
@@ -167,6 +180,7 @@
       preceeding_type(15)    = 0
       succeeding_type(15)    = 0
       if_photo_type(15)      = 1
+      nrxnline(15)           = 1
 
       type_name(16)          = 'O3 photolysis'
       symbol(16)             = "A"
@@ -174,6 +188,7 @@
       preceeding_type(16)    = 0
       succeeding_type(16)    = 0
       if_photo_type(16)      = 1
+      nrxnline(16)           = 1
       endsubroutine rxntype_init
 
 !=========================================================================
