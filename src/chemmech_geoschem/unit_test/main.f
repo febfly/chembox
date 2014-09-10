@@ -19,7 +19,7 @@
       denair=pres*Na/R/temp !#/cm3
       o2=0.21 *denair !#/cm3
       n2=0.78 *denair !#/cm3
-      h2o=0.005*denair
+      h2o=0.001*denair
 
       aer_area  =12e-7 !cm2/cm3
       aer_radius=1e-4  !cm
