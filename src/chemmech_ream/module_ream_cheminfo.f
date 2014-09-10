@@ -27,7 +27,7 @@
       real(kind=DP),dimension(MAX_NPARA,MAX_NRXN)  :: paras
 
       !public functions
-      public :: ream_cheminfo_init
+      public :: cheminfo_init
       public :: spec_add
       public :: spec_finish_add
       public :: spec_getid
@@ -40,7 +40,7 @@
       contains
 
 !=========================================================================
-      subroutine ream_cheminfo_init
+      subroutine cheminfo_init
       ns = 0
       nactive = 0
       ninactive = 0
@@ -58,7 +58,7 @@
       prod_coefs(:,:) = 0.
       r_type(:) = 0
       paras(:,:) = 0.
-      endsubroutine ream_cheminfo_init
+      endsubroutine cheminfo_init
 
 !=========================================================================
 

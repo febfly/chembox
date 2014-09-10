@@ -29,7 +29,8 @@
 !              stores relevant information in module_ream_cheminfo
 !======================================================================
       subroutine ream_read(filename)
-      use module_ream_cheminfo,only : spec_add,spec_finish_add,rxn_add
+      use module_ream_cheminfo,only : cheminfo_init,spec_add,
+     +                               spec_finish_add,rxn_add
       use module_ream_rxntype,only  : MAX_NPARA
       character(len=*),intent(in)        :: filename
       integer                            :: u, tpid_pre, ifok, tpid
@@ -44,6 +45,7 @@
       real(kind=DP),dimension(MAX_NPARA) :: paralist
 
       u = 90 !I/O unit
+      call cheminfo_init
 
       !open input file chem.dat
       open(unit=u,file=trim(filename),status='old')
@@ -161,7 +163,7 @@
       if (tpid_pre.gt.0) then
          succ = succeeding_type(tpid_pre)
          if (succ.gt.0) then
-            if (tpid.ne.succ) then
+            if (tpid0.ne.succ) then
                print*,'Error: chem.dat'
                print*,'***Requires certain type of special reaction***'
                print*,'***Check module_ream_rxntype.f'
@@ -173,10 +175,10 @@
 
       !Check if tpid and tpid_pre satisfy defined succeeding_type
       !and/or succeeding_type
-      if (tpid.gt.0) then
-         prec = preceeding_type(tpid)
+      if (tpid0.gt.0) then
+         prec = preceeding_type(tpid0)
          if (prec.gt.0) then
-            if (tpid0.ne.prec) then
+            if (tpid_pre.ne.prec) then
                print*,'Error: chem.dat'
                print*,'***Requires certain type of special reaction***'
                print*,'***Check module_ream_rxntype.f'
@@ -188,7 +190,7 @@
 
       !Continue to read if this type of special reaction requires more
       !than 1 line of information
-      if (nrxnline(tpid).gt.1) then
+      if (nrxnline(tpid0).gt.1) then
          !Used for checking if the next line is the same reaction or not
          reac_name2=reac_name
          prod_name2=prod_name
@@ -272,7 +274,8 @@
          endif
       enddo
 
-      !count number of products and find their species id
+      !find product's species id
+      prodid = 0
       do i=1,nprod
          if (prod(i).ne." ")then
             id = spec_getid(prod(i))
