@@ -1,5 +1,5 @@
-GFORTRAN module version '0' created from module_geoschem_rxntype.f on Wed Sep 10 11:00:27 2014
-MD5:a4b240941d13c4883e39f8000862bf60 -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from module_geoschem_rxntype.f on Wed Sep 10 11:57:03 2014
+MD5:ceed3f3e002ecdf93c4d0c53b4bd45eb -- If you edit this, you'll get what you deserve.
 
 (() () () ()
 () () () () () () () () () () () () () () () () () () () () () () ())
@@ -81,24 +81,25 @@ INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '30')) 0 () ()
 () 0 0)
 36 'symbol' 'module_geoschem_rxntype' 'symbol' 1 ((VARIABLE
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (CHARACTER 1 0 0
-CHARACTER ((CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1'))) 0 0 () (1
+CHARACTER ((CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2'))) 0 0 () (1
 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
 4 0 0 INTEGER ()) 0 '30')) 0 () () () 0 0)
-37 'type_name' 'module_geoschem_rxntype' 'type_name' 1 ((VARIABLE
+37 'symlen' 'module_geoschem_rxntype' 'symlen' 1 ((PARAMETER
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2') () 0 () ()
+() 0 0)
+38 'type_name' 'module_geoschem_rxntype' 'type_name' 1 ((VARIABLE
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (CHARACTER 1 0 0
 CHARACTER ((CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '50'))) 0 0 () (1
 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
 4 0 0 INTEGER ()) 0 '30')) 0 () () () 0 0)
 30 'sym' '' 'sym' 29 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
-UNKNOWN DUMMY) (CHARACTER 1 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
-INTEGER ()) 0 '1'))) 0 0 () () 0 () () () 0 0)
+UNKNOWN DUMMY) (CHARACTER 1 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
 31 'ifphoto' '' 'ifphoto' 29 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN UNKNOWN DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0
 0)
 32 'id' '' 'id' 29 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN RESULT) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-22 'n2' '' 'n2' 15 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
-REAL 8 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
 23 'denair' '' 'denair' 15 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
 DUMMY) (REAL 8 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
 24 'h2o' '' 'h2o' 15 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
@@ -111,6 +112,8 @@ UNKNOWN DUMMY) (REAL 8 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
 DIMENSION DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (1 EXPLICIT (CONSTANT (
 INTEGER 4 0 0 INTEGER ()) 0 '1') (VARIABLE (INTEGER 4 0 0 INTEGER ()) 0
 16 ())) 0 () () () 0 0)
+22 'n2' '' 'n2' 15 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+REAL 8 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
 21 'o2' '' 'o2' 15 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 REAL 8 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
 20 'pres' '' 'pres' 15 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY)
@@ -134,4 +137,5 @@ INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 0 6 'module_geoschem_rxntype' 0 7 'module_model_parameter' 0 8
 'nparameter' 0 9 'nrxnline' 0 10 'ntype' 0 11 'parameter_pos' 0 12
 'preceeding_type' 0 13 'rxn_rate' 0 14 'rxntype_id' 0 28 'rxntype_init'
-0 33 'strlen' 0 34 'succeeding_type' 0 35 'symbol' 0 36 'type_name' 0 37)
+0 33 'strlen' 0 34 'succeeding_type' 0 35 'symbol' 0 36 'symlen' 0 37
+'type_name' 0 38)

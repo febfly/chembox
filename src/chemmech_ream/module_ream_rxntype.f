@@ -339,7 +339,7 @@
            !V
            case (14)
                 k1=r1(p(1:3),Temp)
-                k2=r1(p(1:3),Temp)
+                k2=r1(p(4:6),Temp)
                 rate_const=k1/(1d0+k2)
            !Photolysis
            case (15:16)

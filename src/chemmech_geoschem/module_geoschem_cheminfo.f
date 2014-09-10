@@ -7,7 +7,7 @@
       module module_geoschem_cheminfo
       use module_model_parameter, only : DP, MAX_NSPEC, MAX_STR1,
      +    MAX_NRXN, MAX_NREAC, MAX_NPROD
-      use module_geoschem_rxntype, only : MAX_NPARA
+      use module_geoschem_rxntype, only : MAX_NPARA,SYMLEN
       implicit none
 
       !species information
@@ -19,7 +19,7 @@
       !reaction information
       integer :: nr, nphoto
       integer, dimension(MAX_NRXN)     :: nreac, nprod
-      character(len=1),dimension(MAX_NSPEC)        :: rxn_symbol
+      character(len=SYMLEN),dimension(MAX_NSPEC)   :: rxn_symbol
       integer, dimension(MAX_NREAC,MAX_NRXN)       :: reacs
       integer, dimension(MAX_NPROD,MAX_NRXN)       :: prods
       real(kind=DP),dimension(MAX_NPROD,MAX_NRXN)  :: prod_coefs

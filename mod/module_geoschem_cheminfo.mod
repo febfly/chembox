@@ -1,8 +1,8 @@
-GFORTRAN module version '0' created from module_geoschem_cheminfo.f on Wed Sep 10 11:12:08 2014
-MD5:fc313ed32547a8eda3066a7cd71f1b0e -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from module_geoschem_cheminfo.f on Wed Sep 10 11:57:03 2014
+MD5:ec5adb777cb7179aae50496ea04c881f -- If you edit this, you'll get what you deserve.
 
-(() () () ()
-() () () () () () () () () () () () () () () () () () () () () () ())
+(() () () () () () () () () () () () () () () () () () () () () ()
+() () () () ())
 
 ()
 
@@ -111,7 +111,7 @@ UNKNOWN-INTENT MODULE-PROC DECL UNKNOWN SUBROUTINE) (UNKNOWN 0 0 0
 UNKNOWN ()) 27 0 (28 29 30 31 32 33 34 35) () 0 () () () 0 0)
 36 'rxn_symbol' 'module_geoschem_cheminfo' 'rxn_symbol' 1 ((VARIABLE
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (CHARACTER 1 0 0
-CHARACTER ((CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1'))) 0 0 () (1
+CHARACTER ((CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2'))) 0 0 () (1
 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
 4 0 0 INTEGER ()) 0 '300')) 0 () () () 0 0)
 37 'spec_add' 'module_geoschem_cheminfo' 'spec_add' 1 ((PROCEDURE
@@ -133,6 +133,10 @@ UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (CHARACTER 1 0 0
 CHARACTER ((CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1'))) 0 0 () (1
 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
 4 0 0 INTEGER ()) 0 '300')) 0 () () () 0 0)
+49 'symlen' 'module_geoschem_rxntype' 'symlen' 1 ((PARAMETER
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2') () 0 () ()
+() 0 0)
 40 'stat' '' 'stat' 38 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN DUMMY) (CHARACTER 1 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
 INTEGER ()) 0 '1'))) 0 0 () () 0 () () () 0 0)
@@ -140,14 +144,18 @@ INTEGER ()) 0 '1'))) 0 0 () () 0 () () () 0 0)
 CHARACTER 1 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
 41 'conc' '' 'conc' 38 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN DUMMY) (REAL 8 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
-32 'id2' '' 'id2' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+31 'id1' '' 'id1' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
 DIMENSION DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () (1 EXPLICIT (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
-INTEGER ()) 0 '20')) 0 () () () 0 0)
+INTEGER ()) 0 '4')) 0 () () () 0 0)
 45 's' '' 's' 44 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 CHARACTER 1 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
 46 'id' '' 'id' 44 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN RESULT) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+32 'id2' '' 'id2' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+DIMENSION DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () (1 EXPLICIT (
+CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
+INTEGER ()) 0 '20')) 0 () () () 0 0)
 33 'cf2' '' 'cf2' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
 DIMENSION DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (1 EXPLICIT (CONSTANT (
 INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0
@@ -158,10 +166,6 @@ DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (1 EXPLICIT (CONSTANT (INTEGER 4 0 0
 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '21')) 0 () ()
 () 0 0)
-31 'id1' '' 'id1' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
-DIMENSION DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () (1 EXPLICIT (
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
-INTEGER ()) 0 '4')) 0 () () () 0 0)
 30 'n2' '' 'n2' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 29 'n1' '' 'n1' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
@@ -177,4 +181,4 @@ INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 16 'nprod' 0 17 'nr' 0 18 'nreac' 0 19 'ns' 0 20 'paras' 0 21 'prod_coefs'
 0 22 'prods' 0 23 'r_type' 0 24 'reacs' 0 25 'rxn_add' 0 26 'rxn_symbol'
 0 36 'spec_add' 0 37 'spec_finish_add' 0 42 'spec_getid' 0 43 'specname'
-0 47 'status' 0 48)
+0 47 'status' 0 48 'symlen' 0 49)

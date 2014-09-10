@@ -103,8 +103,8 @@
       subroutine read_rxn(u,flagid_pre,ifphoto,reacid,nreac,prodid,
      +                   nprod,coef,ord,para,flagid,ifok)
       use module_geoschem_cheminfo,only:spec_getid
-      use module_geoschem_rxntype, only:rxntype_id,MAX_NPARA,
-     +                     nrxnline,preceeding_type,succeeding_type
+      use module_geoschem_rxntype, only:rxntype_id,MAX_NPARA,SYMLEN,
+     +                             preceeding_type,succeeding_type
       integer                                :: u,ord,ifphoto
       character(len=14),dimension(MAX_NREAC) :: reac
       integer,dimension(MAX_NREAC)           :: reacid
@@ -112,11 +112,13 @@
       character(len=14),dimension(MAX_NPROD) :: prod
       integer,dimension(MAX_NPROD)           :: prodid
       integer                                :: nreac, nprod
-      character(len=1)                       :: stat,stat1,flag
+      character(len=1)                       :: stat,stat1
+      character(len=SYMLEN)                  :: flag
       real(kind=DP),dimension(MAX_NPARA)     :: para
       integer                                :: flagid,flagid_pre
       character(len=20)                      :: comment
       integer                                :: ifok
+      integer                                :: nline
 
       real(kind=DP)                  :: a,b,e,f,g
       integer                        :: c,d, succ,prec
@@ -131,24 +133,23 @@
       para(1)=a
       para(2)=b
       para(3)=float(c)
-      para(4)=float(d)
-      para(5)=e
-      para(6)=f
-      para(7)=g
+      nline  =float(d)
+      para(4)=e
+      para(5)=f
+      para(6)=g
       flagid =rxntype_id(flag,ifphoto)
 
       !Continue to read if this type of special reaction requires more
       !than 1 line of information
-      if (nrxnline(flagid).gt.1) then 
-         do i=2,nrxnline(flagid)
+      if (nline.ge.1) then 
+         do i=1,nline
             read(u,51) stat1,ord,a,b,c,d,flag,e,f,g,comment
-            para((i-1)*7+1) = a
-            para((i-1)*7+2) = b
-            para((i-1)*7+3) = float(c)
-            para((i-1)*7+4) = float(d)
-            para((i-1)*7+5) = e
-            para((i-1)*7+6) = f
-            para((i-1)*7+7) = g
+            para(i*6+1) = a
+            para(i*6+2) = b
+            para(i*6+3) = float(c)
+            para(i*6+4) = e
+            para(i*6+5) = f
+            para(i*6+6) = g
          enddo 
       endif
 
@@ -224,7 +225,7 @@
        
        ifok=0 !Successfully read in a new reaction
 
-  51   format(A1,1X,I4,1X,ES8.2,1X,ES8.1,1X,I6,1X,I1,1X,A1,1X,F6.2,1X,
+  51   format(A1,1X,I4,1X,ES8.2,1X,ES8.1,1X,I6,1X,I1,1X,A2,F6.2,1X,
      1       2(F6.0,1X),A20)
   52   format(4(A1,0PF5.3,A14))
   53   format(4(A1,0PF5.3,A14)/4(A1,0PF5.3,A14)/
