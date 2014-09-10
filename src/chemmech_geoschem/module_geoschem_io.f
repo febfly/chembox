@@ -1,5 +1,5 @@
       module module_geoschem_io
-      use module_model_parameter, only: DP,MAX_NREAC,MAX_NPROD
+      use module_geoschem_parameter, only: DP,MAX_NREAC,MAX_NPROD
       implicit none
 
       public :: geos_read
@@ -9,8 +9,17 @@
       contains
       
       subroutine geos_read(filename)
-      use module_geoschem_cheminfo,only: spec_add, spec_finish_add, rxn_add
-      use module_geoschem_rxntype,only:  MAX_NPARA
+      use module_geoschem_cheminfo,only: spec_add, spec_finish_add, 
+     +                                   cheminfo_init,rxn_add
+      use module_geoschem_rxntype,only:  MAX_NPARA, rxntype_init
+
+      !common variables used for printing only,..
+      use module_geoschem_cheminfo,only: specname, ns, status,def_conc,
+     +                                   nr, reacs, prods, r_type, 
+     +                                   prod_coefs,nreac_list=>nreac,
+     +                                   nprod_list=>nprod
+      use module_geoschem_rxntype,only:  symbol
+
       character(len=*),intent(in)        :: filename
       integer                            :: u,  ifok, tpid, tpid_pre
       character(len=5)                   :: head
@@ -27,7 +36,9 @@
       integer                            :: i,j,id
 
       u = 90 !I/O unit
- 
+      call cheminfo_init
+      call rxntype_init
+    
       !open input file chem.dat
       open(unit=u,file=trim(filename),status='old')
 
@@ -47,7 +58,13 @@
          read(u,*)  head
       enddo
       call spec_finish_add
-      print*,'done reading species'
+
+      !print species
+      print*,'Species List:'
+      do i=1,ns
+         print 11,i, specname(i),status(i),def_conc(i)
+      enddo
+      print*,''
 
       !read reaction
       head=""
@@ -90,9 +107,16 @@
          call read_rxn(u,tpid_pre,1,reac_id,nreac,prod_id,nprod,coef,
      +              ord, paralist,tpid,ifok)
       enddo
-      print*,'done reading reactions'
+
+      !print reactions
+      print*,'Reaction list:'
+      do i=1,nr
+          print 12,i,nreac_list(i),nprod_list(i),symbol(r_type(i))
+      enddo
 
   10  format(A1,1X,A14,3X,0PF6.2,4(1PE10.3))
+  11  format(I4,X,A15,X,A1,E10.2)
+  12  format(I3,X,I2,I3,X,A2)
       endsubroutine geos_read
 
 
@@ -169,7 +193,7 @@
              nreac = nreac + 1
              id = spec_getid(reac(j))
              if (id.eq.0) then
-                print*,'cannot find reactions in species list:geos-chem'
+                print*,'cannot find reactants in species list:geos-chem'
                 print*,reac(j)
                 stop
              endif
@@ -186,7 +210,7 @@
              nprod = nprod + 1
              id = spec_getid(prod(j))
              if (id.eq.0) then
-                print*,'cannot find product in species list:geos'
+                print*,'cannot find products in species list:geos'
                 stop
              endif
              prodid(nprod) = id

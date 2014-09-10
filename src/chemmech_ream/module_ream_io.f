@@ -7,7 +7,7 @@
 ! Written by Yuzhong Zhang, 9/8/2014
 !======================================================================
       module module_ream_io
-      use module_model_parameter,only: DP,MAX_NREAC,MAX_NPROD
+      use module_ream_parameter,only: DP,MAX_NREAC,MAX_NPROD
       implicit none
       !public functions
       public  :: ream_read
@@ -31,7 +31,7 @@
       subroutine ream_read(filename)
       use module_ream_cheminfo,only : cheminfo_init,spec_add,
      +                               spec_finish_add,rxn_add
-      use module_ream_rxntype,only  : MAX_NPARA
+      use module_ream_rxntype,only  : MAX_NPARA,rxntype_init
       character(len=*),intent(in)        :: filename
       integer                            :: u, tpid_pre, ifok, tpid
       character(len=5)                   :: head
@@ -46,6 +46,7 @@
 
       u = 90 !I/O unit
       call cheminfo_init
+      call rxntype_init
 
       !open input file chem.dat
       open(unit=u,file=trim(filename),status='old')

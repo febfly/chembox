@@ -5,7 +5,7 @@
 ! Written by Yuzhong Zhang, 9/8/2014
 !=========================================================================
       module module_geoschem_rxntype
-      use module_model_parameter,only: DP
+      use module_geoschem_parameter,only: DP
       implicit none
       integer, parameter :: MAX_NTYPE = 30
       integer, parameter :: MAX_NPARA = 21
@@ -17,8 +17,8 @@
       character(len=STRLEN),dimension(MAX_NTYPE) :: type_name
       character(len=SYMLEN),dimension(MAX_NTYPE) :: symbol
       character(len=STRLEN),dimension(MAX_NTYPE) :: comment
-      integer,dimension(MAX_NTYPE)               :: nparameter
-      integer,dimension(MAX_NPARA,MAX_NTYPE)     :: parameter_pos
+!      integer,dimension(MAX_NTYPE)               :: nparameter
+!      integer,dimension(MAX_NPARA,MAX_NTYPE)     :: parameter_pos
       integer,dimension(MAX_NTYPE)               :: preceeding_type
       integer,dimension(MAX_NTYPE)               :: succeeding_type
       integer,dimension(MAX_NTYPE)               :: if_photo_type
@@ -59,8 +59,7 @@
 !                  proper value
 !=========================================================================
       subroutine rxntype_init
-      parameter_pos(:,:)     = 0
-      ntype                  = 17
+      ntype                  = 18
 
       type_name(1)           = 'Normal'
       symbol(1)              = " "
@@ -180,6 +179,13 @@
       preceeding_type(17)    = 0
       succeeding_type(17)    = 0
       if_photo_type(17)      = 0
+
+      type_name(18)          = 'HNO4 photolysis'
+      symbol(18)             = 'T'
+      comment(18)            = ""
+      preceeding_type(18)    = 0
+      succeeding_type(18)    = 0
+      if_photo_type(18)      = 1
 
       endsubroutine rxntype_init
 
@@ -339,6 +345,9 @@
            !G, DMS+OH
            case (17)
                 rate_const= 0d0 !unfinished
+           !T, HNO4 photolysis
+           case (18)
+                rate_const= 0d0
          endselect
          rate_c(ir) = rate_const
       enddo !ir

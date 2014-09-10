@@ -5,7 +5,7 @@
 ! Written by Yuzhong Zhang, 9/8/2014
 !=========================================================================
       module module_ream_rxntype
-      use module_model_parameter,only: DP
+      use module_ream_parameter,only: DP
       implicit none
       integer, parameter :: MAX_NTYPE = 30
       integer, parameter :: MAX_NPARA = 16
@@ -16,8 +16,8 @@
       character(len=STRLEN),dimension(MAX_NTYPE) :: type_name
       character(len=1),dimension(MAX_NTYPE)      :: symbol
       character(len=STRLEN),dimension(MAX_NTYPE):: comment
-      integer,dimension(MAX_NTYPE)               :: nparameter
-      integer,dimension(MAX_NPARA,MAX_NTYPE)     :: parameter_pos
+!      integer,dimension(MAX_NTYPE)               :: nparameter
+!      integer,dimension(MAX_NPARA,MAX_NTYPE)     :: parameter_pos
       integer,dimension(MAX_NTYPE)               :: preceeding_type
       integer,dimension(MAX_NTYPE)               :: succeeding_type
       integer,dimension(MAX_NTYPE)               :: if_photo_type
@@ -59,7 +59,7 @@
 !                  proper value
 !=========================================================================
       subroutine rxntype_init
-      parameter_pos(:,:)     = 0
+!      parameter_pos(:,:)     = 0
       ntype                  = 16
 
       type_name(1)           = 'Normal'

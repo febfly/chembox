@@ -5,7 +5,7 @@
 ! Written by Yuzhong Zhang, 9/8/2014
 !=========================================================================
       module module_geoschem_cheminfo
-      use module_model_parameter, only : DP, MAX_NSPEC, MAX_STR1,
+      use module_geoschem_parameter, only : DP, MAX_NSPEC, MAX_STR1,
      +    MAX_NRXN, MAX_NREAC, MAX_NPROD
       use module_geoschem_rxntype, only : MAX_NPARA,SYMLEN
       implicit none
@@ -19,7 +19,7 @@
       !reaction information
       integer :: nr, nphoto
       integer, dimension(MAX_NRXN)     :: nreac, nprod
-      character(len=SYMLEN),dimension(MAX_NSPEC)   :: rxn_symbol
+!      character(len=SYMLEN),dimension(MAX_NSPEC)   :: rxn_symbol
       integer, dimension(MAX_NREAC,MAX_NRXN)       :: reacs
       integer, dimension(MAX_NPROD,MAX_NRXN)       :: prods
       real(kind=DP),dimension(MAX_NPROD,MAX_NRXN)  :: prod_coefs
@@ -27,7 +27,7 @@
       real(kind=DP),dimension(MAX_NPARA,MAX_NRXN)  :: paras
 
       !public functions
-      public :: geoschem_cheminfo_init
+      public :: cheminfo_init
       public :: spec_add
       public :: spec_finish_add
       public :: spec_getid
@@ -40,7 +40,7 @@
       contains
 
 !=========================================================================
-      subroutine geoschem_cheminfo_init
+      subroutine cheminfo_init
       ns = 0
       nactive = 0
       ninactive = 0
@@ -52,13 +52,13 @@
       nphoto = 0
       nreac(:) = 0
       nprod(:) = 0
-      rxn_symbol(:) = ''
+!      rxn_symbol(:) = ''
       reacs(:,:) = 0
       prods(:,:) = 0
       prod_coefs(:,:) = 0.
       r_type(:) = 0
       paras(:,:) = 0.
-      endsubroutine geoschem_cheminfo_init
+      endsubroutine cheminfo_init
 
 !=========================================================================
 
@@ -80,6 +80,11 @@
       endif
 
       ns = ns + 1
+      if (ns.gt.MAX_NSPEC) then
+         print*,'Error:parameter MAX_NSPEC is too small'
+         stop
+      endif
+
       if (stat.eq.'A') then
          nactive = nactive + 1
          specname(nactive) = s1
@@ -95,6 +100,7 @@
          print*,'Error:cannot recognize stat',stat
          stop
       endif
+
       endsubroutine spec_add
 
 !=========================================================================
@@ -112,8 +118,8 @@
        character(len=*),intent(in)        :: s
        integer                            :: id
        integer                            :: n
-       character(len=MAX_STR1)             :: s1
-
+       character(len=MAX_STR1)            :: s1
+  
        s1 = treat_str(s)
        do n = ns, 1, -1
           if (s1 .eq. specname(n)) exit
@@ -156,6 +162,11 @@
 
 !       if (flag.eq.'D') return !dead reactions
        nr = nr + 1
+       if (nr.gt.MAX_NRXN) then
+          print*,'Error: parameter MAX_NRXN is too small'
+          stop
+       endif
+
        if (ifp.eq.1) nphoto = nphoto + 1
        nreac(nr) = n1
        nprod(nr) = n2
@@ -165,6 +176,7 @@
 !       rxn_symbol(nr) = flag
        r_type (nr) = typeid
        paras(:,nr) = pr(:)
+
 
        endsubroutine rxn_add
 !=========================================================================

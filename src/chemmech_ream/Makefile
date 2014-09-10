@@ -1,6 +1,6 @@
 OBJDIR := ../../obj/
 MODDIR := ../../mod/
-
+MODFLAG:= -J$(MODDIR)
 include ../Makefile_Header
 
 SRC := $(wildcard *.f)
@@ -16,12 +16,13 @@ all:$(OBJ)
 #	@ln -s $(EXEDIR)$(EXE) .
 
 $(OBJDIR)%.o:%.f
-	$(FC) $(FCFLAGS) -c $< -o $@
+	$(FC) $(FCFLAGS) $(MODFLAG) -c $< -o $@
 
 clean:
 	@rm $(MOD)
 	@rm $(OBJ)
 
-$(OBJDIR)module_ream_rxntype.o : module_ream_rxntype.f module_model_parameter.o
-$(OBJDIR)module_ream_cheminfo.o : module_ream_cheminfo.f module_ream_rxntype.o module_model_parameter.o
-$(OBJDIR)module_ream_io.o : module_ream_io.f module_ream_cheminfo.o module_ream_rxntype.o module_model_parameter.o
+$(OBJDIR)module_ream_parameter.o:module_ream_parameter.f
+$(OBJDIR)module_ream_rxntype.o : module_ream_rxntype.f module_ream_parameter.o
+$(OBJDIR)module_ream_cheminfo.o : module_ream_cheminfo.f module_ream_rxntype.o module_ream_parameter.o
+$(OBJDIR)module_ream_io.o : module_ream_io.f module_ream_cheminfo.o module_ream_rxntype.o module_ream_parameter.o

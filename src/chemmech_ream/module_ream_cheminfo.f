@@ -5,7 +5,7 @@
 ! Written by Yuzhong Zhang, 9/8/2014
 !=========================================================================
       module module_ream_cheminfo
-      use module_model_parameter, only : DP, MAX_NSPEC, MAX_STR1,
+      use module_ream_parameter, only : DP, MAX_NSPEC, MAX_STR1,
      +    MAX_NRXN, MAX_NREAC, MAX_NPROD
       use module_ream_rxntype, only : MAX_NPARA
       implicit none
@@ -19,7 +19,7 @@
       !reaction information
       integer :: nr, nphoto
       integer, dimension(MAX_NRXN)     :: nreac, nprod
-      character(len=1),dimension(MAX_NSPEC)        :: rxn_symbol
+!      character(len=1),dimension(MAX_NSPEC)        :: rxn_symbol
       integer, dimension(MAX_NREAC,MAX_NRXN)       :: reacs
       integer, dimension(MAX_NPROD,MAX_NRXN)       :: prods
       real(kind=DP),dimension(MAX_NPROD,MAX_NRXN)  :: prod_coefs
@@ -52,7 +52,7 @@
       nphoto = 0
       nreac(:) = 0
       nprod(:) = 0
-      rxn_symbol(:) = ''
+!      rxn_symbol(:) = ''
       reacs(:,:) = 0
       prods(:,:) = 0
       prod_coefs(:,:) = 0.
@@ -80,6 +80,11 @@
       endif
 
       ns = ns + 1
+      if (ns.gt.MAX_NSPEC) then
+         print*,'Error:parameter MAX_NSPEC is too small'
+         stop
+      endif
+
       if (stat.eq.'A') then
          nactive = nactive + 1
          specname(nactive) = s1
@@ -156,6 +161,11 @@
 
 !       if (flag.eq.'D') return !dead reactions
        nr = nr + 1
+       if (nr.gt.MAX_NRXN) then
+          print*,'Error: parameter MAX_NRXN is too small'
+          stop
+       endif
+
        if (ifp.eq.1) nphoto = nphoto + 1
        nreac(nr) = n1
        nprod(nr) = n2
