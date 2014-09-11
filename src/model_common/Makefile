@@ -1,6 +1,5 @@
 OBJDIR := ../../obj/
 MODDIR := ../../mod/
-MODFLAG:= -J$(MODDIR)
 
 include ../Makefile_Header
 	
@@ -13,9 +12,11 @@ vpath %.o $(OBJDIR)
 all:$(OBJ)
 
 $(OBJDIR)%.o:%.f
-	$(FC) $(FCFLAGS) $(MODFLAG) -c $< -o $@
+	$(FC) $(FCFLAGS) -c $< -o $@
 
 clean:
 	@rm $(MOD)
 	@rm $(OBJ)
 
+$(OBJDIR)module_model_cheminfo.o : module_model_cheminfo.f module_model_parameter.o
+$(OBJDIR)module_model_parameter.o : module_model_parameter.f

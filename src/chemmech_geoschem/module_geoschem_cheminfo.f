@@ -13,9 +13,9 @@
 
       !species information
       integer :: ns, ninactive, nactive
-      character(len=MAX_STR1),dimension(MAX_NSPEC) :: specname
-      character(len=1),dimension(MAX_NSPEC)        :: status
-      real(kind=DP),dimension(MAX_NSPEC)           :: def_conc
+      character(len=MAX_STR1),dimension(MAX_NSPEC)   :: specname
+      character(len=1),dimension(MAX_NSPEC)          :: status
+      real(kind=DP),dimension(MAX_NSPEC)             :: def_conc
 
       !reaction information
       integer :: nr, nphoto
@@ -34,7 +34,7 @@
 
       !More reaction information
       integer :: ninactrxn
-      integer,dimension(MAX_NINACTRXN,2) :: inactrxn
+      integer,dimension(2, MAX_NINACTRXN) :: inactrxn
       integer :: nemisrxn
       integer,dimension(MAX_NEMISRXN)    :: emisrxn
       integer :: ndeprxn
@@ -213,37 +213,43 @@
        endsubroutine rxn_add
 !=========================================================================
        subroutine rxn_finish_add
-       integer :: ir, is
+       integer :: ir, is, sid
        ninactrxn=0
        nemisrxn =0
        ndeprxn  =0
        do ir=1,nr
           do is=1,nreac(ir)
              !reactant is 'EMISSION',i.e. a emission rxn
-             if (specname(reacs(ir,is)).eq.'EMISSION') then
+             sid = reacs(is,ir)
+             if (specname(sid).eq.'EMISSION') then
                 nemisrxn = nemisrxn + 1
                 if (nemisrxn.gt.MAX_NEMISRXN) then
                    print*,'Error: MAX_NEMISRXN is too small'
                    stop
                 endif
                 emisrxn(nemisrxn) = ir
-             !reactant is 'DRYDEP',i.e. a drydep rxn
-             elseif (specname(reacs(ir,is)).eq.'DRYDEP') then
+             !reactant is an inactive species
+             elseif (status(sid).eq.'I') then
+                ninactrxn = ninactrxn + 1
+                if (ninactrxn.gt.MAX_NINACTRXN) then
+                   print*,'Error: MAX_NINACTRXN is too small'
+                   stop
+                endif
+                inactrxn(1,ninactrxn) = ir
+                inactrxn(2,ninactrxn) = sid
+             endif
+          enddo
+
+          !a product is 'DRYDEP',i.e. a drydep rxn
+          do is=1,nprod(ir)
+             sid = prods(is,ir)
+             if (specname(sid).eq.'DRYDEP') then
                 ndeprxn  = ndeprxn  + 1
                 if (ndeprxn.gt.MAX_NDEPRXN) then
                    print*,'Error: MAX_NDEPRXN is too small'
                    stop
                 endif
                 deprxn(ndeprxn)   = ir
-             !reactant is an inactive species
-             elseif (status(reacs(ir,is)).eq.'I') then
-                ninactrxn = ninactrxn + 1
-                if (ninactrxn.gt.MAX_NINACTRXN) then
-                   print*,'Error: MAX_NINACTRXN is too small'
-                   stop
-                endif
-                inactrxn(ninactrxn,1) = ir
-                inactrxn(ninactrxn,2) = is
              endif
           enddo
        enddo

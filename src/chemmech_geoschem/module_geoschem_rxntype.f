@@ -267,12 +267,12 @@
                 rate_const = r1(p(1:3),Temp)
            !P: pressure dependent
            case (2)
-                kh=r1(p(1:3),Temp)*M
+                kh=r1(p(1:3),Temp)
                 kl=r1(p(7:9),Temp)
-                xyrat=kh/kl
+                xyrat=kh*M/kl
                 blog=log10(xyrat)
                 fexp=1d0/(1d0+blog*blog)
-                rate_const=kh*p(4)**fexp/(1d0+xyrat)/M
+                rate_const=kh*p(4)**fexp/(1d0+xyrat)
            !B
            case (3)
                 k1=r1(p(1:3),Temp)
