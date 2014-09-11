@@ -30,7 +30,7 @@
 !======================================================================
       subroutine ream_read(filename)
       use module_ream_cheminfo,only : cheminfo_init,spec_add,
-     +                               spec_finish_add,rxn_add
+     +                       spec_finish_add,rxn_add,rxn_finish_add
       use module_ream_rxntype,only  : MAX_NPARA,rxntype_init
       character(len=*),intent(in)        :: filename
       integer                            :: u, tpid_pre, ifok, tpid
@@ -64,6 +64,9 @@
          call spec_add(spec_name, spec_stat, spec_conc)
          read(u,11) spec_stat, spec_name,spec_conc
       enddo
+
+      !put inactive species to the end of the list
+      ! and record useful tracer IDs
       call spec_finish_add
       print*,'done read species'
 
@@ -112,6 +115,11 @@
          call read_photorxn(u,nreac, nprod, reac_id,prod_id,tpid,
      +           coef,paralist, ifok)
       enddo
+    
+      !Record index for emission, drydep reactions
+      !And reactions with inactive reactants
+      call rxn_finish_add
+
       print*,'done read photolysis reactions'
 
  11   format(a1, 1x, a8, 1x, e10.3)

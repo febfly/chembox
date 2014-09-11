@@ -10,7 +10,7 @@
       
       subroutine geos_read(filename)
       use module_geoschem_cheminfo,only: spec_add, spec_finish_add, 
-     +                                   cheminfo_init,rxn_add
+     +                           cheminfo_init,rxn_add,rxn_finish_add
       use module_geoschem_rxntype,only:  MAX_NPARA, rxntype_init
 
       !common variables used for printing only,..
@@ -57,6 +57,9 @@
          read(u,10) spec_stat,spec_name,(pinp(j),j=1,5)
          read(u,*)  head
       enddo
+
+      !put inactive species to the end of the list
+      ! and record useful tracer IDs
       call spec_finish_add
 
       !print species
@@ -107,6 +110,10 @@
          call read_rxn(u,tpid_pre,1,reac_id,nreac,prod_id,nprod,coef,
      +              ord, paralist,tpid,ifok)
       enddo
+
+      !Record index for emission, drydep reactions
+      !And reactions with inactive reactants
+      call rxn_finish_add
 
       !print reactions
       print*,'Reaction list:'

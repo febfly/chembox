@@ -9,6 +9,11 @@
       integer,parameter :: MAX_STR1  = MMAX_STR1
       integer,parameter :: MAX_NREAC = MMAX_NREAC
       integer,parameter :: MAX_NPROD = MMAX_NPROD
+
+      integer,parameter :: MAX_NINACTRXN = 100
+      integer,parameter :: MAX_NEMISRXN  = 30
+      integer,parameter :: MAX_NDEPRXN   = 30
+
 !      integer,parameter :: DP        = 8
 !      integer,parameter :: MAX_NSPEC = 300
 !      integer,parameter :: MAX_NRXN  = 300

@@ -6,7 +6,8 @@
 !=========================================================================
       module module_geoschem_cheminfo
       use module_geoschem_parameter, only : DP, MAX_NSPEC, MAX_STR1,
-     +    MAX_NRXN, MAX_NREAC, MAX_NPROD
+     +    MAX_NRXN, MAX_NREAC, MAX_NPROD, MAX_NINACTRXN, MAX_NEMISRXN,
+     +    MAX_NDEPRXN
       use module_geoschem_rxntype, only : MAX_NPARA,SYMLEN
       implicit none
 
@@ -19,12 +20,25 @@
       !reaction information
       integer :: nr, nphoto
       integer, dimension(MAX_NRXN)     :: nreac, nprod
-!      character(len=SYMLEN),dimension(MAX_NSPEC)   :: rxn_symbol
       integer, dimension(MAX_NREAC,MAX_NRXN)       :: reacs
       integer, dimension(MAX_NPROD,MAX_NRXN)       :: prods
       real(kind=DP),dimension(MAX_NPROD,MAX_NRXN)  :: prod_coefs
       integer, dimension(MAX_NRXN)                 :: r_type
       real(kind=DP),dimension(MAX_NPARA,MAX_NRXN)  :: paras
+
+      !More species information
+      !TracerID
+      integer :: iemission, idrydep
+      integer :: ich4
+      integer :: io3, ino, ino2, ipan, iisop, ioh, iho2 
+
+      !More reaction information
+      integer :: ninactrxn
+      integer,dimension(MAX_NINACTRXN,2) :: inactrxn
+      integer :: nemisrxn
+      integer,dimension(MAX_NEMISRXN)    :: emisrxn
+      integer :: ndeprxn
+      integer,dimension(MAX_NDEPRXN)     :: deprxn
 
       !public functions
       public :: cheminfo_init
@@ -32,8 +46,10 @@
       public :: spec_finish_add
       public :: spec_getid
       public :: rxn_add
+      public :: rxn_finish_add
 
       !private functions
+      private :: spec_tracerid
       private :: spec_ifduplicate
       private :: treat_str
 
@@ -105,13 +121,29 @@
 
 !=========================================================================
        subroutine spec_finish_add
+       !Move inactive and dead species to the end of the list
        if (ninactive.gt.0) then 
           specname(nactive+1:ns) = specname(MAX_NSPEC-ninactive+1:MAX_NSPEC)
           status(nactive+1:ns)   = status(MAX_NSPEC-ninactive+1:MAX_NSPEC)
           def_conc(nactive+1:ns) = def_conc(MAX_NSPEC-ninactive+1:MAX_NSPEC)
        endif
+       
+       !Record some useful IDs 
+       call spec_tracerid
        endsubroutine spec_finish_add
        
+!=========================================================================
+       subroutine spec_tracerid
+       ich4 = spec_getid('CH4')
+       io3  = spec_getid('O3')
+       ino  = spec_getid('NO')
+       ino2 = spec_getid('NO2')
+       iisop= spec_getid('ISOP')
+       ioh  = spec_getid('OH')
+       iho2 = spec_getid('HO2')
+       iemission = spec_getid('EMISSION')
+       idrydep   = spec_getid('DRYDEP')
+       endsubroutine spec_tracerid
 !=========================================================================
 
        function spec_getid (s) result (id)
@@ -179,6 +211,43 @@
 
 
        endsubroutine rxn_add
+!=========================================================================
+       subroutine rxn_finish_add
+       integer :: ir, is
+       ninactrxn=0
+       nemisrxn =0
+       ndeprxn  =0
+       do ir=1,nr
+          do is=1,nreac(ir)
+             !reactant is 'EMISSION',i.e. a emission rxn
+             if (specname(reacs(ir,is)).eq.'EMISSION') then
+                nemisrxn = nemisrxn + 1
+                if (nemisrxn.gt.MAX_NEMISRXN) then
+                   print*,'Error: MAX_NEMISRXN is too small'
+                   stop
+                endif
+                emisrxn(nemisrxn) = ir
+             !reactant is 'DRYDEP',i.e. a drydep rxn
+             elseif (specname(reacs(ir,is)).eq.'DRYDEP') then
+                ndeprxn  = ndeprxn  + 1
+                if (ndeprxn.gt.MAX_NDEPRXN) then
+                   print*,'Error: MAX_NDEPRXN is too small'
+                   stop
+                endif
+                deprxn(ndeprxn)   = ir
+             !reactant is an inactive species
+             elseif (status(reacs(ir,is)).eq.'I') then
+                ninactrxn = ninactrxn + 1
+                if (ninactrxn.gt.MAX_NINACTRXN) then
+                   print*,'Error: MAX_NINACTRXN is too small'
+                   stop
+                endif
+                inactrxn(ninactrxn,1) = ir
+                inactrxn(ninactrxn,2) = is
+             endif
+          enddo
+       enddo
+       endsubroutine rxn_finish_add
 !=========================================================================
        function treat_str (s) result (s1)
      
