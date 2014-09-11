@@ -15,5 +15,9 @@
       integer,parameter :: MAX_STR1  = 15
       integer,parameter :: MAX_NREAC = 4
       integer,parameter :: MAX_NPROD = 20
-      
+     
+      integer,parameter :: MAX_NINACTRXN = 100
+      integer,parameter :: MAX_NEMISRXN  = 30
+      integer,parameter :: MAX_NDEPRXN   = 30
+ 
       endmodule module_geoschem_parameter
