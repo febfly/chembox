@@ -5,10 +5,10 @@
 ! Written by Yuzhong Zhang, 9/8/2014
 !=========================================================================
       module module_ream_rxntype
-      use module_chemmech_common,only: DP, MAX_NRXN, nr
-      use module_geoschem_common,only: MAX_NTYPE, MAX_NPARA, STRLEN, SYMLEN
+      use module_chemmech_common,only: DP, MAX_NRXN, nrxn
+      use module_ream_common,only: MAX_NTYPE, MAX_NPARA, STRLEN, SYMLEN
      
-      use module_geoschem_common,only: 
+      use module_ream_common,only: 
      +    ntype, type_name, symbol, comment, 
      +    preceeding_type, succeeding_type, if_photo_type,
      +    tp=>r_type, paras, nrxnline
@@ -230,7 +230,7 @@
       !in out variables
       real(kind=DP),intent(in) :: Temp, Pres, O2, N2, H2O
       real(kind=DP),intent(in) :: aer_area, aer_radius, denair
-      real(kind=DP),dimension(nr),intent(out)      :: rate_c
+      real(kind=DP),dimension(MAX_NRXN),intent(out)      :: rate_c
 
       !local variables
       integer                            :: ir, itp
@@ -247,7 +247,7 @@
       !loop through reactions
       M = denair
       rate_c(:) = 0d0 
-      do ir = 1, nr
+      do ir = 1, nrxn
          itp = tp(ir)
          p(:)= paras(:,ir)
          select case (itp)

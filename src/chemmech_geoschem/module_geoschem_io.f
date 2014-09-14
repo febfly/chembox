@@ -1,6 +1,7 @@
       module module_geoschem_io
-      use module_chemmech_common
-      use module_geoschem_common
+      use module_chemmech_common,only: DP, MAX_NREAC, MAX_NPROD 
+      use module_chemmech_common,only: spec_getid
+      use module_geoschem_common,only: MAX_NPARA,SYMLEN
       implicit none
 
       public :: geos_read
@@ -10,6 +11,10 @@
       contains
       
       subroutine geos_read(filename)
+      use module_geoschem_cheminfo,only: spec_add, spec_finish_add, 
+     +                                   rxn_add, rxn_finish_add,
+     +                                   cheminfo_init
+      use module_geoschem_rxntype,only:  rxntype_init
       character(len=*),intent(in)        :: filename
       integer                            :: u,  ifok, tpid, tpid_pre
       character(len=5)                   :: head
@@ -52,12 +57,7 @@
       ! and record useful tracer IDs
       call spec_finish_add
 
-      !print species
-      print*,'Species List:'
-      do i=1,ns
-         print 11,i, specname(i),status(i),def_conc(i)
-      enddo
-      print*,''
+      print*,'Done reading Species'
 
       !read reaction
       head=""
@@ -106,10 +106,7 @@
       call rxn_finish_add
 
       !print reactions
-      print*,'Reaction list:'
-      do i=1,nr
-          print 12,i,nreac_list(i),nprod_list(i),symbol(r_type(i))
-      enddo
+      print*,'Done reading reaction list:'
 
   10  format(A1,1X,A14,3X,0PF6.2,4(1PE10.3))
   11  format(I4,X,A15,X,A1,E10.2)
@@ -123,6 +120,7 @@
 !===============================================================================
       subroutine read_rxn(u,flagid_pre,ifphoto,reacid,nreac,prodid,
      +                   nprod,coef,ord,para,flagid,ifok)
+      use module_geoschem_rxntype, only:rxntype_id,preceeding_type,succeeding_type
       integer                                :: u,ord,ifphoto
       character(len=14),dimension(MAX_NREAC) :: reac
       integer,dimension(MAX_NREAC)           :: reacid

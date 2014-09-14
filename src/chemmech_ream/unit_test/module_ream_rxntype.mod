@@ -1,5 +1,5 @@
-GFORTRAN module version '0' created from module_ream_rxntype.f on Sun Sep 14 13:47:41 2014
-MD5:4043fb88a85643f1a7290b07a929b118 -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from ../module_ream_rxntype.f on Sun Sep 14 13:56:14 2014
+MD5:3cbf9b4b09b146cdc3a08637e27bafbe -- If you edit this, you'll get what you deserve.
 
 (() () () () () () () () () ()
 () () () () () () () () () () () () () () () () ())
@@ -26,7 +26,7 @@ INTEGER ()) 0 0 () (1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1')
 (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '30')) 0 () () () 0 0)
 5 'max_npara' 'module_ream_common' 'max_npara' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
-INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '12') () 0 ()
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '21') () 0 ()
 () () 0 0)
 6 'max_nrxn' 'module_chemmech_common' 'max_nrxn' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
@@ -58,7 +58,7 @@ UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 ()
 14 'paras' 'module_ream_common' 'paras' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (REAL 8 0 0 REAL ()) 0 0 () (2
 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
-4 0 0 INTEGER ()) 0 '12') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
+4 0 0 INTEGER ()) 0 '21') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () () () 0 0)
 15 'preceeding_type' 'module_ream_common' 'preceeding_type' 1 ((
 VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (
@@ -84,12 +84,12 @@ INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '30')) 0 () ()
 () 0 0)
 35 'symbol' 'module_ream_common' 'symbol' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (CHARACTER 1 0 0 CHARACTER ((
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1'))) 0 0 () (1 EXPLICIT (
+CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2'))) 0 0 () (1 EXPLICIT (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
 INTEGER ()) 0 '30')) 0 () () () 0 0)
 36 'symlen' 'module_ream_common' 'symlen' 1 ((PARAMETER UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') () 0 () () () 0 0)
+CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2') () 0 () () () 0 0)
 37 'r_type' 'module_ream_common' 'r_type' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0 INTEGER ()) 0 0 ()
 (1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (

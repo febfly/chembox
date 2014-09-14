@@ -6,6 +6,7 @@
 !=========================================================================
       module module_geoschem_rxntype
       use module_chemmech_common,only: DP, MAX_NRXN
+      use module_chemmech_common,only: nr=>nrxn
       use module_geoschem_common,only: MAX_NTYPE, MAX_NPARA, STRLEN, SYMLEN
      
       use module_geoschem_common,only: 

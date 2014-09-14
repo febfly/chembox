@@ -1,8 +1,8 @@
-GFORTRAN module version '0' created from module_ream_cheminfo.f on Wed Sep 10 15:50:28 2014
-MD5:724d52a4131e84f09ed9e21a28493a64 -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from module_ream_cheminfo.f on Sun Sep 14 13:48:14 2014
+MD5:658577cfe5cc31bd7ffc8240310f3cdd -- If you edit this, you'll get what you deserve.
 
-(() () () () () () () () () () () ()
-() () () () () () () () () () () () () () ())
+(() () () ()
+() () () () () () () () () () () () () () () () () () () () () () ())
 
 ()
 
@@ -15,163 +15,204 @@ MD5:724d52a4131e84f09ed9e21a28493a64 -- If you edit this, you'll get what you de
 (2 'cheminfo_init' 'module_ream_cheminfo' 'cheminfo_init' 1 ((PROCEDURE
 UNKNOWN-INTENT MODULE-PROC DECL UNKNOWN SUBROUTINE) (UNKNOWN 0 0 0
 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-3 'def_conc' 'module_ream_cheminfo' 'def_conc' 1 ((VARIABLE
+3 'spec_defconc' 'module_chemmech_common' 'spec_defconc' 1 ((VARIABLE
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (REAL 8 0 0 REAL
 ()) 0 0 () (1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '300')) 0 () () () 0 0)
-4 'dp' 'module_ream_parameter' 'dp' 1 ((PARAMETER UNKNOWN-INTENT
+4 'deprxn' 'module_chemmech_common' 'deprxn' 1 ((VARIABLE UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0 INTEGER ()) 0 0 ()
+(1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (
+INTEGER 4 0 0 INTEGER ()) 0 '30')) 0 () () () 0 0)
+5 'dp' 'module_chemmech_common' 'dp' 1 ((PARAMETER UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '8') () 0 () () () 0 0)
-5 'max_npara' 'module_ream_rxntype' 'max_npara' 1 ((PARAMETER
+6 'emisrxn' 'module_chemmech_common' 'emisrxn' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0
+INTEGER ()) 0 0 () (1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '30')) 0 () () () 0 0)
+7 'inactrxn' 'module_chemmech_common' 'inactrxn' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0
+INTEGER ()) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2') (CONSTANT (INTEGER 4 0 0
+INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '100')) 0 () ()
+() 0 0)
+8 'max_ndeprxn' 'module_chemmech_common' 'max_ndeprxn' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
-INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '16') () 0 ()
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '30') () 0 ()
 () () 0 0)
-6 'max_nprod' 'module_ream_parameter' 'max_nprod' 1 ((PARAMETER
+9 'max_nemisrxn' 'module_chemmech_common' 'max_nemisrxn' 1 ((PARAMETER
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '30') () 0 ()
+() () 0 0)
+10 'max_ninactrxn' 'module_chemmech_common' 'max_ninactrxn' 1 ((
+PARAMETER UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4
+0 0 INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '100') ()
+0 () () () 0 0)
+11 'max_npara' 'module_ream_common' 'max_npara' 1 ((PARAMETER
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '12') () 0 ()
+() () 0 0)
+12 'max_nprod' 'module_chemmech_common' 'max_nprod' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
 INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '20') () 0 ()
 () () 0 0)
-7 'max_nreac' 'module_ream_parameter' 'max_nreac' 1 ((PARAMETER
+13 'max_nreac' 'module_chemmech_common' 'max_nreac' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
 INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '4') () 0 () ()
 () 0 0)
-8 'max_nrxn' 'module_ream_parameter' 'max_nrxn' 1 ((PARAMETER
+14 'max_nrxn' 'module_chemmech_common' 'max_nrxn' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
 INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500') () 0 ()
 () () 0 0)
-9 'max_nspec' 'module_ream_parameter' 'max_nspec' 1 ((PARAMETER
+15 'max_nspec' 'module_chemmech_common' 'max_nspec' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
 INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '300') () 0 ()
 () () 0 0)
-10 'max_str1' 'module_ream_parameter' 'max_str1' 1 ((PARAMETER
+16 'max_str1' 'module_chemmech_common' 'max_str1' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
 INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '15') () 0 ()
 () () 0 0)
-11 'module_ream_cheminfo' 'module_ream_cheminfo' 'module_ream_cheminfo'
+17 'module_chemmech_common' 'module_chemmech_common'
+'module_chemmech_common' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN) (UNKNOWN 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
+18 'module_ream_cheminfo' 'module_ream_cheminfo' 'module_ream_cheminfo'
 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (UNKNOWN 0 0 0
 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-12 'module_ream_parameter' 'module_ream_parameter' 'module_ream_parameter'
-1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (UNKNOWN 0 0 0
+19 'module_ream_common' 'module_ream_common' 'module_ream_common' 1 ((
+MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (UNKNOWN 0 0 0
 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-13 'module_ream_rxntype' 'module_ream_rxntype' 'module_ream_rxntype' 1 (
-(MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (UNKNOWN 0 0 0
-UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-14 'nactive' 'module_ream_cheminfo' 'nactive' 1 ((VARIABLE
+20 'nactive' 'module_chemmech_common' 'nactive' 1 ((VARIABLE
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ())
 0 0 () () 0 () () () 0 0)
-15 'ninactive' 'module_ream_cheminfo' 'ninactive' 1 ((VARIABLE
+21 'ndeprxn' 'module_chemmech_common' 'ndeprxn' 1 ((VARIABLE
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ())
 0 0 () () 0 () () () 0 0)
-16 'nphoto' 'module_ream_cheminfo' 'nphoto' 1 ((VARIABLE UNKNOWN-INTENT
-UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 ()
-() () 0 0)
-17 'nprod' 'module_ream_cheminfo' 'nprod' 1 ((VARIABLE UNKNOWN-INTENT
+22 'nemisrxn' 'module_chemmech_common' 'nemisrxn' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ())
+0 0 () () 0 () () () 0 0)
+23 'ninactive' 'module_chemmech_common' 'ninactive' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ())
+0 0 () () 0 () () () 0 0)
+24 'ninactrxn' 'module_chemmech_common' 'ninactrxn' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ())
+0 0 () () 0 () () () 0 0)
+25 'nphotorxn' 'module_chemmech_common' 'nphotorxn' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ())
+0 0 () () 0 () () () 0 0)
+26 'nprod' 'module_chemmech_common' 'nprod' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0 INTEGER ()) 0 0 ()
 (1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (
 INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () () () 0 0)
-18 'nr' 'module_ream_cheminfo' 'nr' 1 ((VARIABLE UNKNOWN-INTENT
+27 'nrxn' 'module_chemmech_common' 'nrxn' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 ()
 () () 0 0)
-19 'nreac' 'module_ream_cheminfo' 'nreac' 1 ((VARIABLE UNKNOWN-INTENT
+28 'nreac' 'module_chemmech_common' 'nreac' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0 INTEGER ()) 0 0 ()
 (1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (
 INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () () () 0 0)
-20 'ns' 'module_ream_cheminfo' 'ns' 1 ((VARIABLE UNKNOWN-INTENT
+29 'nspec' 'module_chemmech_common' 'nspec' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 ()
 () () 0 0)
-21 'paras' 'module_ream_cheminfo' 'paras' 1 ((VARIABLE UNKNOWN-INTENT
+30 'paras' 'module_ream_common' 'paras' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (REAL 8 0 0 REAL ()) 0 0 () (2
 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
-4 0 0 INTEGER ()) 0 '16') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
+4 0 0 INTEGER ()) 0 '12') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () () () 0 0)
-22 'prod_coefs' 'module_ream_cheminfo' 'prod_coefs' 1 ((VARIABLE
+31 'photorxn' 'module_chemmech_common' 'photorxn' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0
+INTEGER ()) 0 0 () (1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '100')) 0 () () () 0 0)
+32 'prod_coefs' 'module_chemmech_common' 'prod_coefs' 1 ((VARIABLE
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (REAL 8 0 0 REAL
 ()) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '20') (CONSTANT (INTEGER 4 0 0
 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () ()
 () 0 0)
-23 'prods' 'module_ream_cheminfo' 'prods' 1 ((VARIABLE UNKNOWN-INTENT
-UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0 INTEGER ()) 0 0 ()
-(2 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (
-INTEGER 4 0 0 INTEGER ()) 0 '20') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0
-'1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () () () 0 0)
-24 'r_type' 'module_ream_cheminfo' 'r_type' 1 ((VARIABLE UNKNOWN-INTENT
+33 'prod_id' 'module_chemmech_common' 'prod_id' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0
+INTEGER ()) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '20') (CONSTANT (INTEGER 4 0 0
+INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () ()
+() 0 0)
+34 'r_type' 'module_ream_common' 'r_type' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0 INTEGER ()) 0 0 ()
 (1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (
 INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () () () 0 0)
-25 'reacs' 'module_ream_cheminfo' 'reacs' 1 ((VARIABLE UNKNOWN-INTENT
-UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0 INTEGER ()) 0 0 ()
-(2 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (
-INTEGER 4 0 0 INTEGER ()) 0 '4') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0
-'1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () () () 0 0)
-26 'rxn_add' 'module_ream_cheminfo' 'rxn_add' 1 ((PROCEDURE
+35 'reac_id' 'module_chemmech_common' 'reac_id' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0
+INTEGER ()) 0 0 () (2 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1')
+(CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '4') (CONSTANT (INTEGER 4 0 0
+INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () ()
+() 0 0)
+36 'rxn_add' 'module_ream_cheminfo' 'rxn_add' 1 ((PROCEDURE
 UNKNOWN-INTENT MODULE-PROC DECL UNKNOWN SUBROUTINE) (UNKNOWN 0 0 0
-UNKNOWN ()) 27 0 (28 29 30 31 32 33 34 35) () 0 () () () 0 0)
-36 'rxn_symbol' 'module_ream_cheminfo' 'rxn_symbol' 1 ((VARIABLE
-UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (CHARACTER 1 0 0
-CHARACTER ((CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1'))) 0 0 () (1
-EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
-4 0 0 INTEGER ()) 0 '300')) 0 () () () 0 0)
-37 'spec_add' 'module_ream_cheminfo' 'spec_add' 1 ((PROCEDURE
-UNKNOWN-INTENT MODULE-PROC DECL UNKNOWN SUBROUTINE) (UNKNOWN 0 0 0
-UNKNOWN ()) 38 0 (39 40 41) () 0 () () () 0 0)
-42 'spec_finish_add' 'module_ream_cheminfo' 'spec_finish_add' 1 ((
+UNKNOWN ()) 37 0 (38 39 40 41 42 43 44 45) () 0 () () () 0 0)
+46 'rxn_finish_add' 'module_ream_cheminfo' 'rxn_finish_add' 1 ((
 PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL UNKNOWN SUBROUTINE) (UNKNOWN 0
 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-43 'spec_getid' 'module_ream_cheminfo' 'spec_getid' 1 ((PROCEDURE
+47 'spec_add' 'module_ream_cheminfo' 'spec_add' 1 ((PROCEDURE
+UNKNOWN-INTENT MODULE-PROC DECL UNKNOWN SUBROUTINE) (UNKNOWN 0 0 0
+UNKNOWN ()) 48 0 (49 50 51) () 0 () () () 0 0)
+52 'spec_finish_add' 'module_ream_cheminfo' 'spec_finish_add' 1 ((
+PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL UNKNOWN SUBROUTINE) (UNKNOWN 0
+0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
+53 'spec_getid' 'module_chemmech_common' 'spec_getid' 1 ((PROCEDURE
 UNKNOWN-INTENT MODULE-PROC DECL UNKNOWN FUNCTION) (INTEGER 4 0 0 INTEGER
-()) 44 0 (45) () 46 () () () 0 0)
-47 'specname' 'module_ream_cheminfo' 'specname' 1 ((VARIABLE
+()) 54 0 (55) () 56 () () () 0 0)
+57 'spec_name' 'module_chemmech_common' 'spec_name' 1 ((VARIABLE
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (CHARACTER 1 0 0
 CHARACTER ((CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '15'))) 0 0 () (1
 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
 4 0 0 INTEGER ()) 0 '300')) 0 () () () 0 0)
-48 'status' 'module_ream_cheminfo' 'status' 1 ((VARIABLE UNKNOWN-INTENT
-UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (CHARACTER 1 0 0 CHARACTER ((
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1'))) 0 0 () (1 EXPLICIT (
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
-INTEGER ()) 0 '300')) 0 () () () 0 0)
-40 'stat' '' 'stat' 38 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+58 'spec_status' 'module_chemmech_common' 'spec_status' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (CHARACTER 1 0 0
+CHARACTER ((CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1'))) 0 0 () (1
+EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
+4 0 0 INTEGER ()) 0 '300')) 0 () () () 0 0)
+55 's' '' 's' 54 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+CHARACTER 1 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
+56 'id' '' 'id' 54 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN RESULT) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+50 'stat' '' 'stat' 48 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN DUMMY) (CHARACTER 1 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0
 INTEGER ()) 0 '1'))) 0 0 () () 0 () () () 0 0)
-41 'conc' '' 'conc' 38 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+51 'conc' '' 'conc' 48 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN DUMMY) (REAL 8 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
-39 's' '' 's' 38 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+49 's' '' 's' 48 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 CHARACTER 1 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
-31 'id1' '' 'id1' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
-DIMENSION DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () (1 EXPLICIT (
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
-INTEGER ()) 0 '4')) 0 () () () 0 0)
-45 's' '' 's' 44 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
-CHARACTER 1 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
-46 'id' '' 'id' 44 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
-UNKNOWN RESULT) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-32 'id2' '' 'id2' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+42 'id2' '' 'id2' 37 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
 DIMENSION DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () (1 EXPLICIT (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
 INTEGER ()) 0 '20')) 0 () () () 0 0)
-33 'cf2' '' 'cf2' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+43 'cf2' '' 'cf2' 37 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
 DIMENSION DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (1 EXPLICIT (CONSTANT (
 INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0
 '20')) 0 () () () 0 0)
-34 'typeid' '' 'typeid' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+44 'typeid' '' 'typeid' 37 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
 DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-35 'pr' '' 'pr' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION
+45 'pr' '' 'pr' 37 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION
 DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (1 EXPLICIT (CONSTANT (INTEGER 4 0 0
-INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '16')) 0 () ()
+INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '12')) 0 () ()
 () 0 0)
-30 'n2' '' 'n2' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+41 'id1' '' 'id1' 37 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+DIMENSION DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () (1 EXPLICIT (
+CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
+INTEGER ()) 0 '4')) 0 () () () 0 0)
+40 'n2' '' 'n2' 37 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-29 'n1' '' 'n1' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+39 'n1' '' 'n1' 37 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-28 'ifp' '' 'ifp' 27 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
+38 'ifp' '' 'ifp' 37 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 )
 
-('cheminfo_init' 0 2 'def_conc' 0 3 'dp' 0 4 'max_npara' 0 5 'max_nprod'
-0 6 'max_nreac' 0 7 'max_nrxn' 0 8 'max_nspec' 0 9 'max_str1' 0 10
-'module_ream_cheminfo' 0 11 'module_ream_parameter' 0 12
-'module_ream_rxntype' 0 13 'nactive' 0 14 'ninactive' 0 15 'nphoto' 0 16
-'nprod' 0 17 'nr' 0 18 'nreac' 0 19 'ns' 0 20 'paras' 0 21 'prod_coefs'
-0 22 'prods' 0 23 'r_type' 0 24 'reacs' 0 25 'rxn_add' 0 26 'rxn_symbol'
-0 36 'spec_add' 0 37 'spec_finish_add' 0 42 'spec_getid' 0 43 'specname'
-0 47 'status' 0 48)
+('cheminfo_init' 0 2 'def_conc' 0 3 'deprxn' 0 4 'dp' 0 5 'emisrxn' 0 6
+'inactrxn' 0 7 'max_ndeprxn' 0 8 'max_nemisrxn' 0 9 'max_ninactrxn' 0 10
+'max_npara' 0 11 'max_nprod' 0 12 'max_nreac' 0 13 'max_nrxn' 0 14
+'max_nspec' 0 15 'max_str1' 0 16 'module_chemmech_common' 0 17
+'module_ream_cheminfo' 0 18 'module_ream_common' 0 19 'nactive' 0 20
+'ndeprxn' 0 21 'nemisrxn' 0 22 'ninactive' 0 23 'ninactrxn' 0 24 'nphoto'
+0 25 'nphotorxn' 0 25 'nprod' 0 26 'nr' 0 27 'nreac' 0 28 'ns' 0 29
+'paras' 0 30 'photorxn' 0 31 'prod_coefs' 0 32 'prods' 0 33 'r_type' 0
+34 'reacs' 0 35 'rxn_add' 0 36 'rxn_finish_add' 0 46 'spec_add' 0 47
+'spec_finish_add' 0 52 'spec_getid' 0 53 'specname' 0 57 'status' 0 58)

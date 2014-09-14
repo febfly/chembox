@@ -13,7 +13,7 @@
       !species information
       use module_chemmech_common, only : 
      +           ns=>nspec, ninactive, nactive, specname=>spec_name,
-     +           status=>spec_status, def_conc=>spec_defconc
+     +           status=>spec_status,def_conc=>spec_defconc,nphoto=>nphotorxn
 
       !reaction information
       use module_chemmech_common, only : 

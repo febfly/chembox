@@ -1,8 +1,8 @@
-GFORTRAN module version '0' created from module_ream_io.f on Sun Sep 14 13:54:24 2014
-MD5:fcf12df0dbfc796cc1fc72f8b52c171c -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from ../module_ream_io.f on Sun Sep 14 13:56:14 2014
+MD5:887bff99b8ebe0e47ba834fa26b66c88 -- If you edit this, you'll get what you deserve.
 
-(() () () () () () () () () () () ()
-() () () () () () () () () () () () () () ())
+(() () () () () () () () ()
+() () () () () () () () () () () () () () () () () ())
 
 ()
 
@@ -17,7 +17,7 @@ UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '8') () 0 () () () 0 0)
 3 'max_npara' 'module_ream_common' 'max_npara' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
-INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '12') () 0 ()
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '21') () 0 ()
 () () 0 0)
 4 'max_nprod' 'module_chemmech_common' 'max_nprod' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
@@ -44,7 +44,7 @@ UNKNOWN-INTENT MODULE-PROC DECL UNKNOWN FUNCTION) (INTEGER 4 0 0 INTEGER
 ()) 13 0 (14) () 15 () () () 0 0)
 16 'symlen' 'module_ream_common' 'symlen' 1 ((PARAMETER UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') () 0 () () () 0 0)
+CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2') () 0 () () () 0 0)
 11 'filename' '' 'filename' 10 ((VARIABLE IN UNKNOWN-PROC UNKNOWN
 UNKNOWN DUMMY) (CHARACTER 1 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
 15 'id' '' 'id' 13 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN

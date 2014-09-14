@@ -3,16 +3,12 @@
       use module_geoschem_common 
       use module_geoschem_io,only: geos_read
       use module_geoschem_rxntype,only: rxn_rate
-      use module_geoschem_cheminfo,only:nr,r_type,paras,nphoto
-      use module_geoschem_cheminfo,only:ninactrxn,inactrxn,
-     +                  nemisrxn,emisrxn,ndeprxn,deprxn
-      use module_geoschem_cheminfo,only:ns,specname,spec_getid,nactive
       implicit none
       character(len=255) :: filename
       real(kind=DP) :: Na, R
       real(kind=DP) :: temp, pres, o2,n2, denair, h2o
       real(kind=DP) :: aer_area,aer_radius
-      real(kind=DP),allocatable,dimension(:) :: ratek
+      real(kind=DP),dimension(MAX_NRXN) :: ratek
       real(kind=DP),dimension(MAX_NSPEC)     :: conc
       integer       :: i
 
@@ -35,9 +31,8 @@
 
       call geos_read(filename)
 
-      allocate(ratek(nr))
       conc(:)=0d0
-      conc(nactive+1:ns)    = 0.22060057
+      conc(nactive+1:nspec)    = 0.22060057
       conc(spec_getid('H2'))=1.1d13
       conc(spec_getid('CH4'))=4.3d13
       conc(spec_getid('MOH'))=4.4d10
@@ -45,7 +40,7 @@
       conc(spec_getid('O2')) =0.21*2.5d19
       conc(spec_getid('N2')) =0.78*2.5d19
 
-      call rxn_rate(nr,r_type,paras,temp,pres,o2,n2,denair,
+      call rxn_rate(temp,pres,o2,n2,denair,
      +     h2o,aer_area,aer_radius,ratek)
 
       do i=1,nemisrxn
@@ -57,11 +52,12 @@
          ratek(deprxn(i))=2d0
       enddo
       do i=1,ninactrxn
-         print*,specname(inactrxn(2,i))
+         print*,spec_name(inactrxn(2,i))
          ratek(inactrxn(1,i))=ratek(inactrxn(1,i))*conc(inactrxn(2,i))
       enddo
       print*,'Reaction rate constant:'
-      do i=1,nr
+      do i=1,nrxn
          print*,i,ratek(i)
       enddo
+      print*,'done'
       endprogram

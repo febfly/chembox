@@ -50,8 +50,8 @@
        integer                            :: id
        integer                            :: n
   
-       do n = ns, 1, -1
-          if (adjustl(trim(s)) .eq. specname(n)) exit
+       do n = nspec, 1, -1
+          if (adjustl(trim(s)) .eq. spec_name(n)) exit
        enddo
        id = n 
        endfunction spec_getid
