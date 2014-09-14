@@ -18,5 +18,5 @@ clean:
 	@rm $(MOD)
 	@rm $(OBJ)
 
-$(OBJDIR)module_model_cheminfo.o : module_model_cheminfo.f module_model_parameter.o
+$(OBJDIR)module_chemmech_common.o : module_model_cheminfo.f module_model_parameter.o
 $(OBJDIR)module_model_parameter.o : module_model_parameter.f

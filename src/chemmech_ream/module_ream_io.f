@@ -7,7 +7,8 @@
 ! Written by Yuzhong Zhang, 9/8/2014
 !======================================================================
       module module_ream_io
-      use module_ream_parameter,only: DP,MAX_NREAC,MAX_NPROD
+      use module_chemmech_common
+      use module_geoschem_common
       implicit none
       !public functions
       public  :: ream_read
@@ -29,9 +30,6 @@
 !              stores relevant information in module_ream_cheminfo
 !======================================================================
       subroutine ream_read(filename)
-      use module_ream_cheminfo,only : cheminfo_init,spec_add,
-     +                       spec_finish_add,rxn_add,rxn_finish_add
-      use module_ream_rxntype,only  : MAX_NPARA,rxntype_init
       character(len=*),intent(in)        :: filename
       integer                            :: u, tpid_pre, ifok, tpid
       character(len=5)                   :: head
@@ -131,8 +129,6 @@
 !==============================================================
       subroutine read_rxn(u, tpid_pre, nreac0, nprod0, reac_id0, prod_id0,
      +           tpid0, coef0, paralist, ifok)
-      use module_ream_rxntype,only:nrxnline, preceeding_type,
-     +           succeeding_type, MAX_NPARA
 
       integer, intent(in)  :: u, tpid_pre
       integer              :: nreac0, nreac,nprod0, nprod,tpid0, tpid
@@ -328,8 +324,6 @@
 !==============================================================
       subroutine read_photorxn(u,nreac, nprod, reacid,prodid,
      &           flagid,coef,para,ifok)
-      use module_ream_cheminfo,only:spec_getid
-      use module_ream_rxntype ,only:rxntype_id
       integer                       :: u,ord
       character(len=8),dimension(4) :: reac
       integer,dimension(4)          :: reacid

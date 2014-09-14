@@ -5,51 +5,42 @@
 ! Written by Yuzhong Zhang, 9/8/2014
 !=========================================================================
       module module_geoschem_cheminfo
-      use module_geoschem_parameter, only : DP, MAX_NSPEC, MAX_STR1,
+      !parameters
+      use module_chemmech_common, only : DP, MAX_NSPEC, MAX_STR1,
      +    MAX_NRXN, MAX_NREAC, MAX_NPROD, MAX_NINACTRXN, MAX_NEMISRXN,
      +    MAX_NDEPRXN
-      use module_geoschem_rxntype, only : MAX_NPARA,SYMLEN
-      implicit none
 
       !species information
-      integer :: ns, ninactive, nactive
-      character(len=MAX_STR1),dimension(MAX_NSPEC)   :: specname
-      character(len=1),dimension(MAX_NSPEC)          :: status
-      real(kind=DP),dimension(MAX_NSPEC)             :: def_conc
+      use module_chemmech_common, only : 
+     +           ns=>nspec, ninactive, nactive, specname=>spec_name,
+     +           status=>spec_status, def_conc=>spec_defconc
 
       !reaction information
-      integer :: nr, nphoto
-      integer, dimension(MAX_NRXN)     :: nreac, nprod
-      integer, dimension(MAX_NREAC,MAX_NRXN)       :: reacs
-      integer, dimension(MAX_NPROD,MAX_NRXN)       :: prods
-      real(kind=DP),dimension(MAX_NPROD,MAX_NRXN)  :: prod_coefs
-      integer, dimension(MAX_NRXN)                 :: r_type
-      real(kind=DP),dimension(MAX_NPARA,MAX_NRXN)  :: paras
+      use module_chemmech_common, only : 
+     +           nr=>nrxn, nreac, nprod, reacs=>reac_id, prods=>prod_id,
+     +           prod_coefs
 
-      !More species information
-      !TracerID
-      integer :: iemission, idrydep
-      integer :: ich4
-      integer :: io3, ino, ino2, ipan, iisop, ioh, iho2 
+      !special reaction index (Emission, drydep, photolysis, etc)
+      use module_chemmech_common, only :
+     +           ninactrxn, nemisrxn, ndeprxn,nphotorxn,
+     +           inactrxn,emisrxn,deprxn,photorxn
 
-      !More reaction information
-      integer :: ninactrxn
-      integer,dimension(2, MAX_NINACTRXN) :: inactrxn
-      integer :: nemisrxn
-      integer,dimension(MAX_NEMISRXN)    :: emisrxn
-      integer :: ndeprxn
-      integer,dimension(MAX_NDEPRXN)     :: deprxn
+      !utility function
+      use module_chemmech_common, only : spec_getid
+
+      !reaction rate type and parameters
+      use module_geoschem_common, only : MAX_NPARA, r_type, paras
+
+      implicit none
 
       !public functions
       public :: cheminfo_init
       public :: spec_add
       public :: spec_finish_add
-      public :: spec_getid
       public :: rxn_add
       public :: rxn_finish_add
 
       !private functions
-      private :: spec_tracerid
       private :: spec_ifduplicate
       private :: treat_str
 
@@ -68,7 +59,6 @@
       nphoto = 0
       nreac(:) = 0
       nprod(:) = 0
-!      rxn_symbol(:) = ''
       reacs(:,:) = 0
       prods(:,:) = 0
       prod_coefs(:,:) = 0.
@@ -127,38 +117,8 @@
           status(nactive+1:ns)   = status(MAX_NSPEC-ninactive+1:MAX_NSPEC)
           def_conc(nactive+1:ns) = def_conc(MAX_NSPEC-ninactive+1:MAX_NSPEC)
        endif
-       
-       !Record some useful IDs 
-       call spec_tracerid
        endsubroutine spec_finish_add
        
-!=========================================================================
-       subroutine spec_tracerid
-       ich4 = spec_getid('CH4')
-       io3  = spec_getid('O3')
-       ino  = spec_getid('NO')
-       ino2 = spec_getid('NO2')
-       iisop= spec_getid('ISOP')
-       ioh  = spec_getid('OH')
-       iho2 = spec_getid('HO2')
-       iemission = spec_getid('EMISSION')
-       idrydep   = spec_getid('DRYDEP')
-       endsubroutine spec_tracerid
-!=========================================================================
-
-       function spec_getid (s) result (id)
-       character(len=*),intent(in)        :: s
-       integer                            :: id
-       integer                            :: n
-       character(len=MAX_STR1)            :: s1
-  
-       s1 = treat_str(s)
-       do n = ns, 1, -1
-          if (s1 .eq. specname(n)) exit
-       enddo
-       id = n 
-       endfunction spec_getid
-
 !=========================================================================
 !      private function, only useful in the spec_add stage
        function spec_ifduplicate (s) result(ifd)

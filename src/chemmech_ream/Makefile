@@ -22,7 +22,7 @@ clean:
 	@rm $(MOD)
 	@rm $(OBJ)
 
-$(OBJDIR)module_ream_parameter.o:module_ream_parameter.f
-$(OBJDIR)module_ream_rxntype.o : module_ream_rxntype.f module_ream_parameter.o
-$(OBJDIR)module_ream_cheminfo.o : module_ream_cheminfo.f module_ream_rxntype.o module_ream_parameter.o
-$(OBJDIR)module_ream_io.o : module_ream_io.f module_ream_cheminfo.o module_ream_rxntype.o module_ream_parameter.o
+$(OBJDIR)module_ream_common.o:module_ream_common.f module_chemmech_common.o
+$(OBJDIR)module_ream_rxntype.o : module_ream_rxntype.f module_ream_common.o  module_chemmech_common.o 
+$(OBJDIR)module_ream_cheminfo.o : module_ream_cheminfo.f module_ream_rxntype.o module_ream_common.o  module_chemmech_common.o
+$(OBJDIR)module_ream_io.o : module_ream_io.f module_ream_cheminfo.o module_ream_rxntype.o module_ream_common.o  module_chemmech_common.o

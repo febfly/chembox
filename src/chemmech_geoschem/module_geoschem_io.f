@@ -1,5 +1,6 @@
       module module_geoschem_io
-      use module_geoschem_parameter, only: DP,MAX_NREAC,MAX_NPROD
+      use module_chemmech_common
+      use module_geoschem_common
       implicit none
 
       public :: geos_read
@@ -9,17 +10,6 @@
       contains
       
       subroutine geos_read(filename)
-      use module_geoschem_cheminfo,only: spec_add, spec_finish_add, 
-     +                           cheminfo_init,rxn_add,rxn_finish_add
-      use module_geoschem_rxntype,only:  MAX_NPARA, rxntype_init
-
-      !common variables used for printing only,..
-      use module_geoschem_cheminfo,only: specname, ns, status,def_conc,
-     +                                   nr, reacs, prods, r_type, 
-     +                                   prod_coefs,nreac_list=>nreac,
-     +                                   nprod_list=>nprod
-      use module_geoschem_rxntype,only:  symbol
-
       character(len=*),intent(in)        :: filename
       integer                            :: u,  ifok, tpid, tpid_pre
       character(len=5)                   :: head
@@ -133,9 +123,6 @@
 !===============================================================================
       subroutine read_rxn(u,flagid_pre,ifphoto,reacid,nreac,prodid,
      +                   nprod,coef,ord,para,flagid,ifok)
-      use module_geoschem_cheminfo,only:spec_getid
-      use module_geoschem_rxntype, only:rxntype_id,MAX_NPARA,SYMLEN,
-     +                             preceeding_type,succeeding_type
       integer                                :: u,ord,ifphoto
       character(len=14),dimension(MAX_NREAC) :: reac
       integer,dimension(MAX_NREAC)           :: reacid

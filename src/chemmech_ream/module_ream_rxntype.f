@@ -5,23 +5,14 @@
 ! Written by Yuzhong Zhang, 9/8/2014
 !=========================================================================
       module module_ream_rxntype
-      use module_ream_parameter,only: DP
+      use module_chemmech_common,only: DP, MAX_NRXN, nr
+      use module_geoschem_common,only: MAX_NTYPE, MAX_NPARA, STRLEN, SYMLEN
+     
+      use module_geoschem_common,only: 
+     +    ntype, type_name, symbol, comment, 
+     +    preceeding_type, succeeding_type, if_photo_type,
+     +    tp=>r_type, paras, nrxnline
       implicit none
-      integer, parameter :: MAX_NTYPE = 30
-      integer, parameter :: MAX_NPARA = 16
-      integer, parameter :: STRLEN    = 50
-
-      integer :: ntype
-      
-      character(len=STRLEN),dimension(MAX_NTYPE) :: type_name
-      character(len=1),dimension(MAX_NTYPE)      :: symbol
-      character(len=STRLEN),dimension(MAX_NTYPE):: comment
-!      integer,dimension(MAX_NTYPE)               :: nparameter
-!      integer,dimension(MAX_NPARA,MAX_NTYPE)     :: parameter_pos
-      integer,dimension(MAX_NTYPE)               :: preceeding_type
-      integer,dimension(MAX_NTYPE)               :: succeeding_type
-      integer,dimension(MAX_NTYPE)               :: if_photo_type
-      integer,dimension(MAX_NTYPE)               :: nrxnline
 
       !pulic functions
       public  :: rxn_rate
@@ -59,7 +50,6 @@
 !                  proper value
 !=========================================================================
       subroutine rxntype_init
-!      parameter_pos(:,:)     = 0
       ntype                  = 16
 
       type_name(1)           = 'Normal'
@@ -234,13 +224,10 @@
 ! output    :
 !             1. rate_c    : rate constant [nr]
 !=========================================================================
-      subroutine rxn_rate(nr, tp, para, Temp, Pres, 
+      subroutine rxn_rate(Temp, Pres, 
      +                  O2, N2, denair, H2O, aer_area, aer_radius, 
      +                  rate_c) 
       !in out variables
-      integer, intent(in)                              :: nr
-      integer, dimension(nr), intent(in)               :: tp
-      real(kind=DP),dimension(MAX_NPARA,nr),intent(in) :: para
       real(kind=DP),intent(in) :: Temp, Pres, O2, N2, H2O
       real(kind=DP),intent(in) :: aer_area, aer_radius, denair
       real(kind=DP),dimension(nr),intent(out)      :: rate_c
@@ -262,7 +249,7 @@
       rate_c(:) = 0d0 
       do ir = 1, nr
          itp = tp(ir)
-         p(:)= para(:,ir)
+         p(:)= paras(:,ir)
          select case (itp)
            !Arrhenius formulation
            case (1) 
@@ -344,6 +331,11 @@
            !Photolysis
            case (15:16)
                 rate_const= 0d0
+           !default error
+           case default
+                print*,'Error: rate constant calculation method not'
+     +           //' defined for type '//symbol(itp)
+                stop                
          endselect
          rate_c(ir) = rate_const
       enddo !ir

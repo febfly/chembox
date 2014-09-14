@@ -1,12 +1,12 @@
       program main
-      use module_chemmech_common 
-      use module_geoschem_common 
-      use module_geoschem_io,only: geos_read
-      use module_geoschem_rxntype,only: rxn_rate
-      use module_geoschem_cheminfo,only:nr,r_type,paras,nphoto
-      use module_geoschem_cheminfo,only:ninactrxn,inactrxn,
+      use moduel_chemmech_common
+      use module_ream_common !DP,MAX_NSPEC
+      use module_ream_io,only: ream_read
+      use module_ream_rxntype,only: rxn_rate
+      use module_ream_cheminfo,only:nr,r_type,paras,nphoto
+      use module_ream_cheminfo,only:ninactrxn,inactrxn,
      +                  nemisrxn,emisrxn,ndeprxn,deprxn
-      use module_geoschem_cheminfo,only:ns,specname,spec_getid,nactive
+      use module_ream_cheminfo,only:ns,specname,spec_getid,nactive
       implicit none
       character(len=255) :: filename
       real(kind=DP) :: Na, R
@@ -33,7 +33,7 @@
       filename="chem_test1.dat"
 
 
-      call geos_read(filename)
+      call ream_read(filename)
 
       allocate(ratek(nr))
       conc(:)=0d0
@@ -45,7 +45,7 @@
       conc(spec_getid('O2')) =0.21*2.5d19
       conc(spec_getid('N2')) =0.78*2.5d19
 
-      call rxn_rate(nr,r_type,paras,temp,pres,o2,n2,denair,
+      call rxn_rate(temp,pres,o2,n2,denair,
      +     h2o,aer_area,aer_radius,ratek)
 
       do i=1,nemisrxn
