@@ -5,10 +5,12 @@
 ! Organized into a module by Yuzhong Zhang, 9/8/2014
 !=====================================================================
       module mod_smvgear_comode
-      !use module_model_parameter, only : DBL_PRECISION => DP
+      use module_model_parameter,only:
+     +    MDP=>DP, MAX_NSPEC, MAX_STR1, MAX_NREAC, MAX_NPROD,
+     +    MAX_NRXN,MAX_NPHOTO
       implicit none
-      integer, parameter :: DP = 8       
-      !integer, parameter :: DP = DBL_PRECISION
+      !integer, parameter :: DP = 8       
+      integer, parameter :: MDP
 
 ! *********************************************************************
 !                   COMMON VARIABLES: PARAMETERS
@@ -32,9 +34,12 @@
 ! ICS     = number of smvgear equation sets: 3 gaschem + 1 aqchem + 1 growth 
 ! ICP     = number of smvgear chemistry sets x 2 + 1 (for growth)
 ! MORDER  = maximum order for gear parameters for dimension purposes
-      integer, parameter ::  IGAS    =   139 
-      integer, parameter ::  IPHOT   =    52
-      integer, parameter ::  NMRATE  =   300
+      !integer, parameter ::  IGAS    =   139 
+      integer, parameter ::  IGAS    =   MAX_NSPEC
+      !integer, parameter ::  IPHOT   =    52
+      integer, parameter ::  IPHOT   =   MAX_NPHOTO
+      !integer, parameter ::  NMRATE  =   300
+      integer, parameter ::  NMRATE  =   MAX_NRXN - MAX_NPHOTO
       integer, parameter ::  ICS     =     1
       integer, parameter ::  ICP     = ICS*2
       integer, parameter ::  NCSGAS  = ICS
@@ -46,7 +51,8 @@
       integer, parameter ::  MAXGL3  = 35
       integer, parameter ::  MAXGL4  = 10          
       integer, parameter ::  MAXGL5  = MAXGL
-      integer, parameter ::  NMRPROD = 16              
+      !integer, parameter ::  NMRPROD = 16              
+      integer, parameter ::  NMRPROD = MAX_NREAC + MAX_NPROD
 
 ! ****************** parameters to minimize array space ***************
 ! MXCOUNT2,3 = arrays sizes used to minimize matrix space
@@ -59,8 +65,10 @@
       integer, parameter ::  MXCOUNT4 = MXGSAER * 8 
       
       integer, parameter ::  STRLEN   = 14     
-      integer, parameter ::  NMREAC   = 3
-      integer, parameter ::  NALLREAC = NMREAC + 1
+      !integer, parameter ::  NMREAC   = 3
+      integer, parameter ::  NMREAC   = MAX_NREAC - 1
+      !integer, parameter ::  NALLREAC = NMREAC + 1
+      integer, parameter ::  NALLREAC = MAX_NREAC
       integer, parameter ::  NMPROD   = NMRPROD - NALLREAC
       integer, parameter ::  NPRODLO  = NALLREAC + 1
       integer, parameter ::  NPRODHI  = NPRODLO + NMPROD - 1

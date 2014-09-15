@@ -20,4 +20,5 @@ clean:
 	@rm $(OBJ)
 
 $(OBJDIR)module_chemmech_common.o : module_chemmech_common.f module_model_parameter.o
+$(OBJDIR)module_conc_common.o : module_conc_common.f module_model_parameter.o
 $(OBJDIR)module_model_parameter.o : module_model_parameter.f

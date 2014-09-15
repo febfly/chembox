@@ -3,6 +3,13 @@
       !Numerical parameters
       integer, parameter :: DP = 8
 
+      !Grid parameters
+      integer, parameter :: IX = 1
+      integer, parameter :: JX = 1
+      integer, parameter :: KX = 1
+      integer, parameter :: NIJ  = IX*JX
+      integer, parameter :: NIJK = IX*JX*KX 
+
       !Chemical mechanism parameters
       integer, parameter :: MAX_NSPEC   = 300
       integer, parameter :: MAX_STR1    = 15  !For names,e.g., species
