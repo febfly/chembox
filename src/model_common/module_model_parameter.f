@@ -19,6 +19,10 @@
 
       integer, parameter :: MAX_NRXN    = 500
       integer, parameter :: MAX_NPHOTO  = 90
+
+      !Time step
+      real(kind=DP),parameter :: TS_MODEL_MIN = 1
+      real(kind=DP),parameter :: TS_CHEM_MIN = 1
  
 
       endmodule module_model_parameter
