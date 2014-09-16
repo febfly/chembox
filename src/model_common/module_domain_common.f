@@ -37,3 +37,4 @@
       enddo
 
       endsubroutine calc_domain_index
+      endmodule module_domain_common
