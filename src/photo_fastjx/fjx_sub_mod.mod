@@ -1,4 +1,4 @@
-GFORTRAN module version '0' created from fjx_sub_mod.f90 on Tue Sep  9 16:40:13 2014
+GFORTRAN module version '0' created from fjx_sub_mod.f90 on Wed Sep 17 10:26:43 2014
 MD5:739614426dba227ece26f284dd006435 -- If you edit this, you'll get what you deserve.
 
 (() () () () () () ()

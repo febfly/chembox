@@ -17,8 +17,8 @@ $(OBJDIR)%.o:%.f
 	$(FC) $(FCFLAGS) $(MODFLAG) -c $< -o $@
 
 clean:
-	@rm $(MOD)
-	@rm $(OBJ)
+	@rm -f $(MOD)
+	@rm -f $(OBJ)
 
 $(OBJDIR)module_geoschem_common.o:module_geoschem_common.f module_chemmech_common.o
 $(OBJDIR)module_geoschem_rxntype.o : module_geoschem_rxntype.f module_geoschem_common.o module_chemmech_common.o

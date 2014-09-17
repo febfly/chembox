@@ -18,7 +18,7 @@
       airdensity = pressure*Na/R/temperature/1d6
       aer_area = 12e-7
       aer_radius = 1e-4
-      water_vapor = 0.001*denair
+      water_vapor = 0.001*airdensity
 
       endsubroutine update_met
       endmodule module_met_common

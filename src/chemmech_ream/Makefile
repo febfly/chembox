@@ -19,8 +19,8 @@ $(OBJDIR)%.o:%.f
 	$(FC) $(FCFLAGS) $(MODFLAG) -c $< -o $@
 
 clean:
-	@rm $(MOD)
-	@rm $(OBJ)
+	@rm -f $(MOD)
+	@rm -f $(OBJ)
 
 $(OBJDIR)module_ream_common.o:module_ream_common.f module_chemmech_common.o
 $(OBJDIR)module_ream_rxntype.o : module_ream_rxntype.f module_ream_common.o  module_chemmech_common.o 

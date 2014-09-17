@@ -16,8 +16,8 @@ $(OBJDIR)%.o:%.f
 	$(FC) $(FCFLAGS) $(MODFLAG) -c $< -o $@
 
 clean:
-	@rm $(MOD)
-	@rm $(OBJ)
+	@rm -f $(MOD)
+	@rm -f $(OBJ)
 
 $(OBJDIR)julday_mod.o : julday_mod.f
 $(OBJDIR)util_time_mod.o:util_time_mod.f julday_mod.o

@@ -1,33 +1,29 @@
 include Makefile_Header
 OUTPATH :=
-EXE := smvgear.exe
+EXE := chembox.exe
 EXEDIR := 
 	
 SRC := $(wildcard *.f)
 OBJ := $(SRC:.f=.o)
 
 all:$(OBJ)
+	@$(MAKE) -C model_util all
+	@$(MAKE) -C model_common all
+	@$(MAKE) -C chemmech_geoschem all 
+	@$(MAKE) -C chemmech_ream all 
+	@$(MAKE) -C solver_smvgear all 
+	@$(MAKE) -C photo_fastjx all 
+	@$(MAKE) -C model_main all 
 #	$(FC) $(FCFLAGS) -o $(EXE) $(OBJ)
 #	@mv $(EXE) $(EXEDIR)
 #	@ln -s $(EXEDIR)$(EXE) .
 
 clean:
-	@rm *.o
-
+	@$(MAKE) -C model_util clean
+	@$(MAKE) -C model_common clean
+	@$(MAKE) -C chemmech_geoschem clean
+	@$(MAKE) -C chemmech_ream clean
+	@$(MAKE) -C solver_smvgear clean 
+	@$(MAKE) -C photo_fastjx clean 
+	@$(MAKE) -C model_main clean 
 	
-backsub.o   : backsub.f mod_comode.o
-decomp.o    : decomp.f  mod_comode.o
-itf_smvgear_setup.o: itf_smvgear_setup.f mod_comode.o
-itf_smvgear_solve.o: itf_smvgear_solve.f mod_comode.o
-jsparse.o   : jsparse.f mod_comode.o
-ksparse.o   : ksparse.f mod_comode.o
-mod_comode.o: mod_comode.f
-pderiv.o    : pderiv.f  mod_comode.o
-smvgear.o   : smvgear.f mod_comode.o
-smvgear_init.o: smvgear_init.f mod_comode.o
-smvgear_setchem.o : smvgear_setchem.f mod_comode.o
-smvgear_setpara.o : smvgear_setpara.f mod_comode.o
-subfun.o    : subfun.f mod_comode.o
-update.o    : update.f mod_comode.o
-getdata.o : getdata.f
-simpleintegrator.o : simpleintegrator.f

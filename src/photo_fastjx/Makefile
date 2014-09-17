@@ -15,8 +15,8 @@ $(OBJDIR)%.o:%.f90
 	$(FC) $(FCFLAGS) -c $< -o $@
 
 clean:
-	@rm $(MOD)
-	@rm $(OBJ)
+	@rm -f $(MOD)
+	@rm -f $(OBJ)
 
 $(OBJDIR)fjx_cmn_mod.o : fjx_cmn_mod.f90
 $(OBJDIR)fjx_sub_mod.o : fjx_sub_mod.f90 fjx_cmn_mod.o

@@ -10,7 +10,7 @@
      +    MAX_NRXN,MAX_NPHOTO
       implicit none
       !integer, parameter :: DP = 8       
-      integer, parameter :: MDP
+      integer, parameter :: DP = MDP
 
 ! *********************************************************************
 !                   COMMON VARIABLES: PARAMETERS

@@ -1,5 +1,6 @@
 OBJDIR := ../../obj/
 MODDIR := ../../mod/
+MODFLAG:= -J$(MODDIR)
 
 include ../Makefile_Header
 
@@ -12,11 +13,11 @@ vpath %.o $(OBJDIR)
 all:$(OBJ)
 
 $(OBJDIR)%.o:%.f
-	$(FC) $(FCFLAGS) -c $< -o $@
+	$(FC) $(FCFLAGS) $(MODFLAG) -c $< -o $@
 
 clean:
-	@rm $(MOD)
-	@rm $(OBJ)
+	@rm -f $(MOD)
+	@rm -f $(OBJ)
 
 $(OBJDIR)mod_smvgear_comode.o : mod_smvgear_comode.f
 $(OBJDIR)mod_smvgear_core.o : mod_smvgear_core.f mod_smvgear_comode.o
