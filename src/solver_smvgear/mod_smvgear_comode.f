@@ -7,7 +7,7 @@
       module mod_smvgear_comode
       use module_model_parameter,only:
      +    MDP=>DP, MAX_NSPEC, MAX_STR1, MAX_NREAC, MAX_NPROD,
-     +    MAX_NRXN,MAX_NPHOTO
+     +    MAX_NRXN,MAX_NPHOTO, MAX_BLK
       implicit none
       !integer, parameter :: DP = 8       
       integer, parameter :: DP = MDP
@@ -19,7 +19,8 @@
 ! KBLOOP   = maximum number of grid points in a vectorized block 
 !            should range from 512 (below which vectorization decreases)
 !            to 1024 (above which, array space is limited) 
-      integer, parameter :: KBLOOP  = 15 
+!      integer, parameter :: KBLOOP  = 16 
+      integer, parameter :: KBLOOP = MAX_BLK
 
 ! ************************* gas-phase parameters **********************
 ! IGAS    = maximum number of gases, active + inactive 

@@ -7,6 +7,7 @@
       real(kind=DP),dimension(IX,JX,KX) :: aer_area   !cm2/cm3
       real(kind=DP),dimension(IX,JX,KX) :: aer_radius !cm
       real(kind=DP),dimension(IX,JX,KX) :: airdensity !molec/cm3
+      integer, dimension(IX,JX)         :: ifsun
     
       public :: update_met
 
@@ -19,6 +20,7 @@
       aer_area = 12e-7
       aer_radius = 1e-4
       water_vapor = 0.001*airdensity
+      ifsun = 1
 
       endsubroutine update_met
       endmodule module_met_common
