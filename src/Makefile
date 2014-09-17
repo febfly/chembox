@@ -1,7 +1,5 @@
 include Makefile_Header
 OUTPATH :=
-EXE := chembox.exe
-EXEDIR := 
 	
 SRC := $(wildcard *.f)
 OBJ := $(SRC:.f=.o)

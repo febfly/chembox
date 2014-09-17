@@ -18,7 +18,7 @@
       do k=1,KX
         do j=1,JX
           do i=1,IX
-             n=k*IX*JX + j*IX +i
+             n=(k-1)*IX*JX + (j-1)*IX +i
              grid_3_1(i,j,k)=n
              grid_1_3_i(n)=i
              grid_1_3_j(n)=j
@@ -29,7 +29,7 @@
 
       do j=1,JX
         do i=1,IX
-           n=j*IX + i
+           n=(j-1)*IX + i
            grid_2_1(i,j) = n
            grid_1_2_i(n) = i
            grid_1_2_j(n) = j

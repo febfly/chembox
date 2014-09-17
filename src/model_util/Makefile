@@ -1,6 +1,7 @@
 OBJDIR := ../../obj/
 MODDIR := ../../mod/
 MODFLAG:= -J$(MODDIR)
+LIBDIR := ../../lib/
 
 include ../Makefile_Header
 	
@@ -11,6 +12,7 @@ MOD := $(patsubst %.f,$(MODDIR)%.mod,$(SRC))
 vpath %.o $(OBJDIR)
 
 all:$(OBJ)
+	$(AR) crs $(LIBDIR)libutil.a $(OBJ)
 
 $(OBJDIR)%.o:%.f
 	$(FC) $(FCFLAGS) $(MODFLAG) -c $< -o $@
@@ -18,6 +20,7 @@ $(OBJDIR)%.o:%.f
 clean:
 	@rm -f $(MOD)
 	@rm -f $(OBJ)
+	@rm -f $(LIBDIR)libutil.a
 
 $(OBJDIR)julday_mod.o : julday_mod.f
 $(OBJDIR)util_time_mod.o:util_time_mod.f julday_mod.o

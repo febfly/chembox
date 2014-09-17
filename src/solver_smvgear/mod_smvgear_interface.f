@@ -75,8 +75,8 @@
       endif
 
       if (n_mxreac.gt.NMREAC) then
-         write(iout,*) 'Error: n_mxprod is greater than NMREAC',
-     +                 n_mxprod, NMPROD
+         write(iout,*) 'Error: n_mxreac is greater than NMREAC',
+     +                 n_mxreac, NMREAC
          stop
       endif
 
@@ -123,7 +123,7 @@
           implicit none
           !Input variables
           integer, intent(in) :: ncs, ifsun
-          integer, intent(in) :: n_spec, n_rxn, n_grid
+          integer, intent(in) :: n_grid
           real(kind=DP), dimension(KBLOOP, IGAS), intent(in) :: conc0
           real(kind=DP), dimension(KBLOOP, NMRATE), intent(in) :: rate_const
 

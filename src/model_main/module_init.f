@@ -4,19 +4,20 @@
        contains
 
        subroutine do_initialize
-       use module_model_parameter,only: DP, TS_CHEM_MIN
-       use module_domain_common,only:calc_domain_index, NIJK
+       use module_model_parameter,only: DP, TS_CHEM_MIN, MAX_NREAC,
+     +     MAX_NPROD, MAX_STR1, MAX_NRXN
+       use module_domain_common,only:calc_domain_index, NIJK,
+     +     grid_1_3_i,grid_1_3_j,grid_1_3_k
        use module_time_common,only:time_step_init
        use module_model_option,only:option_chemmech,option_solver
-       use module_geoschem_io,only:read_geoschem
-       use module_ream_io,only:read_ream
+       use module_geoschem_io,only:geos_read
+       use module_ream_io,only:ream_read
        use module_chemmech_common,only:spec_defconc,spec_getid
        use module_chemmech_common,only:nspec,nrxn,nactive,spec_name,
-     +     nreac,reac_id,prod_id,prod_coefs,nphotorxn
-       use module_chemmech_common,only:MAX_NREAC, MAX_NPROD, MAX_STR1
-       use module_smvgear_interface,only:smvgear_setup       
+     +                   nreac,reac_id,prod_id,prod_coefs,nphotorxn
+       use mod_smvgear_interface,only:smvgear_setup 
        use module_conc_common,only:gas_conc
-       use module_met_common,only:airdensity
+       use module_met_common,only:update_met,airdensity
        character(len=255) :: filename
        integer            :: i,j,k,ido3,idno2,idisop
        integer            :: ig, irxn
@@ -32,17 +33,20 @@
        call calc_domain_index
 
        !Initialize time vairables
-       call time_step_init(2011,10,10,0,0,0.,
-     +                     2011,10,11,0,0,0.)
+       call time_step_init(2011,10,10,0,0,0d0,
+     +                     2011,10,11,0,0,30d0)
 
        !Initialize chemical mechanism
        if (option_chemmech.eq.1) then
           filename='globchem.dat'
-          call read_geoschem(trim(filename))
+          call geos_read(trim(filename))
        elseif (option_chemmech.eq.2) then
           filename='chem.dat'
-          call read_ream(trim(filename))
+          call ream_read(trim(filename))
        endif
+
+       !Initialize met
+       call update_met
 
        !Chemical initial condition
        ido3=spec_getid('O3')
@@ -57,9 +61,8 @@
           gas_conc(ig,idno2) = 5d-9*airdensity(i,j,k)
           gas_conc(ig,idisop) = 1d-9*airdensity(i,j,k)
        enddo
-       
        !Initialize chemical solver
-       if (opt_solver.eq.1) then !smvgear
+       if (option_solver.eq.1) then !smvgear
           reac_coefs=0d0
           do irxn=1,nrxn
              reac_coefs(1:nreac(irxn),irxn)=1d0

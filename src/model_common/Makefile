@@ -1,6 +1,7 @@
 OBJDIR := ../../obj/
 MODDIR := ../../mod/
 MODFLAG:= -J$(MODDIR)
+LIBDIR := ../../lib/
 
 include ../Makefile_Header
 	
@@ -11,6 +12,7 @@ MOD := $(patsubst %.f,$(MODDIR)%.mod,$(SRC))
 vpath %.o $(OBJDIR)
 
 all:$(OBJ)
+	$(AR) crs $(LIBDIR)libcommon.a $(OBJ)
 
 $(OBJDIR)%.o:%.f
 	$(FC) $(FCFLAGS) $(MODFLAG) -c $< -o $@
@@ -18,6 +20,7 @@ $(OBJDIR)%.o:%.f
 clean:
 	@rm -f $(MOD)
 	@rm -f $(OBJ)
+	@rm -f $(LIBDIR)libcommon.a
 
 $(OBJDIR)module_chemmech_common.o : module_chemmech_common.f module_model_parameter.o
 $(OBJDIR)module_conc_common.o : module_conc_common.f module_model_parameter.o

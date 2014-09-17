@@ -13,13 +13,15 @@
      +           aer_area, aer_radius, ifsun
       use module_chemmech_common,only:ninactrxn, inactrxn
       use module_conc_common,only:gas_conc
-      use module_geoschem_rxntype,only: geos_rxnrate=>rxnrate
-      use module_ream_rxntype,only: ream_rxnrate=>rxnrate
-      use module_smvgear_interface,only:smvgear_solve
+      use module_geoschem_rxntype,only: geos_rxnrate=>rxn_rate
+      use module_ream_rxntype,only: ream_rxnrate=>rxn_rate
+      use mod_smvgear_interface,only:smvgear_solve
+
+      use module_chemmech_common,only:spec_getid
       logical, save :: firsttime=.true.
-      integer, save :: nblk
       integer,parameter :: MAX_NBLK = NIJK/MAX_BLK + 1
-      integer,dimension(MAX_NBLK) :: grid_st, blksize
+      integer,save      :: nblk
+      integer,dimension(MAX_NBLK),save :: grid_st, blksize
       integer       :: iblk, igrid, irxn
       integer       :: gind, gi, gj, gk, g0, g1
 
@@ -90,6 +92,7 @@
                do irxn = 1, ninactrxn
                   rrate_tmp(inactrxn(1,irxn))= rrate_tmp(inactrxn(1,irxn))*
      +                                    gas_conc(gind, inactrxn(2,irxn))
+               enddo
             endif
 
             rrate(igrid,:)=rrate_tmp(:)
@@ -97,7 +100,7 @@
          enddo!igrid
 
          !solve chemistry OPD
-         if (option_solver.eq.1) then !smvgear
+!         if (option_solver.eq.1) then !smvgear
             call smvgear_solve(1,ifsunflag, blksize(iblk), conc0, rrate,
      +                         conc1, flag)
             if (flag.ne.0) then 
@@ -105,11 +108,12 @@
             endif
             g0 = grid_st(iblk)
             g1 = g0 + blksize(iblk) - 1
-            gas_conc(g0:g1,:) = conc1(:,:)
-         endif
+            gas_conc(g0:g1,:) = conc1(1:blksize(iblk),:)
+!         endif
       enddo!iblk
 !$OMP END PARALLEL DO
-      print*,'chemistry finished'
+      !print*,'chemistry finished'
+      print*,gas_conc(1,spec_getid('O3')),gas_conc(1,spec_getid('NO2'))
       endsubroutine do_chem
 
       endmodule module_chem

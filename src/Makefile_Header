@@ -1,5 +1,5 @@
 FC := gfortran
-FCFLAGS := -ffixed-line-length-none  -fopenmp -fbounds-check 
+FCFLAGS := -ffixed-line-length-none  -fbounds-check -fopenmp
 #MODFLAG :=-J$(MODDIR)
 LD := gfortran $(FCFLAGS)
 LINK := 

@@ -1,6 +1,7 @@
 OBJDIR := ../../obj/
 MODDIR := ../../mod/
 MODFLAG:= -J$(MODDIR)
+LIBDIR := ../../lib/
 include ../Makefile_Header
 
 SRC := $(wildcard *.f)
@@ -10,7 +11,7 @@ MOD := $(patsubst %.f,$(MODDIR)%.mod,$(SRC))
 vpath %.o $(OBJDIR)
 
 all:$(OBJ)
-	@echo $(OBJ)
+	$(AR) crs $(LIBDIR)libream.a $(OBJ)
 #	$(FC) $(FCFLAGS) -o $(EXE) $(OBJ)
 #	@mv $(EXE) $(EXEDIR)
 #	@ln -s $(EXEDIR)$(EXE) .
@@ -21,6 +22,7 @@ $(OBJDIR)%.o:%.f
 clean:
 	@rm -f $(MOD)
 	@rm -f $(OBJ)
+	@rm -f $(LIBDIR)libream.a
 
 $(OBJDIR)module_ream_common.o:module_ream_common.f module_chemmech_common.o
 $(OBJDIR)module_ream_rxntype.o : module_ream_rxntype.f module_ream_common.o  module_chemmech_common.o 

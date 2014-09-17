@@ -51,7 +51,8 @@
       integer, parameter ::  MAXGL2  = 70          
       integer, parameter ::  MAXGL3  = 35
       integer, parameter ::  MAXGL4  = 10          
-      integer, parameter ::  MAXGL5  = MAXGL
+      !integer, parameter ::  MAXGL5  = MAXGL
+      integer, parameter ::  MAXGL5  = MAXGL*2.5
       !integer, parameter ::  NMRPROD = 16              
       integer, parameter ::  NMRPROD = MAX_NREAC + MAX_NPROD
 
@@ -65,11 +66,12 @@
       integer, parameter ::  MXCOUNT3 = MXGSAER * 25
       integer, parameter ::  MXCOUNT4 = MXGSAER * 8 
       
-      integer, parameter ::  STRLEN   = 14     
+!      integer, parameter ::  STRLEN   = 14     
+      integer, parameter ::  STRLEN   = MAX_STR1     
       !integer, parameter ::  NMREAC   = 3
-      integer, parameter ::  NMREAC   = MAX_NREAC - 1
-      !integer, parameter ::  NALLREAC = NMREAC + 1
-      integer, parameter ::  NALLREAC = MAX_NREAC
+      integer, parameter ::  NMREAC   = MAX_NREAC 
+      integer, parameter ::  NALLREAC = NMREAC 
+      !integer, parameter ::  NALLREAC = MAX_NREAC
       integer, parameter ::  NMPROD   = NMRPROD - NALLREAC
       integer, parameter ::  NPRODLO  = NALLREAC + 1
       integer, parameter ::  NPRODHI  = NPRODLO + NMPROD - 1

@@ -50,7 +50,7 @@
       ts_model_min = TSM3D
       ts_chem_min  = TSCHEM
       frac_day0 = d0+float(h0)/24d0+float(mi0)/1440d0+s0/86400d0
-      frac_day1 = d0+float(h1)/24d0+float(mi1)/1440d0+s1/86400d0
+      frac_day1 = d1+float(h1)/24d0+float(mi1)/1440d0+s1/86400d0
       t_st_min = julday(y0,m0,frac_day0)*1440d0
       t_ed_min = julday(y1,m1,frac_day1)*1440d0
       if (t_st_min.ge.t_ed_min) then
@@ -88,16 +88,16 @@
       if (itstep.lt.ntstep) then 
          t_remain_min  = t_remain_min - ts_model_min
          t_elapse_min  = t_elapse_min + ts_model_min
-         jd = t_elapse_min/1440d0
+         jd = (t_st_min+t_elapse_min)/1440d0
          call jd2ymdhms(jd,year,month,day,hour,minute,second)
          jday = int(t_elapse_min/1440d0 - julday(year,1,1d0) + 1)
          flag = 0
       elseif (itstep.eq.ntstep) then
-         ts_model_min = t_ed_min - t_elapse_min
+         ts_model_min = t_total_min - t_elapse_min
          ts_chem_min  = ts_model_min
          t_remain_min = 0
-         t_elapse_min = t_ed_min
-         jd = t_elapse_min/1440d0
+         t_elapse_min = t_total_min
+         jd = (t_st_min+t_elapse_min)/1440d0
          call jd2ymdhms(jd,year,month,day,hour,minute,second)
          jday = int(t_elapse_min/1440d0 - julday(year,1,1d0) + 1)
          flag = 1
@@ -105,6 +105,8 @@
          print*,'Simulation finished'
          flag = 2
       endif
+      if (flag.ne.2) print "(A,i4,'-',i2,'-',i2,x,i2,':',i2)",
+     +      'Current time:',year,month,day,hour,minute
       endfunction time_step_next
 
       endmodule module_time_common
