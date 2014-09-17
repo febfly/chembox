@@ -97,8 +97,8 @@
       endsubroutine smvgear_setup
 
 !====================================================================
-      subroutine smvgear_solve (ncs, ifsun, n_grid, n_spec, n_rxn,
-     +     conc0, rate_const, conc1, flag)
+      subroutine smvgear_solve (ncs, ifsun, n_grid, conc0, rate_const, 
+     +                          conc1, flag)
 !===================================================================
 ! INPUT
 !     ncs      : index of chemistry set
@@ -124,11 +124,11 @@
           !Input variables
           integer, intent(in) :: ncs, ifsun
           integer, intent(in) :: n_spec, n_rxn, n_grid
-          real(kind=DP), dimension(n_grid, n_spec), intent(in) :: conc0
-          real(kind=DP), dimension(n_grid, n_rxn), intent(in) :: rate_const
+          real(kind=DP), dimension(KBLOOP, IGAS), intent(in) :: conc0
+          real(kind=DP), dimension(KBLOOP, NMRATE), intent(in) :: rate_const
 
           !Output variables
-          real(kind=DP), dimension(n_grid, n_spec), intent(out) :: conc1
+          real(kind=DP), dimension(KBLOOP, IGAS), intent(out) :: conc1
           integer, intent(out)                          :: flag
           !character(len=MSGLEN), intent(out)            :: message
 
@@ -181,6 +181,7 @@
           call smvgear(ncs, ifsun,flag)
 
           !Update concentration
+          conc1(:,:) = 0d0
           if (flag.eq.0) then !if solver succeeds, update concentration
              do jnew = 1, ischang(ncs)
                 jold = inewold(jnew, ncs)
