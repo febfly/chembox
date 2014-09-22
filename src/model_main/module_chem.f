@@ -11,10 +11,11 @@
       use module_met_common,only:
      +           temperature, pressure, water_vapor, airdensity,
      +           aer_area, aer_radius, ifsun
-      use module_chemmech_common,only:ninactrxn, inactrxn
+      use module_chemmech_common,only:ninactrxn,inactrxn,nrxn,nphotorxn
       use module_conc_common,only:gas_conc
       use module_geoschem_rxntype,only: geos_rxnrate=>rxn_rate
       use module_ream_rxntype,only: ream_rxnrate=>rxn_rate
+      use module_photoassign,only: prate
       use mod_smvgear_interface,only:smvgear_solve
 
       use module_chemmech_common,only:spec_getid
@@ -82,6 +83,9 @@
      +                           aer_radius(gi,gj,gk),
      +                           rrate_tmp)
             endif
+
+            !update photolysis rate
+            rrate_tmp(nrxn-nphotorxn+1:nrxn) = prate(1:nphotorxn,gk)
 
             !update emission rate
 
