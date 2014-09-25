@@ -207,7 +207,7 @@
          prod_name2=prod_name
          coef2     =coef0
          !Read multiple lines
-         do il = 2, nrxnline(tpid)
+         do il = 2, nrxnline(tpid0)
             para(:) = 0.
             call read_line(u,reac_name,reac_id,nreac,prod_name,prod_id,
      +           nprod, coef, dinp, iord, para, flagtmp, tpid, 
@@ -343,6 +343,12 @@
 
       integer                       :: i,id
       integer                       :: ifphoto
+   
+      reac=''
+      prod=''
+      reacid = 0
+      coef = 0
+      prodid = 0
 
       !Read the line
       read(u,15)reac(1),ord,stat,nprod,para(1),flag
@@ -381,6 +387,7 @@
           print*,'cannot find reactants'//reac(1)// 'in species list'
           stop
       endif
+      reacid(1) = id
 
       !Find products
       do i=1,nprod

@@ -16,6 +16,8 @@
 ! 
 !=======================================================================
 
+      integer,parameter:: FLAG_END=2, FLAG_LAST=1, FLAG_NORMAL=0
+
       real(kind=DP) :: t_total_min
       real(kind=DP) :: t_remain_min, t_elapse_min
       integer       :: ntstep, itstep
@@ -91,7 +93,7 @@
          jd = (t_st_min+t_elapse_min)/1440d0
          call jd2ymdhms(jd,year,month,day,hour,minute,second)
          jday = int(t_elapse_min/1440d0 - julday(year,1,1d0) + 1)
-         flag = 0
+         flag = FLAG_NORMAL
       elseif (itstep.eq.ntstep) then
          ts_model_min = t_total_min - t_elapse_min
          ts_chem_min  = ts_model_min
@@ -100,12 +102,12 @@
          jd = (t_st_min+t_elapse_min)/1440d0
          call jd2ymdhms(jd,year,month,day,hour,minute,second)
          jday = int(t_elapse_min/1440d0 - julday(year,1,1d0) + 1)
-         flag = 1
+         flag = FLAG_LAST
       elseif (itstep.gt.ntstep) then 
          print*,'Simulation finished'
-         flag = 2
+         flag = FLAG_END
       endif
-      if (flag.ne.2) print "(A,i4,'-',i2,'-',i2,x,i2,':',i2)",
+      if (flag.ne.FLAG_END) print "(A,i4,'-',i2,'-',i2,x,i2,':',i2)",
      +      'Current time:',year,month,day,hour,minute
       endfunction time_step_next
 
