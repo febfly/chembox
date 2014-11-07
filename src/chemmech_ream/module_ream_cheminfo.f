@@ -81,7 +81,7 @@
       ifdup=spec_ifduplicate(s1)
 
       if (ifdup) then
-         print*,'Error:duplicate definition of species'
+         print*,'Error:duplicate definition of species',s
          stop
       endif
 
@@ -179,6 +179,11 @@
        do ir=1,nr
           do is=1,nreac(ir)
              sid = reacs(is,ir)
+             if (sid.eq.0) then
+                print*,'Error: cannot find species ',is,'in reaction',ir
+                stop
+             endif
+
              !reactant is 'EMISSION',i.e. a emission rxn
              if (specname(sid).eq.'EMISSION') then
                 nemisrxn = nemisrxn + 1
