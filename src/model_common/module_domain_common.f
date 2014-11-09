@@ -10,6 +10,8 @@
       integer,dimension(NIJ)      :: grid_1_2_i
       integer,dimension(NIJ)      :: grid_1_2_j
 
+      real(kind=DP)  :: height, width, length
+
       public :: calc_domain_index
       contains
 

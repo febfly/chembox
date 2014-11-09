@@ -26,6 +26,7 @@
       !Time step
       real(kind=DP),parameter :: TS_MODEL_MIN = 1
       real(kind=DP),parameter :: TS_CHEM_MIN = 1
+      real(kind=DP),parameter :: TS_OUTPUT_MIN = 2.
  
 
       endmodule module_model_parameter

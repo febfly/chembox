@@ -249,9 +249,9 @@
       npdlo(    1:ICP) = 0
       npdhi(    1:ICP) = 0
 
-      fracp(   1:MAXGL,1:ICS) = 0
-      ignfrac( 1:MAXGL,1:ICS) = 0
-      nkgnfrac(1:MAXGL,1:ICS) = 0
+      fracp(   1:MAXGL5,1:ICS) = 0
+      ignfrac( 1:MAXGL5,1:ICS) = 0
+      nkgnfrac(1:MAXGL5,1:ICS) = 0
 
       nreacoth(1:MAXGL2,1:ICS) = 0
       lgasbino(1:MAXGL2,1:ICS) = 0

@@ -52,7 +52,8 @@
       integer, parameter ::  MAXGL3  = 35
       integer, parameter ::  MAXGL4  = 10          
       !integer, parameter ::  MAXGL5  = MAXGL
-      integer, parameter ::  MAXGL5  = MAXGL*2.5
+      !integer, parameter ::  MAXGL5  = MAXGL*2.5
+      integer, parameter ::  MAXGL5  = MAXGL*5
       !integer, parameter ::  NMRPROD = 16              
       integer, parameter ::  NMRPROD = MAX_NREAC + MAX_NPROD
 
