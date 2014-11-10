@@ -57,9 +57,9 @@
           j=grid_1_3_j(ig)
           k=grid_1_3_k(ig)
           gas_conc(ig,:)  = spec_defconc(:)*airdensity(i,j,k)
-          gas_conc(ig,ido3) = 40d-9*airdensity(i,j,k)
-          gas_conc(ig,idno2) = 5d-9*airdensity(i,j,k)
-          gas_conc(ig,idisop) = 1d-9*airdensity(i,j,k)
+          if (ido3.gt.0) gas_conc(ig,ido3) = 40d-9*airdensity(i,j,k)
+          if (idno2.gt.0) gas_conc(ig,idno2) = 5d-9*airdensity(i,j,k)
+          if (idisop.gt.0) gas_conc(ig,idisop) = 1d-9*airdensity(i,j,k)
        enddo
        !Initialize chemical solver
        if (option_solver.eq.1) then !smvgear

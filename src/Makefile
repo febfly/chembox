@@ -9,6 +9,7 @@ all:$(OBJ)
 	@$(MAKE) -C model_common all
 	@$(MAKE) -C chemmech_geoschem all 
 	@$(MAKE) -C chemmech_ream all 
+	@$(MAKE) -C chemmech_mcm all
 	@$(MAKE) -C solver_smvgear all 
 	@$(MAKE) -C photo_fastjx all 
 	@$(MAKE) -C model_main all 

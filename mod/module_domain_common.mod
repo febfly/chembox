@@ -1,5 +1,5 @@
-GFORTRAN module version '0' created from module_domain_common.f on Wed Sep 17 16:37:14 2014
-MD5:515d748d096faa4dd93890a0f6cf1517 -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from module_domain_common.f on Sun Nov  9 20:49:32 2014
+MD5:7d9a58f36fd79053575eb31ecd573016 -- If you edit this, you'll get what you deserve.
 
 (() () () ()
 () () () () () () () () () () () () () () () () () () () () () () ())
@@ -51,30 +51,40 @@ INTEGER ()) 0 0 () (3 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1')
 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
 INTEGER ()) 0 '1')) 0 () () () 0 0)
-11 'ix' 'module_model_parameter' 'ix' 1 ((PARAMETER UNKNOWN-INTENT
+11 'height' 'module_domain_common' 'height' 1 ((VARIABLE UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN) (REAL 8 0 0 REAL ()) 0 0 () () 0 () () ()
+0 0)
+12 'ix' 'module_model_parameter' 'ix' 1 ((PARAMETER UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') () 0 () () () 0 0)
-12 'jx' 'module_model_parameter' 'jx' 1 ((PARAMETER UNKNOWN-INTENT
+13 'jx' 'module_model_parameter' 'jx' 1 ((PARAMETER UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') () 0 () () () 0 0)
-13 'kx' 'module_model_parameter' 'kx' 1 ((PARAMETER UNKNOWN-INTENT
+14 'kx' 'module_model_parameter' 'kx' 1 ((PARAMETER UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') () 0 () () () 0 0)
-14 'module_domain_common' 'module_domain_common' 'module_domain_common'
+15 'length' 'module_domain_common' 'length' 1 ((VARIABLE UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN) (REAL 8 0 0 REAL ()) 0 0 () () 0 () () ()
+0 0)
+16 'module_domain_common' 'module_domain_common' 'module_domain_common'
 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (UNKNOWN 0 0 0
 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-15 'module_model_parameter' 'module_model_parameter'
+17 'module_model_parameter' 'module_model_parameter'
 'module_model_parameter' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN) (UNKNOWN 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-16 'nij' 'module_model_parameter' 'nij' 1 ((PARAMETER UNKNOWN-INTENT
+18 'nij' 'module_model_parameter' 'nij' 1 ((PARAMETER UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') () 0 () () () 0 0)
-17 'nijk' 'module_model_parameter' 'nijk' 1 ((PARAMETER UNKNOWN-INTENT
+19 'nijk' 'module_model_parameter' 'nijk' 1 ((PARAMETER UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') () 0 () () () 0 0)
+20 'width' 'module_domain_common' 'width' 1 ((VARIABLE UNKNOWN-INTENT
+UNKNOWN-PROC UNKNOWN UNKNOWN) (REAL 8 0 0 REAL ()) 0 0 () () 0 () () ()
+0 0)
 )
 
 ('calc_domain_index' 0 2 'dp' 0 3 'grid_1_2_i' 0 4 'grid_1_2_j' 0 5
 'grid_1_3_i' 0 6 'grid_1_3_j' 0 7 'grid_1_3_k' 0 8 'grid_2_1' 0 9
-'grid_3_1' 0 10 'ix' 0 11 'jx' 0 12 'kx' 0 13 'module_domain_common' 0
-14 'module_model_parameter' 0 15 'nij' 0 16 'nijk' 0 17)
+'grid_3_1' 0 10 'height' 0 11 'ix' 0 12 'jx' 0 13 'kx' 0 14 'length' 0
+15 'module_domain_common' 0 16 'module_model_parameter' 0 17 'nij' 0 18
+'nijk' 0 19 'width' 0 20)

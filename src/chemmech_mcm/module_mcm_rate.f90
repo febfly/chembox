@@ -1,6 +1,5 @@
 module module_mcm_rate
 use module_model_parameter,only:MAX_NSPEC,MAX_NRXN
-implicit none  
 
 public :: constants
 private :: zenith
@@ -27,6 +26,7 @@ double precision:: y(mnsp)
 
 double precision:: mm(80),nn(80),l(80),j(80)
 double precision:: theta,secx,cosx
+integer         :: i
 
 open(13,file='mcm_photolysis.txt', status='old')    
 !  calculate zenith angle and temperature for time of day

@@ -11,14 +11,26 @@
       integer, parameter :: NIJK = IX*JX*KX 
 
       !Chemical mechanism parameters
-      integer, parameter :: MAX_NSPEC   = 300
+
+      !For REAM or GeosChem
+      !integer, parameter :: MAX_NSPEC   = 300
+      !integer, parameter :: MAX_STR1    = 15  !For names,e.g., species
+      !integer, parameter :: MAX_STR2    = 50  !For long names
+      !integer, parameter :: MAX_NREAC   = 4
+      !integer, parameter :: MAX_NPROD   = 20
+
+      !integer, parameter :: MAX_NRXN    = 500
+      !integer, parameter :: MAX_NPHOTO  = 90
+
+      !For MCM
+      integer, parameter :: MAX_NSPEC   = 2000
       integer, parameter :: MAX_STR1    = 15  !For names,e.g., species
       integer, parameter :: MAX_STR2    = 50  !For long names
-      integer, parameter :: MAX_NREAC   = 4
-      integer, parameter :: MAX_NPROD   = 20
+      integer, parameter :: MAX_NREAC   = 3
+      integer, parameter :: MAX_NPROD   = 6
 
-      integer, parameter :: MAX_NRXN    = 500
-      integer, parameter :: MAX_NPHOTO  = 90
+      integer, parameter :: MAX_NRXN    = 5000
+      integer, parameter :: MAX_NPHOTO  = 35
 
       !Solver paramters
       integer, parameter :: MAX_BLK = 15

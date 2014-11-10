@@ -2,7 +2,7 @@ module module_mcm_rate
 !use module_model_parameter,only:MAX_NSPEC,MAX_NRXN
 
 public :: constants
-private :: zenith
+public :: zenith
 private :: temperature
 
 contains

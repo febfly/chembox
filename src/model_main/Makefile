@@ -3,7 +3,7 @@ MODDIR := ../../mod/
 MODFLAG:= -J$(MODDIR)
 BINDIR := ../../bin/
 LIBDIR := ../../lib/
-LIBFLAG:= -L$(LIBDIR) -lcommon -lutil -lgeoschem -lream -lfastjx -lsmvgear
+LIBFLAG:= -L$(LIBDIR) -lcommon -lutil -lgeoschem -lream -lmcm -lfastjx -lsmvgear
 EXE    := chembox.exe
 
 include ../Makefile_Header
@@ -29,4 +29,4 @@ clean:
 
 $(OBJDIR)chembox.o: chembox.f module_init.o module_chem.o
 $(OBJDIR)module_init.o:module_init.f
-$(OBJDIR)module_chem.o:module_chem.f 
+$(OBJDIR)module_chem.o:module_chem.f

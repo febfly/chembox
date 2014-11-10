@@ -3,11 +3,11 @@
      +    MAX_NSPEC,MAX_NRXN,MAX_STR1,
      +    MAX_NREAC,MAX_NPROD
       implicit none
-      integer, parameter :: SL=15
-      integer, parameter :: MNS=3487
-      integer, parameter :: MNR=20000
-      integer, parameter :: MNRT=3
-      integer, parameter :: MNPD=6
+      integer, parameter :: SL=MAX_STR1
+      integer, parameter :: MNS=MAX_NSPEC
+      integer, parameter :: MNR=MAX_NRXN
+      integer, parameter :: MNRT=MAX_NREAC
+      integer, parameter :: MNPD=MAX_NPROD
 
       public :: mcm_read
 

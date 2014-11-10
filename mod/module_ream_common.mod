@@ -1,5 +1,5 @@
-GFORTRAN module version '0' created from module_ream_common.f on Wed Sep 17 16:37:14 2014
-MD5:52dd93bae1c19384f41bf4d491f20a06 -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from module_ream_common.f on Sun Nov  9 20:49:33 2014
+MD5:45b13984c8c660a99691bc79df4aae9b -- If you edit this, you'll get what you deserve.
 
 (() () () ()
 () () () () () () () () () () () () () () () () () () () () () () ())
@@ -30,7 +30,7 @@ INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '12') () 0 ()
 () () 0 0)
 6 'max_nrxn' 'module_chemmech_common' 'max_nrxn' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
-INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500') () 0 ()
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '5000') () 0 ()
 () () 0 0)
 7 'max_ntype' 'module_ream_common' 'max_ntype' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
@@ -53,7 +53,7 @@ UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 ()
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (REAL 8 0 0 REAL ()) 0 0 () (2
 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
 4 0 0 INTEGER ()) 0 '12') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () () () 0 0)
+CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '5000')) 0 () () () 0 0)
 13 'preceeding_type' 'module_ream_common' 'preceeding_type' 1 ((
 VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (
 INTEGER 4 0 0 INTEGER ()) 0 0 () (1 EXPLICIT (CONSTANT (INTEGER 4 0 0
@@ -62,7 +62,7 @@ INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '30')) 0 () ()
 14 'r_type' 'module_ream_common' 'r_type' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (INTEGER 4 0 0 INTEGER ()) 0 0 ()
 (1 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (
-INTEGER 4 0 0 INTEGER ()) 0 '500')) 0 () () () 0 0)
+INTEGER 4 0 0 INTEGER ()) 0 '5000')) 0 () () () 0 0)
 15 'strlen' 'module_ream_common' 'strlen' 1 ((PARAMETER UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '50') () 0 () () () 0 0)

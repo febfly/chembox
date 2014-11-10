@@ -1,8 +1,8 @@
-GFORTRAN module version '0' created from mod_smvgear_interface.f on Wed Sep 17 16:37:16 2014
-MD5:deabc295bb68118d784b12d302d67b89 -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from mod_smvgear_interface.f on Sun Nov  9 20:50:15 2014
+MD5:f0a9ec2e8307e0a7ff3c786de284106c -- If you edit this, you'll get what you deserve.
 
-(() () () () () () ()
-() () () () () () () () () () () () () () () () () () () ())
+(() () () () () () () () () () () () () () () () () () () () ()
+() () () () () ())
 
 ()
 
@@ -64,27 +64,27 @@ UNKNOWN DIMENSION DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (2 EXPLICIT (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (VARIABLE (INTEGER 4 0 0
 INTEGER ()) 0 14 ()) (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
 VARIABLE (INTEGER 4 0 0 INTEGER ()) 0 11 ())) 0 () () () 0 0)
-22 'ifsun' '' 'ifsun' 20 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
-DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 25 'rate_const' '' 'rate_const' 20 ((VARIABLE IN UNKNOWN-PROC UNKNOWN
 UNKNOWN DIMENSION DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (2 EXPLICIT (
 CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0
 INTEGER ()) 0 '15') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '410')) 0 () () () 0 0)
-26 'conc1' '' 'conc1' 20 ((VARIABLE OUT UNKNOWN-PROC UNKNOWN UNKNOWN
-DIMENSION DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (2 EXPLICIT (CONSTANT (
-INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0
-'15') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0
-0 INTEGER ()) 0 '300')) 0 () () () 0 0)
-27 'flag' '' 'flag' 20 ((VARIABLE OUT UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY)
-(INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-23 'n_grid' '' 'n_grid' 20 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '4965')) 0 () () () 0 0)
+22 'ifsun' '' 'ifsun' 20 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
 DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 24 'conc0' '' 'conc0' 20 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
 DIMENSION DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (2 EXPLICIT (CONSTANT (
 INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0
 '15') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0
-0 INTEGER ()) 0 '300')) 0 () () () 0 0)
+0 INTEGER ()) 0 '2000')) 0 () () () 0 0)
+26 'conc1' '' 'conc1' 20 ((VARIABLE OUT UNKNOWN-PROC UNKNOWN UNKNOWN
+DIMENSION DUMMY) (REAL 8 0 0 REAL ()) 0 0 () (2 EXPLICIT (CONSTANT (
+INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0
+'15') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0
+0 INTEGER ()) 0 '2000')) 0 () () () 0 0)
+27 'flag' '' 'flag' 20 ((VARIABLE OUT UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY)
+(INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+23 'n_grid' '' 'n_grid' 20 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN
+DUMMY) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 21 'ncs' '' 'ncs' 20 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 )

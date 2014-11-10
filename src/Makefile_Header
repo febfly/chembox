@@ -6,4 +6,6 @@ LINK :=
 #FCFLAGS := -ffixed-line-length-none 
 #FC := ifort
 #FCFLAGS := -extend-source -openmp -CB
+
+FC90FLAGS:= -ffree-form -fbounds-check -fopenmp
 	

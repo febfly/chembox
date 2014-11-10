@@ -11,14 +11,17 @@
       use module_met_common,only:
      +           temperature, pressure, water_vapor, airdensity,
      +           aer_area, aer_radius, ifsun
-      use module_chemmech_common,only:ninactrxn,inactrxn,nrxn,nphotorxn
+      use module_chemmech_common,only:ninactrxn,inactrxn,nrxn
       use module_conc_common,only:gas_conc
       use module_geoschem_rxntype,only: geos_rxnrate=>rxn_rate
       use module_ream_rxntype,only: ream_rxnrate=>rxn_rate
+      use module_mcm_rate,only: constants
 !      use module_photoassign,only: prate
       use mod_smvgear_interface,only:smvgear_solve
 
       use module_chemmech_common,only:spec_getid
+      use module_time_common,only: hour,minute
+
       logical, save :: firsttime=.true.
       integer,parameter :: MAX_NBLK = NIJK/MAX_BLK + 1
       integer,save      :: nblk
@@ -82,6 +85,8 @@
      +                           aer_area(gi,gj,gk),
      +                           aer_radius(gi,gj,gk),
      +                           rrate_tmp)
+            elseif (option_chemmech.eq.3) then !mcm
+               call constants(rrate_tmp, hour*3600d0+minute*60d0,gas_conc(gind,:))
             endif
 
             !update photolysis rate

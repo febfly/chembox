@@ -1,5 +1,5 @@
-GFORTRAN module version '0' created from module_conc_common.f on Wed Sep 17 16:37:14 2014
-MD5:d3278b3d27f6ec3958b562ca3925607a -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from module_conc_common.f on Sun Nov  9 20:49:32 2014
+MD5:13b840ed9b54195be90737a6a9506f09 -- If you edit this, you'll get what you deserve.
 
 (() () () ()
 () () () () () () () () () () () () () () () () () () () () () () ())
@@ -19,10 +19,10 @@ CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '8') () 0 () () () 0 0)
 UNKNOWN-PROC UNKNOWN UNKNOWN DIMENSION) (REAL 8 0 0 REAL ()) 0 0 () (2
 EXPLICIT (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER
 4 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '1') (
-CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '300')) 0 () () () 0 0)
+CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2000')) 0 () () () 0 0)
 4 'max_nspec' 'module_model_parameter' 'max_nspec' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
-INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '300') () 0 ()
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '2000') () 0 ()
 () () 0 0)
 5 'module_conc_common' 'module_conc_common' 'module_conc_common' 1 ((
 MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (UNKNOWN 0 0 0

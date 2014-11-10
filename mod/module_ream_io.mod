@@ -1,5 +1,5 @@
-GFORTRAN module version '0' created from module_ream_io.f on Wed Sep 17 16:37:14 2014
-MD5:fcf12df0dbfc796cc1fc72f8b52c171c -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from module_ream_io.f on Sun Nov  9 20:49:33 2014
+MD5:9e34a50b82640065d183bc2e90855a36 -- If you edit this, you'll get what you deserve.
 
 (() () () () () () () () () () () ()
 () () () () () () () () () () () () () () ())
@@ -21,11 +21,11 @@ INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '12') () 0 ()
 () () 0 0)
 4 'max_nprod' 'module_chemmech_common' 'max_nprod' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
-INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '20') () 0 ()
-() () 0 0)
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '6') () 0 () ()
+() 0 0)
 5 'max_nreac' 'module_chemmech_common' 'max_nreac' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (INTEGER 4 0 0
-INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '4') () 0 () ()
+INTEGER ()) 0 0 () (CONSTANT (INTEGER 4 0 0 INTEGER ()) 0 '3') () 0 () ()
 () 0 0)
 6 'module_chemmech_common' 'module_chemmech_common'
 'module_chemmech_common' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
