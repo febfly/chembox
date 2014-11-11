@@ -1,6 +1,6 @@
       module module_time_common
       use module_model_parameter,only:DP,TSCHEM=>TS_CHEM_MIN,
-     +    TSM3D=>TS_MODEL_MIN
+     +    TSM3D=>TS_MODEL_MIN, TSOUT=>TS_OUTPUT_MIN
       implicit none
 !=======================================================================
 ! t_total_min   : total simulation time in minute
@@ -28,6 +28,10 @@
 
       real(kind=DP) :: ts_model_min
       real(kind=DP) :: ts_chem_min
+      real(kind=DP) :: ts_output_min
+      logical       :: if_time_output
+
+      real(kind=DP),private ::last_output_step, dstep_output
 
       public :: time_step_init
       public :: time_step_next
@@ -51,6 +55,9 @@
 
       ts_model_min = TSM3D
       ts_chem_min  = TSCHEM
+      ts_output_min= TSOUT
+      dstep_output = ts_output_min/ts_model_min
+
       frac_day0 = d0+float(h0)/24d0+float(mi0)/1440d0+s0/86400d0
       frac_day1 = d1+float(h1)/24d0+float(mi1)/1440d0+s1/86400d0
       t_st_min = julday(y0,m0,frac_day0)*1440d0
@@ -94,6 +101,9 @@
          call jd2ymdhms(jd,year,month,day,hour,minute,second)
          jday = int(t_elapse_min/1440d0 - julday(year,1,1d0) + 1)
          flag = FLAG_NORMAL
+
+
+
       elseif (itstep.eq.ntstep) then
          ts_model_min = t_total_min - t_elapse_min
          ts_chem_min  = ts_model_min

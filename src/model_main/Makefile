@@ -27,6 +27,7 @@ clean:
 	@rm -f $(EXE)
 	@rm -f $(BINDIR)$(EXE)
 
-$(OBJDIR)chembox.o: chembox.f module_init.o module_chem.o
+$(OBJDIR)chembox.o: chembox.f module_init.o module_chem.o module_output.o
 $(OBJDIR)module_init.o:module_init.f
 $(OBJDIR)module_chem.o:module_chem.f
+$(OBJDIR)module_output.o:module_output.f
