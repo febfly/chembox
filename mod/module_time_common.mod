@@ -1,5 +1,5 @@
-GFORTRAN module version '0' created from module_time_common.f on Sun Nov  9 20:49:33 2014
-MD5:c66a919a6af41e9fe8f4b345ef4c2d69 -- If you edit this, you'll get what you deserve.
+GFORTRAN module version '0' created from module_time_common.f on Mon Nov 10 15:06:27 2014
+MD5:f8e58b3fae84456c87854e81e0b195b7 -- If you edit this, you'll get what you deserve.
 
 (() () () () () ()
 () () () () () () () () () () () () () () () () () () () () ())
@@ -84,15 +84,18 @@ UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (REAL 8 0 0 REAL ()) 0 0 ()
 38 'ts_model_min' 'module_time_common' 'ts_model_min' 1 ((VARIABLE
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (REAL 8 0 0 REAL ()) 0 0 ()
 () 0 () () () 0 0)
-39 'ts_chem_min' 'module_model_parameter' 'ts_chem_min' 1 ((PARAMETER
+39 'ts_output_min' 'module_time_common' 'ts_output_min' 1 ((VARIABLE
+UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN) (REAL 8 0 0 REAL ()) 0 0 ()
+() 0 () () () 0 0)
+40 'ts_chem_min' 'module_model_parameter' 'ts_chem_min' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (REAL 8 0 0 REAL ())
 0 0 () (CONSTANT (REAL 8 0 0 REAL ()) 0 '0.10000000000000@1') () 0 () ()
 () 0 0)
-40 'ts_model_min' 'module_model_parameter' 'ts_model_min' 1 ((PARAMETER
+41 'ts_model_min' 'module_model_parameter' 'ts_model_min' 1 ((PARAMETER
 UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE) (REAL 8 0 0 REAL ())
 0 0 () (CONSTANT (REAL 8 0 0 REAL ()) 0 '0.10000000000000@1') () 0 () ()
 () 0 0)
-41 'year' 'module_time_common' 'year' 1 ((VARIABLE UNKNOWN-INTENT
+42 'year' 'module_time_common' 'year' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN UNKNOWN) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 ()
 () () 0 0)
 23 'y0' '' 'y0' 22 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
@@ -119,7 +122,7 @@ INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 34 's1' '' 's1' 22 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN DUMMY) (
 REAL 8 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
-36 'flag' '' 'flag' 42 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+36 'flag' '' 'flag' 43 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN RESULT) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 )
 
@@ -128,5 +131,5 @@ UNKNOWN RESULT) (INTEGER 4 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 0 11 'module_time_common' 0 12 'month' 0 13 'ntstep' 0 14 'second' 0 15
 't_ed_min' 0 16 't_elapse_min' 0 17 't_remain_min' 0 18 't_st_min' 0 19
 't_total_min' 0 20 'time_step_init' 0 21 'time_step_next' 0 35
-'ts_chem_min' 0 37 'ts_model_min' 0 38 'tschem' 0 39 'tsm3d' 0 40 'year'
-0 41)
+'ts_chem_min' 0 37 'ts_model_min' 0 38 'ts_output_min' 0 39 'tschem' 0
+40 'tsm3d' 0 41 'year' 0 42)

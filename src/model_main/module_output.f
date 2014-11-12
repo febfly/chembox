@@ -5,7 +5,7 @@
       subroutine do_output
       use module_chemmech_common,only : spec_getid
       use module_met_common,only : airdensity
-      use module_time_common,only : t_elapse_min,ts_output_min
+      use module_time_common,only : t_elapse_s
       use module_conc_common,only : gas_conc
       use module_domain_common,only : grid_1_3_i,grid_1_3_j,grid_1_3_k
       use module_model_option,only: path_output
@@ -65,7 +65,7 @@
          j=grid_1_3_j(ig)
          k=grid_1_3_k(ig)
          write(outstring,'(f5.1)')
-     +        t_elapse_min
+     +        t_elapse_s/3600.
          do is=1,NOUT
             write(outstring,'(a,a1,e10.3)') trim(outstring),',',
      +        gas_conc(ig,ind(is))/airdensity(i,j,k)*1d9

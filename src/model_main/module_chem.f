@@ -109,7 +109,7 @@
          enddo!igrid
 
          !solve chemistry OPD
-!         if (option_solver.eq.1) then !smvgear
+         if (option_solver.eq.1) then !smvgear
             call smvgear_solve(1,ifsunflag, blksize(iblk), conc0, rrate,
      +                         conc1, flag)
             if (flag.ne.0) then 
@@ -118,11 +118,10 @@
             g0 = grid_st(iblk)
             g1 = g0 + blksize(iblk) - 1
             gas_conc(g0:g1,:) = conc1(1:blksize(iblk),:)
-!         endif
+         endif
       enddo!iblk
 !$OMP END PARALLEL DO
       !print*,'chemistry finished'
-      print*,gas_conc(1,spec_getid('O3')),gas_conc(1,spec_getid('NO2'))
       endsubroutine do_chem
 
       endmodule module_chem

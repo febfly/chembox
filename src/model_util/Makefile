@@ -24,3 +24,4 @@ clean:
 
 $(OBJDIR)julday_mod.o : julday_mod.f
 $(OBJDIR)util_time_mod.o:util_time_mod.f julday_mod.o
+$(OBJDIR)module_util.o: module_util.f

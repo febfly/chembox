@@ -1,4 +1,4 @@
-      module module_mcm_cheminfo
+      module module_mcm_io
       use module_model_parameter,only:
      +    MAX_NSPEC,MAX_NRXN,MAX_STR1,
      +    MAX_NREAC,MAX_NPROD
@@ -13,7 +13,7 @@
 
       contains
 
-      subroutine mcm_read
+      subroutine mcm_read(filename)
       use module_chemmech_common,only:
      +  nspec, ninactive, nactive, spec_name, spec_defconc,spec_status,
      +  nreac, nprod, reac_id, prod_id, prod_coefs, ninactrxn,
@@ -30,6 +30,7 @@
       character (len=SL) :: nametmp
       integer            :: id, id2, nstmp, ir
       integer            :: ifok
+      character(len=*)   :: filename
 
       mcm_specname=''
       mcm_reac=0
@@ -38,7 +39,7 @@
       mcm_nprod=0
       mcm_ns=0
 
-      open(unit=20,file='mcm_chem.txt')
+      open(unit=20,file=trim(filename))
       text=''
       do while (text.ne.'Species present in subset')
          read(20,'(a)') text
@@ -127,4 +128,4 @@
       endsubroutine mcm_read
 
 !================================================================
-      endmodule module_mcm_cheminfo 
+      endmodule module_mcm_io 

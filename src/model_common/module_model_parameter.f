@@ -36,9 +36,9 @@
       integer, parameter :: MAX_BLK = 15
 
       !Time step
-      real(kind=DP),parameter :: TS_MODEL_MIN = 1
-      real(kind=DP),parameter :: TS_CHEM_MIN = 1
-      real(kind=DP),parameter :: TS_OUTPUT_MIN = 2.
+      real(kind=DP),parameter :: TS_MODEL  = 60.
+      real(kind=DP),parameter :: TS_CHEM   = 60.
+      real(kind=DP),parameter :: TS_OUTPUT = 600.
  
 
       endmodule module_model_parameter

@@ -28,5 +28,5 @@ clean:
 	@rm -f $(OBJ)
 	@rm -f $(LIBDIR)libmcm.a
 
-$(OBJDIR)module_mcm_cheminfo.o:module_mcm_cheminfo.f 
+$(OBJDIR)module_mcm_io.o:module_mcm_io.f 
 $(OBJDIR)module_mcm_rate.o : module_mcm_rate.f90 
