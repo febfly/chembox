@@ -47,11 +47,11 @@
       real(kind=DP) :: t_remain_s, t_elapse_s
       real(kind=DP) :: t_st_s, t_ed_s
       integer       :: year_st, hour_st, minute_st, month_st,
-     +                 day_st, second_st
+     +                 day_st
       integer       :: year_ed, hour_ed, minute_ed, month_ed,
-     +                 day_ed, second_ed
-      integer       :: year, month, day, hour, minute, second
-      real(kind=DP) :: jday
+     +                 day_ed
+      integer       :: year, month, day, hour, minute
+      real(kind=DP) :: jday, second_st, second_ed, second
 
 
       public :: time_init
@@ -69,6 +69,7 @@
       subroutine time_init
       real(kind=DP) :: nts_chem_tmp, nts_output_tmp
 
+      model_status = FLAG_START
       !setup time step for varied process
       timestep(IP_BASE)   = TS_MODEL
       timestep(IP_CHEM)   = TS_CHEM
@@ -102,10 +103,10 @@
          jd = (t_st_s + t_elapse_s)/86400d0
          call jd2ymdhms(jd, year, month, day, hour, minute, second)
          jday = jd - julday(year,1, 1d0)
-         flag = FLAG_NORMAL
+         model_status = FLAG_NORMAL
       elseif (itstep.ge.ntstep) then
          print*, 'Simulation finished'
-         flag = FLAG_END 
+         model_status = FLAG_END 
       endif
  
       !determine whether process i will be executed in next time step
@@ -163,6 +164,7 @@
 !     Set the time variables when the module is initialized
 !======================================================================
       subroutine time_settime
+      use julday_mod,   only: julday
       real(kind=DP) :: frac_day_st, frac_day_ed
       
       frac_day_st = day_st+float(hour_st)/24d0+float(minute_st)/1440d0

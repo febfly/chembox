@@ -19,6 +19,7 @@
      +  nreac, nprod, reac_id, prod_id, prod_coefs, ninactrxn,
      +  nemisrxn, ndeprxn, nphotorxn, nrxn
 
+      character(len=*)   :: filename
       character (len=70) :: text
       integer            :: mcm_ns, mcm_nr
       character (len=SL),dimension(MNS) :: mcm_specname 
@@ -30,7 +31,6 @@
       character (len=SL) :: nametmp
       integer            :: id, id2, nstmp, ir
       integer            :: ifok
-      character(len=*)   :: filename
 
       mcm_specname=''
       mcm_reac=0

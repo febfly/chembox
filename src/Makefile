@@ -22,6 +22,7 @@ clean:
 	@$(MAKE) -C model_common clean
 	@$(MAKE) -C chemmech_geoschem clean
 	@$(MAKE) -C chemmech_ream clean
+	@$(MAKE) -C chemmech_mcm clean
 	@$(MAKE) -C solver_smvgear clean 
 	@$(MAKE) -C photo_fastjx clean 
 	@$(MAKE) -C model_main clean 

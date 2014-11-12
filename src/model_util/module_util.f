@@ -1,5 +1,7 @@
       module module_util
-      integer,parameter: DP=8
+      !use module_model_parameter,only:DP
+      implicit none
+      integer,parameter:: DP=8
       real(kind=DP),parameter :: EPS = 1d-8
       public:: isint
       contains

@@ -12,7 +12,7 @@
        use module_model_option,only:option_chemmech,option_solver
        use module_geoschem_io,only:geos_read
        use module_ream_io,only:ream_read
-       use module_mcm_cheminfo,only:mcm_read
+       use module_mcm_io,only:mcm_read
 
        use module_chemmech_common,only:spec_defconc,spec_getid
        use module_chemmech_common,only:nspec,nrxn,nactive,spec_name,
