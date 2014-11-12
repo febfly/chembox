@@ -76,35 +76,4 @@
      +         reac_id,prod_id,reac_coefs,prod_coefs)
        endif       
        endsubroutine do_initialize
-
-       subroutine read_init_conc
-       use module_model_parameter, only: DP, MAX_STR1
-       use module_conc_common,     only:gas_conc
-       use module_chemmech_common, only:spec_getid
-       use module_met_common,      only:airdensity
-       use module_domain_common,   only:NIJK,
-     +     grid_1_3_i,grid_1_3_j,grid_1_3_k
-       character(len=255)      :: text
-       character(len=MAX_STR1) :: spec
-       real(kind=DP)           :: init_conc
-       integer                 :: iostatus, id, ig, i, j, k
-       open(unit=12,file='mcm_init.txt')
-       read(12,*) text
-       iostatus=0
-       do while(iostatus.eq.0) 
-          read(12,*) spec, init_conc
-          id=spec_getid(spec)
-          if (id.eq.0) then
-             print*,'Warning: cannot find '//trim(spec)//' mcm_init.txt'
-          else
-             do ig = 1, NIJK
-                i = grid_1_3_i(ig)
-                j = grid_1_3_j(ig)
-                k = grid_1_3_k(ig)
-                gas_conc(ig,id) = init_conc*1d-9*airdensity(i,j,k)
-             enddo
-          endif
-       enddo
-       close(12)
-       endsubroutine
        endmodule module_init
